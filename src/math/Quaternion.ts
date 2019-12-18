@@ -612,7 +612,7 @@ namespace THREE
 
 		}
 
-		fromArray(array, offset)
+		fromArray(array, offset?)
 		{
 
 			if (offset === undefined) offset = 0;

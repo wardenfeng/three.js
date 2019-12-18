@@ -135,5 +135,23 @@
     "src/objects/Points.ts",
     "src/objects/Skeleton.ts",
     "src/objects/Sprite.ts",
+    //
+    "src/materials/Material.ts",
+    "src/materials/ShaderMaterial.ts",
+    "src/materials/ShadowMaterial.ts",
+    "src/materials/SpriteMaterial.ts",
+    "src/materials/RawShaderMaterial.ts",
+    "src/materials/PointsMaterial.ts",
+    "src/materials/MeshToonMaterial.ts",
+    "src/materials/MeshStandardMaterial.ts",
+    "src/materials/MeshPhysicalMaterial.ts",
+    "src/materials/MeshPhongMaterial.ts",
+    "src/materials/MeshNormalMaterial.ts",
+    "src/materials/MeshMatcapMaterial.ts",
+    "src/materials/MeshDistanceMaterial.ts",
+    "src/materials/MeshDepthMaterial.ts",
+    "src/materials/MeshBasicMaterial.ts",
+    "src/materials/LineDashedMaterial.ts",
+    "src/materials/LineBasicMaterial.ts",
   ]
 }
