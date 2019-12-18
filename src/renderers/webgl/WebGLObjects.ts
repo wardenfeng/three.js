@@ -5,63 +5,67 @@ namespace THREE
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	export function WebGLObjects(gl, geometries, attributes, info)
+	export class WebGLObjects
 	{
 
-		var updateList = {};
-
-		function update(object)
+		constructor(gl, geometries, attributes, info)
 		{
 
-			var frame = info.render.frame;
+			var updateList = {};
 
-			var geometry = object.geometry;
-			var buffergeometry = geometries.get(object, geometry);
-
-			// Update once per frame
-
-			if (updateList[buffergeometry.id] !== frame)
+			function update(object)
 			{
 
-				if (geometry.isGeometry)
+				var frame = info.render.frame;
+
+				var geometry = object.geometry;
+				var buffergeometry = geometries.get(object, geometry);
+
+				// Update once per frame
+
+				if (updateList[buffergeometry.id] !== frame)
 				{
 
-					buffergeometry.updateFromObject(object);
+					if (geometry.isGeometry)
+					{
+
+						buffergeometry.updateFromObject(object);
+
+					}
+
+					geometries.update(buffergeometry);
+
+					updateList[buffergeometry.id] = frame;
 
 				}
 
-				geometries.update(buffergeometry);
+				if (object.isInstancedMesh)
+				{
 
-				updateList[buffergeometry.id] = frame;
+					attributes.update(object.instanceMatrix, gl.ARRAY_BUFFER);
+
+				}
+
+				return buffergeometry;
 
 			}
 
-			if (object.isInstancedMesh)
+			function dispose()
 			{
 
-				attributes.update(object.instanceMatrix, gl.ARRAY_BUFFER);
+				updateList = {};
 
 			}
 
-			return buffergeometry;
+			return {
+
+				update: update,
+				dispose: dispose
+
+			};
 
 		}
-
-		function dispose()
-		{
-
-			updateList = {};
-
-		}
-
-		return {
-
-			update: update,
-			dispose: dispose
-
-		};
 
 	}
-
 
 }

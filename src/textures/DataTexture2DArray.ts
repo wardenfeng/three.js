@@ -6,7 +6,7 @@ namespace THREE
 	 */
 
 
-	export function DataTexture2DArray(data, width, height, depth)
+	export function DataTexture2DArray(data?, width?, height?, depth?)
 	{
 
 		Texture.call(this, null);

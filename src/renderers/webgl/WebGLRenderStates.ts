@@ -5,9 +5,8 @@ namespace THREE
 	 * @author Mugen87 / https://github.com/Mugen87
 	 */
 
-	import { WebGLLights } from './WebGLLights.js';
 
-	function WebGLRenderState()
+	export function WebGLRenderState()
 	{
 
 		var lights = new WebGLLights();
@@ -62,69 +61,73 @@ namespace THREE
 
 	}
 
-	export function WebGLRenderStates()
+	export class WebGLRenderStates
 	{
-
-		var renderStates = new WeakMap();
-
-		function onSceneDispose(event)
+		constructor()
 		{
 
-			var scene = event.target;
+			var renderStates = new WeakMap();
 
-			scene.removeEventListener('dispose', onSceneDispose);
-
-			renderStates.delete(scene);
-
-		}
-
-		function get(scene, camera)
-		{
-
-			var renderState;
-
-			if (renderStates.has(scene) === false)
+			function onSceneDispose(event)
 			{
 
-				renderState = new WebGLRenderState();
-				renderStates.set(scene, new WeakMap());
-				renderStates.get(scene).set(camera, renderState);
+				var scene = event.target;
 
-				scene.addEventListener('dispose', onSceneDispose);
+				scene.removeEventListener('dispose', onSceneDispose);
 
-			} else
+				renderStates.delete(scene);
+
+			}
+
+			function get(scene, camera)
 			{
 
-				if (renderStates.get(scene).has(camera) === false)
+				var renderState;
+
+				if (renderStates.has(scene) === false)
 				{
 
 					renderState = new WebGLRenderState();
+					renderStates.set(scene, new WeakMap());
 					renderStates.get(scene).set(camera, renderState);
+
+					scene.addEventListener('dispose', onSceneDispose);
 
 				} else
 				{
 
-					renderState = renderStates.get(scene).get(camera);
+					if (renderStates.get(scene).has(camera) === false)
+					{
+
+						renderState = new WebGLRenderState();
+						renderStates.get(scene).set(camera, renderState);
+
+					} else
+					{
+
+						renderState = renderStates.get(scene).get(camera);
+
+					}
 
 				}
 
+				return renderState;
+
 			}
 
-			return renderState;
+			function dispose()
+			{
+
+				renderStates = new WeakMap();
+
+			}
+
+			return {
+				get: get,
+				dispose: dispose
+			};
 
 		}
-
-		function dispose()
-		{
-
-			renderStates = new WeakMap();
-
-		}
-
-		return {
-			get: get,
-			dispose: dispose
-		};
 
 	}
 

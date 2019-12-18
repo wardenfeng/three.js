@@ -88,7 +88,7 @@ namespace THREE
 	}
 
 	// eliminate colinear or duplicate points
-	function filterPoints(start, end)
+	function filterPoints(start, end?)
 	{
 
 		if (!start) return start;
@@ -123,7 +123,7 @@ namespace THREE
 	}
 
 	// main ear slicing loop which triangulates a polygon (given as a linked list)
-	function earcutLinked(ear, triangles, dim, minX, minY, invSize, pass)
+	function earcutLinked(ear, triangles, dim, minX, minY, invSize, pass?)
 	{
 
 		if (!ear) return;

@@ -89,7 +89,7 @@ namespace THREE
 				} else
 				{
 
-					return createImageBitmap(blob, scope.options);
+					return (<any>createImageBitmap)(blob, scope.options);
 
 				}
 

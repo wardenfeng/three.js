@@ -37,7 +37,7 @@ namespace THREE
 
 	// SphereBufferGeometry
 
-	export function SphereBufferGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength)
+	export function SphereBufferGeometry(radius, widthSegments, heightSegments, phiStart?, phiLength?, thetaStart?, thetaLength?)
 	{
 
 		BufferGeometry.call(this);

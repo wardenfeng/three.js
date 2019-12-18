@@ -4,235 +4,238 @@ namespace THREE
 	/**
 	 * @author mrdoob / http://mrdoob.com/
 	 */
-
-
-	export function WebGLGeometries(gl, attributes, info)
+	export class WebGLGeometries
 	{
 
-		var geometries = new WeakMap();
-		var wireframeAttributes = new WeakMap();
-
-		function onGeometryDispose(event)
+		constructor(gl, attributes, info)
 		{
 
-			var geometry = event.target;
-			var buffergeometry = geometries.get(geometry);
+			var geometries = new WeakMap();
+			var wireframeAttributes = new WeakMap();
 
-			if (buffergeometry.index !== null)
+			function onGeometryDispose(event)
 			{
 
-				attributes.remove(buffergeometry.index);
+				var geometry = event.target;
+				var buffergeometry = geometries.get(geometry);
 
-			}
-
-			for (var name in buffergeometry.attributes)
-			{
-
-				attributes.remove(buffergeometry.attributes[name]);
-
-			}
-
-			geometry.removeEventListener('dispose', onGeometryDispose);
-
-			geometries.delete(geometry);
-
-			var attribute = wireframeAttributes.get(buffergeometry);
-
-			if (attribute)
-			{
-
-				attributes.remove(attribute);
-				wireframeAttributes.delete(buffergeometry);
-
-			}
-
-			//
-
-			info.memory.geometries--;
-
-		}
-
-		function get(object, geometry)
-		{
-
-			var buffergeometry = geometries.get(geometry);
-
-			if (buffergeometry) return buffergeometry;
-
-			geometry.addEventListener('dispose', onGeometryDispose);
-
-			if (geometry.isBufferGeometry)
-			{
-
-				buffergeometry = geometry;
-
-			} else if (geometry.isGeometry)
-			{
-
-				if (geometry._bufferGeometry === undefined)
+				if (buffergeometry.index !== null)
 				{
 
-					geometry._bufferGeometry = new BufferGeometry().setFromObject(object);
+					attributes.remove(buffergeometry.index);
 
 				}
 
-				buffergeometry = geometry._bufferGeometry;
-
-			}
-
-			geometries.set(geometry, buffergeometry);
-
-			info.memory.geometries++;
-
-			return buffergeometry;
-
-		}
-
-		function update(geometry)
-		{
-
-			var index = geometry.index;
-			var geometryAttributes = geometry.attributes;
-
-			if (index !== null)
-			{
-
-				attributes.update(index, gl.ELEMENT_ARRAY_BUFFER);
-
-			}
-
-			for (var name in geometryAttributes)
-			{
-
-				attributes.update(geometryAttributes[name], gl.ARRAY_BUFFER);
-
-			}
-
-			// morph targets
-
-			var morphAttributes = geometry.morphAttributes;
-
-			for (var name in morphAttributes)
-			{
-
-				var array = morphAttributes[name];
-
-				for (var i = 0, l = array.length; i < l; i++)
+				for (var name in buffergeometry.attributes)
 				{
 
-					attributes.update(array[i], gl.ARRAY_BUFFER);
+					attributes.remove(buffergeometry.attributes[name]);
 
 				}
 
-			}
+				geometry.removeEventListener('dispose', onGeometryDispose);
 
-		}
+				geometries.delete(geometry);
 
-		function updateWireframeAttribute(geometry)
-		{
+				var attribute = wireframeAttributes.get(buffergeometry);
 
-			var indices = [];
-
-			var geometryIndex = geometry.index;
-			var geometryPosition = geometry.attributes.position;
-			var version = 0;
-
-			if (geometryIndex !== null)
-			{
-
-				var array = geometryIndex.array;
-				version = geometryIndex.version;
-
-				for (var i = 0, l = array.length; i < l; i += 3)
+				if (attribute)
 				{
 
-					var a = array[i + 0];
-					var b = array[i + 1];
-					var c = array[i + 2];
-
-					indices.push(a, b, b, c, c, a);
+					attributes.remove(attribute);
+					wireframeAttributes.delete(buffergeometry);
 
 				}
 
-			} else
-			{
+				//
 
-				var array = geometryPosition.array;
-				version = geometryPosition.version;
-
-				for (var i = 0, l = (array.length / 3) - 1; i < l; i += 3)
-				{
-
-					var a = i + 0;
-					var b = i + 1;
-					var c = i + 2;
-
-					indices.push(a, b, b, c, c, a);
-
-				}
+				info.memory.geometries--;
 
 			}
 
-			var attribute = new (arrayMax(indices) > 65535 ? Uint32BufferAttribute : Uint16BufferAttribute)(indices, 1);
-			attribute.version = version;
-
-			attributes.update(attribute, gl.ELEMENT_ARRAY_BUFFER);
-
-			//
-
-			var previousAttribute = wireframeAttributes.get(geometry);
-
-			if (previousAttribute) attributes.remove(previousAttribute);
-
-			//
-
-			wireframeAttributes.set(geometry, attribute);
-
-		}
-
-		function getWireframeAttribute(geometry)
-		{
-
-			var currentAttribute = wireframeAttributes.get(geometry);
-
-			if (currentAttribute)
+			function get(object, geometry)
 			{
 
-				var geometryIndex = geometry.index;
+				var buffergeometry = geometries.get(geometry);
 
-				if (geometryIndex !== null)
+				if (buffergeometry) return buffergeometry;
+
+				geometry.addEventListener('dispose', onGeometryDispose);
+
+				if (geometry.isBufferGeometry)
 				{
 
-					// if the attribute is obsolete, create a new one
+					buffergeometry = geometry;
 
-					if (currentAttribute.version < geometryIndex.version)
+				} else if (geometry.isGeometry)
+				{
+
+					if (geometry._bufferGeometry === undefined)
 					{
 
-						updateWireframeAttribute(geometry);
+						geometry._bufferGeometry = new BufferGeometry().setFromObject(object);
+
+					}
+
+					buffergeometry = geometry._bufferGeometry;
+
+				}
+
+				geometries.set(geometry, buffergeometry);
+
+				info.memory.geometries++;
+
+				return buffergeometry;
+
+			}
+
+			function update(geometry)
+			{
+
+				var index = geometry.index;
+				var geometryAttributes = geometry.attributes;
+
+				if (index !== null)
+				{
+
+					attributes.update(index, gl.ELEMENT_ARRAY_BUFFER);
+
+				}
+
+				for (var name in geometryAttributes)
+				{
+
+					attributes.update(geometryAttributes[name], gl.ARRAY_BUFFER);
+
+				}
+
+				// morph targets
+
+				var morphAttributes = geometry.morphAttributes;
+
+				for (var name in morphAttributes)
+				{
+
+					var array = morphAttributes[name];
+
+					for (var i = 0, l = array.length; i < l; i++)
+					{
+
+						attributes.update(array[i], gl.ARRAY_BUFFER);
 
 					}
 
 				}
 
-			} else
+			}
+
+			function updateWireframeAttribute(geometry)
 			{
 
-				updateWireframeAttribute(geometry);
+				var indices = [];
+
+				var geometryIndex = geometry.index;
+				var geometryPosition = geometry.attributes.position;
+				var version = 0;
+
+				if (geometryIndex !== null)
+				{
+
+					var array = geometryIndex.array;
+					version = geometryIndex.version;
+
+					for (var i = 0, l = array.length; i < l; i += 3)
+					{
+
+						var a = array[i + 0];
+						var b = array[i + 1];
+						var c = array[i + 2];
+
+						indices.push(a, b, b, c, c, a);
+
+					}
+
+				} else
+				{
+
+					var array = geometryPosition.array;
+					version = geometryPosition.version;
+
+					for (var i = 0, l = (array.length / 3) - 1; i < l; i += 3)
+					{
+
+						var a = i + 0;
+						var b = i + 1;
+						var c = i + 2;
+
+						indices.push(a, b, b, c, c, a);
+
+					}
+
+				}
+
+				var attribute = new (arrayMax(indices) > 65535 ? Uint32BufferAttribute : Uint16BufferAttribute)(indices, 1);
+				attribute.version = version;
+
+				attributes.update(attribute, gl.ELEMENT_ARRAY_BUFFER);
+
+				//
+
+				var previousAttribute = wireframeAttributes.get(geometry);
+
+				if (previousAttribute) attributes.remove(previousAttribute);
+
+				//
+
+				wireframeAttributes.set(geometry, attribute);
 
 			}
 
-			return wireframeAttributes.get(geometry);
+			function getWireframeAttribute(geometry)
+			{
+
+				var currentAttribute = wireframeAttributes.get(geometry);
+
+				if (currentAttribute)
+				{
+
+					var geometryIndex = geometry.index;
+
+					if (geometryIndex !== null)
+					{
+
+						// if the attribute is obsolete, create a new one
+
+						if (currentAttribute.version < geometryIndex.version)
+						{
+
+							updateWireframeAttribute(geometry);
+
+						}
+
+					}
+
+				} else
+				{
+
+					updateWireframeAttribute(geometry);
+
+				}
+
+				return wireframeAttributes.get(geometry);
+
+			}
+
+			return {
+
+				get: get,
+				update: update,
+
+				getWireframeAttribute: getWireframeAttribute
+
+			};
 
 		}
-
-		return {
-
-			get: get,
-			update: update,
-
-			getWireframeAttribute: getWireframeAttribute
-
-		};
 
 	}
 

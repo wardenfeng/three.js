@@ -22,11 +22,13 @@ namespace THREE
 	but for three.js curve use, it could be possible inlined and flatten into a single function call
 	which can be placed in CurveUtils.
 	*/
-
-	function CubicPoly()
+	class CubicPoly
 	{
 
-		var c0 = 0, c1 = 0, c2 = 0, c3 = 0;
+		c0 = 0
+		c1 = 0
+		c2 = 0
+		c3 = 0;
 
 		/*
 		 * Compute coefficients for a cubic polynomial
@@ -36,52 +38,49 @@ namespace THREE
 		 *  and
 		 *   p'(0) = t0, p'(1) = t1.
 		 */
-		function init(x0, x1, t0, t1)
+		init(x0, x1, t0, t1)
 		{
 
-			c0 = x0;
-			c1 = t0;
-			c2 = - 3 * x0 + 3 * x1 - 2 * t0 - t1;
-			c3 = 2 * x0 - 2 * x1 + t0 + t1;
+			this.c0 = x0;
+			this.c1 = t0;
+			this.c2 = - 3 * x0 + 3 * x1 - 2 * t0 - t1;
+			this.c3 = 2 * x0 - 2 * x1 + t0 + t1;
 
 		}
 
-		return {
+		initCatmullRom(x0, x1, x2, x3, tension)
+		{
 
-			initCatmullRom: function (x0, x1, x2, x3, tension)
-			{
+			this.init(x1, x2, tension * (x2 - x0), tension * (x3 - x1));
 
-				init(x1, x2, tension * (x2 - x0), tension * (x3 - x1));
+		}
 
-			},
+		initNonuniformCatmullRom(x0, x1, x2, x3, dt0, dt1, dt2)
+		{
 
-			initNonuniformCatmullRom: function (x0, x1, x2, x3, dt0, dt1, dt2)
-			{
+			// compute tangents when parameterized in [t1,t2]
+			var t1 = (x1 - x0) / dt0 - (x2 - x0) / (dt0 + dt1) + (x2 - x1) / dt1;
+			var t2 = (x2 - x1) / dt1 - (x3 - x1) / (dt1 + dt2) + (x3 - x2) / dt2;
 
-				// compute tangents when parameterized in [t1,t2]
-				var t1 = (x1 - x0) / dt0 - (x2 - x0) / (dt0 + dt1) + (x2 - x1) / dt1;
-				var t2 = (x2 - x1) / dt1 - (x3 - x1) / (dt1 + dt2) + (x3 - x2) / dt2;
+			// rescale tangents for parametrization in [0,1]
+			t1 *= dt1;
+			t2 *= dt1;
 
-				// rescale tangents for parametrization in [0,1]
-				t1 *= dt1;
-				t2 *= dt1;
+			this.init(x1, x2, t1, t2);
 
-				init(x1, x2, t1, t2);
+		}
 
-			},
+		calc(t)
+		{
 
-			calc: function (t)
-			{
+			var t2 = t * t;
+			var t3 = t2 * t;
+			return this.c0 + this.c1 * t + this.c2 * t2 + this.c3 * t3;
 
-				var t2 = t * t;
-				var t3 = t2 * t;
-				return c0 + c1 * t + c2 * t2 + c3 * t3;
-
-			}
-
-		};
+		}
 
 	}
+
 
 	//
 

@@ -48,11 +48,6 @@ namespace THREE
 	 *
 	 */
 
-	import { CubeTexture } from '../../textures/CubeTexture.js';
-	import { Texture } from '../../textures/Texture.js';
-	import { DataTexture2DArray } from '../../textures/DataTexture2DArray.js';
-	import { DataTexture3D } from '../../textures/DataTexture3D.js';
-
 	var emptyTexture = new Texture();
 	var emptyTexture2dArray = new DataTexture2DArray();
 	var emptyTexture3d = new DataTexture3D();
@@ -814,7 +809,7 @@ namespace THREE
 			var match = RePathPart.exec(path),
 				matchEnd = RePathPart.lastIndex,
 
-				id = match[1],
+				id: any = match[1],
 				idIsIndex = match[2] === ']',
 				subscript = match[3];
 

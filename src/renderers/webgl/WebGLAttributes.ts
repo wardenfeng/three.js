@@ -5,164 +5,168 @@ namespace THREE
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	export function WebGLAttributes(gl)
+	export class WebGLAttributes
 	{
 
-		var buffers = new WeakMap();
-
-		function createBuffer(attribute, bufferType)
+		constructor(gl)
 		{
 
-			var array = attribute.array;
-			var usage = attribute.usage;
+			var buffers = new WeakMap();
 
-			var buffer = gl.createBuffer();
-
-			gl.bindBuffer(bufferType, buffer);
-			gl.bufferData(bufferType, array, usage);
-
-			attribute.onUploadCallback();
-
-			var type = gl.FLOAT;
-
-			if (array instanceof Float32Array)
+			function createBuffer(attribute, bufferType)
 			{
 
-				type = gl.FLOAT;
+				var array = attribute.array;
+				var usage = attribute.usage;
 
-			} else if (array instanceof Float64Array)
+				var buffer = gl.createBuffer();
+
+				gl.bindBuffer(bufferType, buffer);
+				gl.bufferData(bufferType, array, usage);
+
+				attribute.onUploadCallback();
+
+				var type = gl.FLOAT;
+
+				if (array instanceof Float32Array)
+				{
+
+					type = gl.FLOAT;
+
+				} else if (array instanceof Float64Array)
+				{
+
+					console.warn('THREE.WebGLAttributes: Unsupported data buffer format: Float64Array.');
+
+				} else if (array instanceof Uint16Array)
+				{
+
+					type = gl.UNSIGNED_SHORT;
+
+				} else if (array instanceof Int16Array)
+				{
+
+					type = gl.SHORT;
+
+				} else if (array instanceof Uint32Array)
+				{
+
+					type = gl.UNSIGNED_INT;
+
+				} else if (array instanceof Int32Array)
+				{
+
+					type = gl.INT;
+
+				} else if (array instanceof Int8Array)
+				{
+
+					type = gl.BYTE;
+
+				} else if (array instanceof Uint8Array)
+				{
+
+					type = gl.UNSIGNED_BYTE;
+
+				}
+
+				return {
+					buffer: buffer,
+					type: type,
+					bytesPerElement: array.BYTES_PER_ELEMENT,
+					version: attribute.version
+				};
+
+			}
+
+			function updateBuffer(buffer, attribute, bufferType)
 			{
 
-				console.warn('THREE.WebGLAttributes: Unsupported data buffer format: Float64Array.');
+				var array = attribute.array;
+				var updateRange = attribute.updateRange;
 
-			} else if (array instanceof Uint16Array)
+				gl.bindBuffer(bufferType, buffer);
+
+				if (updateRange.count === - 1)
+				{
+
+					// Not using update ranges
+
+					gl.bufferSubData(bufferType, 0, array);
+
+				} else
+				{
+
+					gl.bufferSubData(bufferType, updateRange.offset * array.BYTES_PER_ELEMENT,
+						array.subarray(updateRange.offset, updateRange.offset + updateRange.count));
+
+					updateRange.count = - 1; // reset range
+
+				}
+
+			}
+
+			//
+
+			function get(attribute)
 			{
 
-				type = gl.UNSIGNED_SHORT;
+				if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
 
-			} else if (array instanceof Int16Array)
+				return buffers.get(attribute);
+
+			}
+
+			function remove(attribute)
 			{
 
-				type = gl.SHORT;
+				if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
 
-			} else if (array instanceof Uint32Array)
+				var data = buffers.get(attribute);
+
+				if (data)
+				{
+
+					gl.deleteBuffer(data.buffer);
+
+					buffers.delete(attribute);
+
+				}
+
+			}
+
+			function update(attribute, bufferType)
 			{
 
-				type = gl.UNSIGNED_INT;
+				if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
 
-			} else if (array instanceof Int32Array)
-			{
+				var data = buffers.get(attribute);
 
-				type = gl.INT;
+				if (data === undefined)
+				{
 
-			} else if (array instanceof Int8Array)
-			{
+					buffers.set(attribute, createBuffer(attribute, bufferType));
 
-				type = gl.BYTE;
+				} else if (data.version < attribute.version)
+				{
 
-			} else if (array instanceof Uint8Array)
-			{
+					updateBuffer(data.buffer, attribute, bufferType);
 
-				type = gl.UNSIGNED_BYTE;
+					data.version = attribute.version;
+
+				}
 
 			}
 
 			return {
-				buffer: buffer,
-				type: type,
-				bytesPerElement: array.BYTES_PER_ELEMENT,
-				version: attribute.version
+
+				get: get,
+				remove: remove,
+				update: update
+
 			};
 
 		}
-
-		function updateBuffer(buffer, attribute, bufferType)
-		{
-
-			var array = attribute.array;
-			var updateRange = attribute.updateRange;
-
-			gl.bindBuffer(bufferType, buffer);
-
-			if (updateRange.count === - 1)
-			{
-
-				// Not using update ranges
-
-				gl.bufferSubData(bufferType, 0, array);
-
-			} else
-			{
-
-				gl.bufferSubData(bufferType, updateRange.offset * array.BYTES_PER_ELEMENT,
-					array.subarray(updateRange.offset, updateRange.offset + updateRange.count));
-
-				updateRange.count = - 1; // reset range
-
-			}
-
-		}
-
-		//
-
-		function get(attribute)
-		{
-
-			if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
-
-			return buffers.get(attribute);
-
-		}
-
-		function remove(attribute)
-		{
-
-			if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
-
-			var data = buffers.get(attribute);
-
-			if (data)
-			{
-
-				gl.deleteBuffer(data.buffer);
-
-				buffers.delete(attribute);
-
-			}
-
-		}
-
-		function update(attribute, bufferType)
-		{
-
-			if (attribute.isInterleavedBufferAttribute) attribute = attribute.data;
-
-			var data = buffers.get(attribute);
-
-			if (data === undefined)
-			{
-
-				buffers.set(attribute, createBuffer(attribute, bufferType));
-
-			} else if (data.version < attribute.version)
-			{
-
-				updateBuffer(data.buffer, attribute, bufferType);
-
-				data.version = attribute.version;
-
-			}
-
-		}
-
-		return {
-
-			get: get,
-			remove: remove,
-			update: update
-
-		};
-
 	}
 
 

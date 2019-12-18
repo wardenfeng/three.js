@@ -215,6 +215,8 @@
     "src/renderers/shaders/ShaderLib/shadow_vert.glsl.ts",
     "src/renderers/shaders/ShaderLib/sprite_frag.glsl.ts",
     "src/renderers/shaders/ShaderLib/sprite_vert.glsl.ts",
+    "src/renderers/shaders/ShaderLib/vsm_vert.glsl.ts",
+    "src/renderers/shaders/ShaderLib/vsm_frag.glsl.ts",
     //
     "src/renderers/shaders/UniformsLib.ts",
     "src/renderers/shaders/UniformsUtils.ts",
@@ -309,6 +311,11 @@
     "src/geometries/TorusKnotGeometry.ts",
     "src/geometries/TubeGeometry.ts",
     "src/geometries/WireframeGeometry.ts",
+    "src/geometries/EdgesGeometry.ts",
+    "src/geometries/DodecahedronGeometry.ts",
+    "src/geometries/TorusGeometry.ts",
+    "src/geometries/RingGeometry.ts",
+    "src/geometries/Geometries.ts",
     //
     "src/extras/Earcut.ts",
     "src/extras/ImageUtils.ts",
@@ -332,6 +339,7 @@
     "src/extras/curves/QuadraticBezierCurve.ts",
     "src/extras/curves/QuadraticBezierCurve3.ts",
     "src/extras/curves/SplineCurve.ts",
+    "src/extras/curves/Curves.ts",
     //
     "src/extras/objects/ImmediateRenderObject.ts",
     //

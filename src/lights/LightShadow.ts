@@ -123,7 +123,7 @@ namespace THREE
 		toJSON: function ()
 		{
 
-			var object = {};
+			var object: any = {};
 
 			if (this.bias !== 0) object.bias = this.bias;
 			if (this.radius !== 1) object.radius = this.radius;

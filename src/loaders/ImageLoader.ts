@@ -45,7 +45,7 @@ namespace THREE
 
 			}
 
-			var image = document.createElementNS('http://www.w3.org/1999/xhtml', 'img');
+			var image: HTMLImageElement = <any>document.createElementNS('http://www.w3.org/1999/xhtml', 'img');
 
 			function onImageLoad()
 			{

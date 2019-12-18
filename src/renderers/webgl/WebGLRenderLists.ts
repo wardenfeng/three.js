@@ -173,65 +173,69 @@ namespace THREE
 
 	}
 
-	export function WebGLRenderLists()
+	export class WebGLRenderLists
 	{
-
-		var lists = new WeakMap();
-
-		function onSceneDispose(event)
+		constructor()
 		{
 
-			var scene = event.target;
+			var lists = new WeakMap();
 
-			scene.removeEventListener('dispose', onSceneDispose);
-
-			lists.delete(scene);
-
-		}
-
-		function get(scene, camera)
-		{
-
-			var cameras = lists.get(scene);
-			var list;
-			if (cameras === undefined)
+			function onSceneDispose(event)
 			{
 
-				list = new WebGLRenderList();
-				lists.set(scene, new WeakMap());
-				lists.get(scene).set(camera, list);
+				var scene = event.target;
 
-				scene.addEventListener('dispose', onSceneDispose);
+				scene.removeEventListener('dispose', onSceneDispose);
 
-			} else
-			{
-
-				list = cameras.get(camera);
-				if (list === undefined)
-				{
-
-					list = new WebGLRenderList();
-					cameras.set(camera, list);
-
-				}
+				lists.delete(scene);
 
 			}
 
-			return list;
+			function get(scene, camera)
+			{
+
+				var cameras = lists.get(scene);
+				var list;
+				if (cameras === undefined)
+				{
+
+					list = new WebGLRenderList();
+					lists.set(scene, new WeakMap());
+					lists.get(scene).set(camera, list);
+
+					scene.addEventListener('dispose', onSceneDispose);
+
+				} else
+				{
+
+					list = cameras.get(camera);
+					if (list === undefined)
+					{
+
+						list = new WebGLRenderList();
+						cameras.set(camera, list);
+
+					}
+
+				}
+
+				return list;
+
+			}
+
+			function dispose()
+			{
+
+				lists = new WeakMap();
+
+			}
+
+			return {
+				get: get,
+				dispose: dispose
+			};
 
 		}
-
-		function dispose()
-		{
-
-			lists = new WeakMap();
-
-		}
-
-		return {
-			get: get,
-			dispose: dispose
-		};
 
 	}
 

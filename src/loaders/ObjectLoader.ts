@@ -1031,6 +1031,4 @@ namespace THREE
 		LinearMipmapLinearFilter: LinearMipmapLinearFilter
 	};
 
-
-	export { ObjectLoader };
 }

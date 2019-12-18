@@ -5,56 +5,60 @@ namespace THREE
 	 * @author fordacious / fordacious.github.io
 	 */
 
-	export function WebGLProperties()
+	export class WebGLProperties
 	{
 
-		var properties = new WeakMap();
-
-		function get(object)
+		constructor()
 		{
 
-			var map = properties.get(object);
+			var properties = new WeakMap();
 
-			if (map === undefined)
+			function get(object)
 			{
 
-				map = {};
-				properties.set(object, map);
+				var map = properties.get(object);
+
+				if (map === undefined)
+				{
+
+					map = {};
+					properties.set(object, map);
+
+				}
+
+				return map;
 
 			}
 
-			return map;
+			function remove(object)
+			{
+
+				properties.delete(object);
+
+			}
+
+			function update(object, key, value)
+			{
+
+				properties.get(object)[key] = value;
+
+			}
+
+			function dispose()
+			{
+
+				properties = new WeakMap();
+
+			}
+
+			return {
+				get: get,
+				remove: remove,
+				update: update,
+				dispose: dispose
+			};
 
 		}
-
-		function remove(object)
-		{
-
-			properties.delete(object);
-
-		}
-
-		function update(object, key, value)
-		{
-
-			properties.get(object)[key] = value;
-
-		}
-
-		function dispose()
-		{
-
-			properties = new WeakMap();
-
-		}
-
-		return {
-			get: get,
-			remove: remove,
-			update: update,
-			dispose: dispose
-		};
-
 	}
 
 

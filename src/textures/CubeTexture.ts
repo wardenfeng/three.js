@@ -6,7 +6,7 @@ namespace THREE
 	 */
 
 
-	export function CubeTexture(images, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
+	export function CubeTexture(images?, mapping?, wrapS?, wrapT?, magFilter?, minFilter?, format?, type?, anisotropy?, encoding?)
 	{
 
 		images = images !== undefined ? images : [];

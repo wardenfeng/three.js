@@ -282,6 +282,4 @@ namespace THREE
 
 	});
 
-
-	export { CurvePath };
 }

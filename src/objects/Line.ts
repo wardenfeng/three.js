@@ -11,7 +11,7 @@ namespace THREE
 	var _ray = new Ray();
 	var _sphere = new Sphere();
 
-	export function Line(geometry, material, mode)
+	export function Line(geometry, material, mode?)
 	{
 
 		if (mode === 1)

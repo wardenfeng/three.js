@@ -37,9 +37,9 @@ namespace THREE
 				radius: { value: 4.0 }
 			},
 
-			vertexShader: vsm_vert,
+			vertexShader: ShaderChunk.vsm_vert,
 
-			fragmentShader: vsm_frag
+			fragmentShader: ShaderChunk.vsm_frag
 
 		});
 
