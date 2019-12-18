@@ -9,7 +9,7 @@ namespace THREE
 	export var AnimationUtils = {
 
 		// same as Array.prototype.slice, but also works on typed arrays
-		arraySlice: function (array, from, to)
+		arraySlice: function (array, from, to?)
 		{
 
 			if (AnimationUtils.isTypedArray(array))
@@ -26,7 +26,7 @@ namespace THREE
 		},
 
 		// converts an array to a specific type
-		convertArray: function (array, type, forceClone)
+		convertArray: function (array, type, forceClone?)
 		{
 
 			if (!array || // let 'undefined' and 'null' pass

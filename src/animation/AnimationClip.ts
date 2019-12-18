@@ -8,113 +8,33 @@ namespace THREE
 	 * @author Ben Houston / http://clara.io/
 	 * @author David Sarno / http://lighthaus.us/
 	 */
-
-	export function AnimationClip(name, duration, tracks)
+	export class AnimationClip
 	{
+		name: any;
+		tracks: any;
+		duration: any;
+		uuid: string;
 
-		this.name = name;
-		this.tracks = tracks;
-		this.duration = (duration !== undefined) ? duration : - 1;
-
-		this.uuid = _Math.generateUUID();
-
-		// this means it should figure out its duration by scanning the tracks
-		if (this.duration < 0)
+		constructor(name, duration, tracks)
 		{
 
-			this.resetDuration();
+			this.name = name;
+			this.tracks = tracks;
+			this.duration = (duration !== undefined) ? duration : - 1;
+
+			this.uuid = _Math.generateUUID();
+
+			// this means it should figure out its duration by scanning the tracks
+			if (this.duration < 0)
+			{
+
+				this.resetDuration();
+			}
 
 		}
 
-	}
 
-	function getTrackTypeForValueTypeName(typeName)
-	{
-
-		switch (typeName.toLowerCase())
-		{
-
-			case 'scalar':
-			case 'double':
-			case 'float':
-			case 'number':
-			case 'integer':
-
-				return NumberKeyframeTrack;
-
-			case 'vector':
-			case 'vector2':
-			case 'vector3':
-			case 'vector4':
-
-				return VectorKeyframeTrack;
-
-			case 'color':
-
-				return ColorKeyframeTrack;
-
-			case 'quaternion':
-
-				return QuaternionKeyframeTrack;
-
-			case 'bool':
-			case 'boolean':
-
-				return BooleanKeyframeTrack;
-
-			case 'string':
-
-				return StringKeyframeTrack;
-
-		}
-
-		throw new Error('THREE.KeyframeTrack: Unsupported typeName: ' + typeName);
-
-	}
-
-	function parseKeyframeTrack(json)
-	{
-
-		if (json.type === undefined)
-		{
-
-			throw new Error('THREE.KeyframeTrack: track type undefined, can not parse');
-
-		}
-
-		var trackType = getTrackTypeForValueTypeName(json.type);
-
-		if (json.times === undefined)
-		{
-
-			var times = [], values = [];
-
-			AnimationUtils.flattenJSON(json.keys, times, values, 'value');
-
-			json.times = times;
-			json.values = values;
-
-		}
-
-		// derived classes can define a static parse method
-		if (trackType.parse !== undefined)
-		{
-
-			return trackType.parse(json);
-
-		} else
-		{
-
-			// by default, we assume a constructor compatible with the base
-			return new trackType(json.name, json.times, json.values, json.interpolation);
-
-		}
-
-	}
-
-	Object.assign(AnimationClip, {
-
-		parse: function (json)
+		static parse(json)
 		{
 
 			var tracks = [],
@@ -130,9 +50,9 @@ namespace THREE
 
 			return new AnimationClip(json.name, json.duration, tracks);
 
-		},
+		}
 
-		toJSON: function (clip)
+		static toJSON(clip)
 		{
 
 			var tracks = [],
@@ -156,9 +76,9 @@ namespace THREE
 
 			return json;
 
-		},
+		}
 
-		CreateFromMorphTargetSequence: function (name, morphTargetSequence, fps, noLoop)
+		static CreateFromMorphTargetSequence(name, morphTargetSequence, fps, noLoop)
 		{
 
 			var numMorphTargets = morphTargetSequence.length;
@@ -201,9 +121,9 @@ namespace THREE
 
 			return new AnimationClip(name, - 1, tracks);
 
-		},
+		}
 
-		findByName: function (objectOrClipArray, name)
+		static findByName(objectOrClipArray, name)
 		{
 
 			var clipArray = objectOrClipArray;
@@ -230,9 +150,9 @@ namespace THREE
 
 			return null;
 
-		},
+		}
 
-		CreateClipsFromMorphTargetSequences: function (morphTargets, fps, noLoop)
+		static CreateClipsFromMorphTargetSequences(morphTargets, fps, noLoop)
 		{
 
 			var animationToMorphTargets = {};
@@ -279,10 +199,10 @@ namespace THREE
 
 			return clips;
 
-		},
+		}
 
 		// parse the animation.hierarchy format
-		parseAnimation: function (animation, bones)
+		static parseAnimation(animation, bones)
 		{
 
 			if (!animation)
@@ -419,11 +339,8 @@ namespace THREE
 
 		}
 
-	});
 
-	Object.assign(AnimationClip.prototype, {
-
-		resetDuration: function ()
+		resetDuration()
 		{
 
 			var tracks = this.tracks, duration = 0;
@@ -441,9 +358,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		trim: function ()
+		trim()
 		{
 
 			for (var i = 0; i < this.tracks.length; i++)
@@ -455,9 +372,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		validate: function ()
+		validate()
 		{
 
 			var valid = true;
@@ -471,9 +388,9 @@ namespace THREE
 
 			return valid;
 
-		},
+		}
 
-		optimize: function ()
+		optimize()
 		{
 
 			for (var i = 0; i < this.tracks.length; i++)
@@ -485,9 +402,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		clone: function ()
+		clone()
 		{
 
 			var tracks = [];
@@ -503,7 +420,91 @@ namespace THREE
 
 		}
 
-	});
+	}
+
+
+	function getTrackTypeForValueTypeName(typeName)
+	{
+
+		switch (typeName.toLowerCase())
+		{
+
+			case 'scalar':
+			case 'double':
+			case 'float':
+			case 'number':
+			case 'integer':
+
+				return NumberKeyframeTrack;
+
+			case 'vector':
+			case 'vector2':
+			case 'vector3':
+			case 'vector4':
+
+				return VectorKeyframeTrack;
+
+			case 'color':
+
+				return ColorKeyframeTrack;
+
+			case 'quaternion':
+
+				return QuaternionKeyframeTrack;
+
+			case 'bool':
+			case 'boolean':
+
+				return BooleanKeyframeTrack;
+
+			case 'string':
+
+				return StringKeyframeTrack;
+
+		}
+
+		throw new Error('THREE.KeyframeTrack: Unsupported typeName: ' + typeName);
+
+	}
+
+	function parseKeyframeTrack(json)
+	{
+
+		if (json.type === undefined)
+		{
+
+			throw new Error('THREE.KeyframeTrack: track type undefined, can not parse');
+
+		}
+
+		var trackType = getTrackTypeForValueTypeName(json.type);
+
+		if (json.times === undefined)
+		{
+
+			var times = [], values = [];
+
+			AnimationUtils.flattenJSON(json.keys, times, values, 'value');
+
+			json.times = times;
+			json.values = values;
+
+		}
+
+		// derived classes can define a static parse method
+		if (trackType.parse !== undefined)
+		{
+			return trackType.parse(json);
+
+		} else
+		{
+
+			// by default, we assume a constructor compatible with the base
+			return new trackType(json.name, json.times, json.values, json.interpolation);
+
+		}
+
+	}
 
 
 }

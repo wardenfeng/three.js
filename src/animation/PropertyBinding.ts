@@ -116,24 +116,33 @@ namespace THREE
 
 	});
 
-
-	export function PropertyBinding(rootNode, path, parsedPath)
+	export class PropertyBinding
 	{
+		path: any;
+		parsedPath: any;
+		node: any;
+		rootNode: any;
+		targetObject: any;
+		resolvedProperty: any;
+		propertyIndex: any;
+		propertyName: any;
+		_getValue_unbound: (targetArray: any, offset: any) => void;
+		_setValue_unbound: (sourceArray: any, offset: any) => void;
 
-		this.path = path;
-		this.parsedPath = parsedPath || PropertyBinding.parseTrackName(path);
+		constructor(rootNode, path, parsedPath)
+		{
 
-		this.node = PropertyBinding.findNode(rootNode, this.parsedPath.nodeName) || rootNode;
+			this.path = path;
+			this.parsedPath = parsedPath || PropertyBinding.parseTrackName(path);
 
-		this.rootNode = rootNode;
+			this.node = PropertyBinding.findNode(rootNode, this.parsedPath.nodeName) || rootNode;
 
-	}
+			this.rootNode = rootNode;
 
-	Object.assign(PropertyBinding, {
+		}
 
-		Composite: Composite,
 
-		create: function (root, path, parsedPath)
+		static create(root, path, parsedPath)
 		{
 
 			if (!(root && root.isAnimationObjectGroup))
@@ -144,11 +153,11 @@ namespace THREE
 			} else
 			{
 
-				return new PropertyBinding.Composite(root, path, parsedPath);
+				return new Composite(root, path, parsedPath);
 
 			}
 
-		},
+		}
 
 		/**
 		 * Replaces spaces with underscores and removes unsupported characters from
@@ -157,14 +166,14 @@ namespace THREE
 		 * @param {string} name Node name to be sanitized.
 		 * @return {string}
 		 */
-		sanitizeNodeName: function (name)
+		static sanitizeNodeName(name)
 		{
 
 			return name.replace(/\s/g, '_').replace(_reservedRe, '');
 
-		},
+		}
 
-		parseTrackName: function (trackName)
+		static parseTrackName(trackName)
 		{
 
 			var matches = _trackRe.exec(trackName);
@@ -215,9 +224,9 @@ namespace THREE
 
 			return results;
 
-		},
+		}
 
-		findNode: function (root, nodeName)
+		static findNode(root, nodeName)
 		{
 
 			if (!nodeName || nodeName === "" || nodeName === "root" || nodeName === "." || nodeName === - 1 || nodeName === root.name || nodeName === root.uuid)
@@ -286,28 +295,25 @@ namespace THREE
 
 		}
 
-	});
-
-	Object.assign(PropertyBinding.prototype, { // prototype, continued
 
 		// these are used to "bind" a nonexistent property
-		_getValue_unavailable: function () { },
-		_setValue_unavailable: function () { },
+		_getValue_unavailable() { }
+		_setValue_unavailable() { }
 
-		BindingType: {
+		BindingType = {
 			Direct: 0,
 			EntireArray: 1,
 			ArrayElement: 2,
 			HasFromToArray: 3
-		},
+		}
 
-		Versioning: {
+		Versioning = {
 			None: 0,
 			NeedsUpdate: 1,
 			MatrixWorldNeedsUpdate: 2
-		},
+		}
 
-		GetterByBindingType: [
+		GetterByBindingType = [
 
 			function getValue_direct(buffer, offset)
 			{
@@ -344,9 +350,9 @@ namespace THREE
 
 			}
 
-		],
+		]
 
-		SetterByBindingTypeAndVersioning: [
+		SetterByBindingTypeAndVersioning = [
 
 			[
 				// Direct
@@ -480,9 +486,9 @@ namespace THREE
 
 			]
 
-		],
+		]
 
-		getValue: function getValue_unbound(targetArray, offset)
+		getValue(targetArray, offset)
 		{
 
 			this.bind();
@@ -494,18 +500,18 @@ namespace THREE
 			// the bound state. When the property is not found, the methods
 			// become no-ops.
 
-		},
+		}
 
-		setValue: function getValue_unbound(sourceArray, offset)
+		setValue(sourceArray, offset)
 		{
 
 			this.bind();
 			this.setValue(sourceArray, offset);
 
-		},
+		}
 
 		// create getter / setter pair for a property in the scene graph
-		bind: function ()
+		bind()
 		{
 
 			var targetObject = this.node,
@@ -769,9 +775,9 @@ namespace THREE
 			this.getValue = this.GetterByBindingType[bindingType];
 			this.setValue = this.SetterByBindingTypeAndVersioning[bindingType][versioning];
 
-		},
+		}
 
-		unbind: function ()
+		unbind()
 		{
 
 			this.node = null;
@@ -782,8 +788,7 @@ namespace THREE
 			this.setValue = this._setValue_unbound;
 
 		}
-
-	});
+	}
 
 	//!\ DECLARE ALIAS AFTER assign prototype !
 	Object.assign(PropertyBinding.prototype, {

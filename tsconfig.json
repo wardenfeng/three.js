@@ -38,17 +38,12 @@
     "src/math/Ray.ts",
     "src/math/SphericalHarmonics3.ts",
     //
-    // "src/math/interpolants/CubicInterpolant.ts",
+    "src/math/interpolants/CubicInterpolant.ts",
     "src/math/interpolants/DiscreteInterpolant.ts",
     "src/math/interpolants/LinearInterpolant.ts",
     "src/math/interpolants/QuaternionLinearInterpolant.ts",
     //
-    "src/animation/tracks/VectorKeyframeTrack.ts",
-    "src/animation/tracks/BooleanKeyframeTrack.ts",
-    "src/animation/tracks/ColorKeyframeTrack.ts",
-    "src/animation/tracks/NumberKeyframeTrack.ts",
-    "src/animation/tracks/QuaternionKeyframeTrack.ts",
-    "src/animation/tracks/StringKeyframeTrack.ts",
+    "src/core/EventDispatcher.ts",
     //
     "src/animation/KeyframeTrack.ts",
     "src/animation/AnimationAction.ts",
@@ -58,5 +53,12 @@
     "src/animation/AnimationUtils.ts",
     "src/animation/PropertyBinding.ts",
     "src/animation/PropertyMixer.ts",
+    //
+    "src/animation/tracks/VectorKeyframeTrack.ts",
+    "src/animation/tracks/BooleanKeyframeTrack.ts",
+    "src/animation/tracks/ColorKeyframeTrack.ts",
+    "src/animation/tracks/NumberKeyframeTrack.ts",
+    "src/animation/tracks/QuaternionKeyframeTrack.ts",
+    "src/animation/tracks/StringKeyframeTrack.ts",
   ]
 }

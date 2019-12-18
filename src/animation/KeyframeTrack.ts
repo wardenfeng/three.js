@@ -10,30 +10,34 @@ namespace THREE
 	 * @author David Sarno / http://lighthaus.us/
 	 * @author tschw
 	 */
-
-	export function KeyframeTrack(name, times, values, interpolation)
+	export class KeyframeTrack
 	{
+		name: any;
+		times: any;
+		values: any;
+		createInterpolant: any;
+		ValueTypeName: string;
 
-		if (name === undefined) throw new Error('THREE.KeyframeTrack: track name is undefined');
-		if (times === undefined || times.length === 0) throw new Error('THREE.KeyframeTrack: no keyframes in track named ' + name);
+		constructor(name, times, values, interpolation?)
+		{
 
-		this.name = name;
+			if (name === undefined) throw new Error('THREE.KeyframeTrack: track name is undefined');
+			if (times === undefined || times.length === 0) throw new Error('THREE.KeyframeTrack: no keyframes in track named ' + name);
 
-		this.times = AnimationUtils.convertArray(times, this.TimeBufferType);
-		this.values = AnimationUtils.convertArray(values, this.ValueBufferType);
+			this.name = name;
 
-		this.setInterpolation(interpolation || this.DefaultInterpolation);
+			this.times = AnimationUtils.convertArray(times, this.TimeBufferType);
+			this.values = AnimationUtils.convertArray(values, this.ValueBufferType);
 
-	}
+			this.setInterpolation(interpolation || this.DefaultInterpolation);
 
-	// Static methods
+		}
 
-	Object.assign(KeyframeTrack, {
 
 		// Serialization (in static context, because of constructor invocation
 		// and automatic invocation of .toJSON):
 
-		toJSON: function (track)
+		static toJSON(track)
 		{
 
 			var trackType = track.constructor;
@@ -75,40 +79,37 @@ namespace THREE
 
 		}
 
-	});
 
-	Object.assign(KeyframeTrack.prototype, {
+		constructo = KeyframeTrack
 
-		constructor: KeyframeTrack,
+		TimeBufferType = Float32Array
 
-		TimeBufferType: Float32Array,
+		ValueBufferType:any = Float32Array
 
-		ValueBufferType: Float32Array,
+		DefaultInterpolation = InterpolateLinear
 
-		DefaultInterpolation: InterpolateLinear,
-
-		InterpolantFactoryMethodDiscrete: function (result)
+		InterpolantFactoryMethodDiscrete(result)
 		{
 
 			return new DiscreteInterpolant(this.times, this.values, this.getValueSize(), result);
 
-		},
+		}
 
-		InterpolantFactoryMethodLinear: function (result)
+		InterpolantFactoryMethodLinear(result)
 		{
 
 			return new LinearInterpolant(this.times, this.values, this.getValueSize(), result);
 
-		},
+		}
 
-		InterpolantFactoryMethodSmooth: function (result)
+		InterpolantFactoryMethodSmooth(result)
 		{
 
 			return new CubicInterpolant(this.times, this.values, this.getValueSize(), result);
 
-		},
+		}
 
-		setInterpolation: function (interpolation)
+		setInterpolation(interpolation)
 		{
 
 			var factoryMethod;
@@ -169,9 +170,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		getInterpolation: function ()
+		getInterpolation()
 		{
 
 			switch (this.createInterpolant)
@@ -191,17 +192,17 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		getValueSize: function ()
+		getValueSize()
 		{
 
 			return this.values.length / this.times.length;
 
-		},
+		}
 
 		// move all keyframes either forwards or backwards in time
-		shift: function (timeOffset)
+		shift(timeOffset)
 		{
 
 			if (timeOffset !== 0.0)
@@ -220,10 +221,10 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
 		// scale all keyframe times by a factor (useful for frame <-> seconds conversions)
-		scale: function (timeScale)
+		scale(timeScale)
 		{
 
 			if (timeScale !== 1.0)
@@ -242,11 +243,11 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
 		// removes keyframes before and after animation without changing any values within the range [startTime, endTime].
 		// IMPORTANT: We do not shift around keys to the start of the track time, because for interpolated keys this will change their values
-		trim: function (startTime, endTime)
+		trim(startTime, endTime)
 		{
 
 			var times = this.times,
@@ -284,10 +285,10 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
 		// ensure we do not get a GarbageInGarbageOut situation, make sure tracks are at least minimally viable
-		validate: function ()
+		validate()
 		{
 
 			var valid = true;
@@ -370,12 +371,11 @@ namespace THREE
 			}
 
 			return valid;
-
-		},
+		}
 
 		// removes equivalent sequential keys as common in morph target sequences
 		// (0,0,0,0,1,1,1,0,0,0,0,0,0,0) --> (0,0,1,1,0,0)
-		optimize: function ()
+		optimize()
 		{
 
 			var times = this.times,
@@ -490,16 +490,15 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		clone: function ()
+		clone()
 		{
 
 			var times = AnimationUtils.arraySlice(this.times, 0);
 			var values = AnimationUtils.arraySlice(this.values, 0);
 
-			var TypedKeyframeTrack = this.constructor;
-			var track = new TypedKeyframeTrack(this.name, times, values);
+			var track = new KeyframeTrack(this.name, times, values);
 
 			// Interpolant argument to constructor is not saved, so copy the factory method directly.
 			track.createInterpolant = this.createInterpolant;
@@ -507,7 +506,7 @@ namespace THREE
 			return track;
 
 		}
+	}
 
-	});
 
 }

@@ -10,27 +10,20 @@ namespace THREE
 	 * @author David Sarno / http://lighthaus.us/
 	 * @author tschw
 	 */
-
-	export function StringKeyframeTrack(name, times, values, interpolation)
+	export class StringKeyframeTrack extends KeyframeTrack
 	{
+		ValueTypeName = 'string'
+		ValueBufferType = Array
 
-		KeyframeTrack.call(this, name, times, values, interpolation);
+		DefaultInterpolation = InterpolateDiscrete
 
+		InterpolantFactoryMethodLinear = undefined
+
+		InterpolantFactoryMethodSmooth = undefined
+
+		constructor(name, times, values, interpolation)
+		{
+			super(name, times, values, interpolation);
+		}
 	}
-
-	StringKeyframeTrack.prototype = Object.assign(Object.create(KeyframeTrack.prototype), {
-
-		constructor: StringKeyframeTrack,
-
-		ValueTypeName: 'string',
-		ValueBufferType: Array,
-
-		DefaultInterpolation: InterpolateDiscrete,
-
-		InterpolantFactoryMethodLinear: undefined,
-
-		InterpolantFactoryMethodSmooth: undefined
-
-	});
-
 }

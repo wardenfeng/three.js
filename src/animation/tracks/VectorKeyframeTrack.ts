@@ -10,24 +10,17 @@ namespace THREE
 	 * @author David Sarno / http://lighthaus.us/
 	 * @author tschw
 	 */
-
-	export function VectorKeyframeTrack(name, times, values, interpolation)
+	export class VectorKeyframeTrack extends KeyframeTrack
 	{
+		ValueTypeName = 'vector'
 
-		KeyframeTrack.call(this, name, times, values, interpolation);
+		constructor(name, times, values, interpolation)
+		{
 
+			super(name, times, values, interpolation);
+
+		}
 	}
 
-	VectorKeyframeTrack.prototype = Object.assign(Object.create(KeyframeTrack.prototype), {
-
-		constructor: VectorKeyframeTrack,
-
-		ValueTypeName: 'vector'
-
-		// ValueBufferType is inherited
-
-		// DefaultInterpolation is inherited
-
-	});
 
 }
