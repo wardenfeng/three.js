@@ -6,8 +6,6 @@ namespace THREE
 	 * @author alteredq / http://alteredqualia.com/
 	 */
 
-	import { Color } from '../math/Color.js';
-
 	export function FogExp2(color, density)
 	{
 

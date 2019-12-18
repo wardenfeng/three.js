@@ -1,6 +1,6 @@
 namespace THREE
 {
-
+	export declare var __THREE_DEVTOOLS__;
 	/**
 	 * @author mrdoob / http://mrdoob.com/
 	 */

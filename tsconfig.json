@@ -89,6 +89,11 @@
     "src/cameras/ArrayCamera.ts",
     "src/cameras/StereoCamera.ts",
     //
+    "src/renderers/shaders/UniformsLib.ts",
+    "src/renderers/shaders/UniformsUtils.ts",
+    "src/renderers/shaders/ShaderChunk.ts",
+    "src/renderers/shaders/ShaderLib.ts",
+    //
     "src/renderers/WebGLRenderTargetCube.ts",
     "src/renderers/WebGLMultisampleRenderTarget.ts",
     "src/renderers/WebGLMultiviewRenderTarget.ts",
