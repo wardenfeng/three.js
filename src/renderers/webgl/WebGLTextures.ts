@@ -922,7 +922,7 @@ namespace THREE
 		}
 
 		// Setup storage for internal depth/stencil buffers and bind to correct framebuffer
-		function setupRenderBufferStorage(renderbuffer, renderTarget, isMultisample)
+		function setupRenderBufferStorage(renderbuffer, renderTarget, isMultisample?)
 		{
 
 			_gl.bindRenderbuffer(_gl.RENDERBUFFER, renderbuffer);

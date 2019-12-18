@@ -249,6 +249,7 @@
     "src/renderers/webgl/WebGLShader.ts",
     "src/renderers/webgl/WebGLShadowMap.ts",
     "src/renderers/webgl/WebGLState.ts",
+    "src/renderers/webgl/WebGLTextures.ts",
     "src/renderers/webgl/WebGLUniforms.ts",
     "src/renderers/webgl/WebGLUtils.ts",
     //

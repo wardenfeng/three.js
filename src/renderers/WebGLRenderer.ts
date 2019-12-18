@@ -1502,7 +1502,7 @@ namespace THREE
 
 		}
 
-		function renderObjects(renderList, scene, camera, overrideMaterial)
+		function renderObjects(renderList, scene, camera, overrideMaterial?)
 		{
 
 			for (var i = 0, l = renderList.length; i < l; i++)
@@ -2165,8 +2165,8 @@ namespace THREE
 				// RectAreaLight Texture
 				// TODO (mrdoob): Find a nicer implementation
 
-				if (m_uniforms.ltc_1 !== undefined) m_uniforms.ltc_1.value = UniformsLib.LTC_1;
-				if (m_uniforms.ltc_2 !== undefined) m_uniforms.ltc_2.value = UniformsLib.LTC_2;
+				if (m_uniforms.ltc_1 !== undefined) m_uniforms.ltc_1.value = UniformsLib["LTC_1"];
+				if (m_uniforms.ltc_2 !== undefined) m_uniforms.ltc_2.value = UniformsLib["LTC_2"];
 
 				WebGLUniforms.upload(_gl, materialProperties.uniformsList, m_uniforms, textures);
 

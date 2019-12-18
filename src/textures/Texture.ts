@@ -10,7 +10,7 @@ namespace THREE
 
 	var textureId = 0;
 
-	export function Texture(image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding)
+	export function Texture(image?, mapping?, wrapS?, wrapT?, magFilter?, minFilter?, format?, type?, anisotropy?, encoding?)
 	{
 
 		Object.defineProperty(this, 'id', { value: textureId++ });
@@ -133,7 +133,7 @@ namespace THREE
 
 			}
 
-			var output = {
+			var output: any = {
 
 				metadata: {
 					version: 4.5,
