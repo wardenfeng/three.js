@@ -172,7 +172,7 @@ namespace THREE
 				if (parts && parts.length > 1)
 				{
 
-					var name = parts[1];
+					var name: string = parts[1];
 
 					var animationMorphTargets = animationToMorphTargets[name];
 					if (!animationMorphTargets)
@@ -259,7 +259,7 @@ namespace THREE
 				{
 
 					// figure out all morph targets used in this track
-					var morphTargetNames = {};
+					var morphTargetNames: { length?} = {};
 
 					for (var k = 0; k < animationKeys.length; k++)
 					{
@@ -477,7 +477,7 @@ namespace THREE
 
 		}
 
-		var trackType = getTrackTypeForValueTypeName(json.type);
+		var trackType: any = getTrackTypeForValueTypeName(json.type);
 
 		if (json.times === undefined)
 		{
