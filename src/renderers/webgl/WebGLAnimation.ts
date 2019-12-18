@@ -5,60 +5,55 @@ namespace THREE
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	export function WebGLAnimation()
+	export class WebGLAnimation
 	{
+		context = null;
+		isAnimating = false;
+		animationLoop = null;
 
-		var context = null;
-		var isAnimating = false;
-		var animationLoop = null;
-
-		function onAnimationFrame(time, frame)
+		onAnimationFrame(time, frame)
 		{
 
-			if (isAnimating === false) return;
+			if (this.isAnimating === false) return;
 
-			animationLoop(time, frame);
+			this.animationLoop(time, frame);
 
-			context.requestAnimationFrame(onAnimationFrame);
+			this.context.requestAnimationFrame(this.onAnimationFrame.bind(this));
 
 		}
 
-		return {
+		start()
+		{
 
-			start: function ()
-			{
+			if (this.isAnimating === true) return;
+			if (this.animationLoop === null) return;
 
-				if (isAnimating === true) return;
-				if (animationLoop === null) return;
+			this.context.requestAnimationFrame(this.onAnimationFrame.bind(this));
 
-				context.requestAnimationFrame(onAnimationFrame);
+			this.isAnimating = true;
 
-				isAnimating = true;
+		}
 
-			},
+		stop()
+		{
 
-			stop: function ()
-			{
+			this.isAnimating = false;
 
-				isAnimating = false;
+		}
 
-			},
+		setAnimationLoop(callback)
+		{
 
-			setAnimationLoop: function (callback)
-			{
+			this.animationLoop = callback;
 
-				animationLoop = callback;
+		}
 
-			},
+		setContext(value)
+		{
 
-			setContext: function (value)
-			{
+			this.context = value;
 
-				context = value;
-
-			}
-
-		};
-
+		}
 	}
+
 }

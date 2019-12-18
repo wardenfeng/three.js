@@ -123,5 +123,17 @@
     "src/renderers/webvr/WebVRManager.ts",
     "src/renderers/webvr/WebVRUtils.ts",
     "src/renderers/webvr/WebXRManager.ts",
+    //
+    "src/objects/Group.ts",
+    "src/objects/Bone.ts",
+    "src/objects/InstancedMesh.ts",
+    "src/objects/Line.ts",
+    "src/objects/LineLoop.ts",
+    "src/objects/LineSegments.ts",
+    "src/objects/LOD.ts",
+    "src/objects/Mesh.ts",
+    "src/objects/Points.ts",
+    "src/objects/Skeleton.ts",
+    "src/objects/Sprite.ts",
   ]
 }

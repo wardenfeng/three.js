@@ -1,3 +1,5 @@
+declare var XRWebGLLayer;
+
 namespace THREE
 {
 
