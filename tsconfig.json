@@ -375,5 +375,21 @@
     "src/lights/RectAreaLight.ts",
     "src/lights/SpotLight.ts",
     "src/lights/SpotLightShadow.ts",
+    //
+    "src/loaders/Loader.ts",
+    "src/loaders/AnimationLoader.ts",
+    "src/loaders/AudioLoader.ts",
+    "src/loaders/BufferGeometryLoader.ts",
+    "src/loaders/Cache.ts",
+    "src/loaders/CompressedTextureLoader.ts",
+    "src/loaders/DataTextureLoader.ts",
+    "src/loaders/FileLoader.ts",
+    "src/loaders/ImageBitmapLoader.ts",
+    "src/loaders/ImageLoader.ts",
+    "src/loaders/LoaderUtils.ts",
+    "src/loaders/LoadingManager.ts",
+    "src/loaders/MaterialLoader.ts",
+    "src/loaders/ObjectLoader.ts",
+    "src/loaders/TextureLoader.ts",
   ]
 }
