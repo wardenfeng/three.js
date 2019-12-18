@@ -360,5 +360,10 @@
     "src/textures/DataTexture3D.ts",
     "src/textures/DepthTexture.ts",
     "src/textures/VideoTexture.ts",
+    //
+    "src/lights/AmbientLight.ts",
+    "src/lights/AmbientLightProbe.ts",
+    "src/lights/DirectionalLight.ts",
+    "src/lights/DirectionalLightShadow.ts",
   ]
 }
