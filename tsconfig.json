@@ -24,5 +24,9 @@
     "src/math/Box3.ts",
     "src/math/Color.ts",
     "src/math/Cylindrical.ts",
+    "src/math/Euler.ts",
+    "src/math/Frustum.ts",
+    "src/math/Sphere.ts",
+    "src/math/Spherical.ts",
   ]
 }

@@ -1,8 +1,6 @@
 namespace THREE
 {
 
-	import { _Math } from './Math.js';
-
 	/**
 	 * @author mrdoob / http://mrdoob.com/
 	 */

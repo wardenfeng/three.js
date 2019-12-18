@@ -35,7 +35,7 @@ namespace THREE
 	 * @author WestLangley / http://github.com/WestLangley
 	 */
 
-	export function Box3(min, max)
+	export function Box3(min?, max?)
 	{
 
 		this.min = (min !== undefined) ? min : new Vector3(+ Infinity, + Infinity, + Infinity);
