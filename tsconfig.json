@@ -350,5 +350,15 @@
     "src/helpers/SkeletonHelper.ts",
     "src/helpers/SpotLightHelper.ts",
     "src/helpers/VertexNormalsHelper.ts",
+    //
+    "src/textures/Texture.ts",
+    "src/textures/CanvasTexture.ts",
+    "src/textures/CompressedTexture.ts",
+    "src/textures/CubeTexture.ts",
+    "src/textures/DataTexture.ts",
+    "src/textures/DataTexture2DArray.ts",
+    "src/textures/DataTexture3D.ts",
+    "src/textures/DepthTexture.ts",
+    "src/textures/VideoTexture.ts",
   ]
 }
