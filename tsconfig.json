@@ -57,10 +57,9 @@
     // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "src/**/*.d.ts"
+  "files": [
+    "src/math/Math.ts",
+    "src/math/Quaternion.ts",
+    "src/math/Vector3.ts",
   ]
 }

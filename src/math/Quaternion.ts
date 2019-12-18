@@ -6,7 +6,7 @@ namespace THREE {
 	 * @author bhouston / http://clara.io
 	 */
 
-	export function Quaternion(x, y, z, w) {
+	export function Quaternion(x?, y?, z?, w?) {
 
 		this._x = x || 0;
 		this._y = y || 0;
