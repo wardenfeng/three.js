@@ -1,4 +1,6 @@
-export var tonemapping_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var tonemapping_pars_fragment = /* glsl */`
 #ifndef saturate
 // <common> may have defined saturate() already
 #define saturate(a) clamp( a, 0.0, 1.0 )
@@ -50,3 +52,4 @@ vec3 ACESFilmicToneMapping( vec3 color ) {
 
 }
 `;
+}

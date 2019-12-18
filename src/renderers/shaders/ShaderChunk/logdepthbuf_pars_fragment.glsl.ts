@@ -1,4 +1,6 @@
-export var logdepthbuf_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var logdepthbuf_pars_fragment = /* glsl */`
 #if defined( USE_LOGDEPTHBUF ) && defined( USE_LOGDEPTHBUF_EXT )
 
 	uniform float logDepthBufFC;
@@ -7,3 +9,4 @@ export var logdepthbuf_pars_fragment = /* glsl */`
 
 #endif
 `;
+}

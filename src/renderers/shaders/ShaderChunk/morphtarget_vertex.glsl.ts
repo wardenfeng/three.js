@@ -1,4 +1,6 @@
-export var morphtarget_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var morphtarget_vertex = /* glsl */`
 #ifdef USE_MORPHTARGETS
 
 	transformed += ( morphTarget0 - position ) * morphTargetInfluences[ 0 ];
@@ -17,3 +19,4 @@ export var morphtarget_vertex = /* glsl */`
 
 #endif
 `;
+}

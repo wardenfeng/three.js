@@ -1,4 +1,6 @@
-export var specularmap_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var specularmap_fragment = /* glsl */`
 float specularStrength;
 
 #ifdef USE_SPECULARMAP
@@ -12,3 +14,4 @@ float specularStrength;
 
 #endif
 `;
+}

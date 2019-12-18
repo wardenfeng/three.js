@@ -1,4 +1,6 @@
-export var cube_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var cube_vert = /* glsl */`
 varying vec3 vWorldDirection;
 
 #include <common>
@@ -14,3 +16,4 @@ void main() {
 
 }
 `;
+}

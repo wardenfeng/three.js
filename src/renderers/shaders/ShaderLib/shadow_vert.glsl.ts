@@ -1,4 +1,6 @@
-export var shadow_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var shadow_vert = /* glsl */`
 #include <fog_pars_vertex>
 #include <shadowmap_pars_vertex>
 
@@ -12,3 +14,4 @@ void main() {
 
 }
 `;
+}

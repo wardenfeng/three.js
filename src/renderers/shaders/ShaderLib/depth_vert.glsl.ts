@@ -1,4 +1,6 @@
-export var depth_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var depth_vert = /* glsl */`
 #include <common>
 #include <uv_pars_vertex>
 #include <displacementmap_pars_vertex>
@@ -31,3 +33,4 @@ void main() {
 
 }
 `;
+}

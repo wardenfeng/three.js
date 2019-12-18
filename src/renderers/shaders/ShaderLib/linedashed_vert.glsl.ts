@@ -1,4 +1,6 @@
-export var linedashed_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var linedashed_vert = /* glsl */`
 uniform float scale;
 attribute float lineDistance;
 
@@ -25,3 +27,4 @@ void main() {
 
 }
 `;
+}

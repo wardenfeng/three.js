@@ -1,4 +1,6 @@
-export var meshlambert_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var meshlambert_vert = /* glsl */`
 #define LAMBERT
 
 varying vec3 vLightFront;
@@ -49,3 +51,4 @@ void main() {
 	#include <fog_vertex>
 }
 `;
+}

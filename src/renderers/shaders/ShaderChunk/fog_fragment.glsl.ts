@@ -1,4 +1,6 @@
-export var fog_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var fog_fragment = /* glsl */`
 #ifdef USE_FOG
 
 	#ifdef FOG_EXP2
@@ -15,3 +17,4 @@ export var fog_fragment = /* glsl */`
 
 #endif
 `;
+}

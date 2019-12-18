@@ -1,4 +1,6 @@
-export var normal_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var normal_frag = /* glsl */`
 #define NORMAL
 
 uniform float opacity;
@@ -40,3 +42,4 @@ void main() {
 
 }
 `;
+}

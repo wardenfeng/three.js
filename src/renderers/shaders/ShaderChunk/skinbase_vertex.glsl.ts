@@ -1,4 +1,6 @@
-export var skinbase_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var skinbase_vertex = /* glsl */`
 #ifdef USE_SKINNING
 
 	mat4 boneMatX = getBoneMatrix( skinIndex.x );
@@ -8,3 +10,4 @@ export var skinbase_vertex = /* glsl */`
 
 #endif
 `;
+}

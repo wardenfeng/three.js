@@ -1,4 +1,6 @@
-export var map_particle_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var map_particle_fragment = /* glsl */`
 #if defined( USE_MAP ) || defined( USE_ALPHAMAP )
 
 	vec2 uv = ( uvTransform * vec3( gl_PointCoord.x, 1.0 - gl_PointCoord.y, 1 ) ).xy;
@@ -18,3 +20,4 @@ export var map_particle_fragment = /* glsl */`
 
 #endif
 `;
+}

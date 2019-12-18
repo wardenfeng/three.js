@@ -1,4 +1,6 @@
-export var meshphysical_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var meshphysical_vert = /* glsl */`
 #define STANDARD
 
 varying vec3 vViewPosition;
@@ -69,3 +71,4 @@ void main() {
 
 }
 `;
+}

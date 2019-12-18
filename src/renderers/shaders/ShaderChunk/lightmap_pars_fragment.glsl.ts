@@ -1,4 +1,6 @@
-export var lightmap_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var lightmap_pars_fragment = /* glsl */`
 #ifdef USE_LIGHTMAP
 
 	uniform sampler2D lightMap;
@@ -6,3 +8,4 @@ export var lightmap_pars_fragment = /* glsl */`
 
 #endif
 `;
+}

@@ -1,4 +1,6 @@
-export var normal_fragment_maps = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var normal_fragment_maps = /* glsl */`
 
 #ifdef OBJECTSPACE_NORMALMAP
 
@@ -39,3 +41,4 @@ export var normal_fragment_maps = /* glsl */`
 
 #endif
 `;
+}

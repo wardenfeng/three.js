@@ -1,4 +1,6 @@
-export var meshlambert_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var meshlambert_frag = /* glsl */`
 uniform vec3 diffuse;
 uniform vec3 emissive;
 uniform float opacity;
@@ -95,3 +97,4 @@ void main() {
 	#include <dithering_fragment>
 }
 `;
+}

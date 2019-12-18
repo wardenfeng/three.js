@@ -1,4 +1,6 @@
-export var meshphysical_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var meshphysical_frag = /* glsl */`
 #define STANDARD
 
 #ifdef PHYSICAL
@@ -119,3 +121,4 @@ void main() {
 
 }
 `;
+}

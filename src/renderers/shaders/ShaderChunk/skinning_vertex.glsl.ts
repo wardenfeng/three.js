@@ -1,4 +1,6 @@
-export var skinning_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var skinning_vertex = /* glsl */`
 #ifdef USE_SKINNING
 
 	vec4 skinVertex = bindMatrix * vec4( transformed, 1.0 );
@@ -13,3 +15,4 @@ export var skinning_vertex = /* glsl */`
 
 #endif
 `;
+}

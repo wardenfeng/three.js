@@ -1,4 +1,6 @@
-export var background_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var background_vert = /* glsl */`
 varying vec2 vUv;
 uniform mat3 uvTransform;
 
@@ -10,3 +12,4 @@ void main() {
 
 }
 `;
+}

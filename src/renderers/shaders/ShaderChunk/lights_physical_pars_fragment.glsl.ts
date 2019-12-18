@@ -1,4 +1,6 @@
-export var lights_physical_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var lights_physical_pars_fragment = /* glsl */`
 struct PhysicalMaterial {
 
 	vec3	diffuseColor;
@@ -169,3 +171,4 @@ float computeSpecularOcclusion( const in float dotNV, const in float ambientOccl
 
 }
 `;
+}

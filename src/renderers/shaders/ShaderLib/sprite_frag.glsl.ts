@@ -1,4 +1,6 @@
-export var sprite_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var sprite_frag = /* glsl */`
 uniform vec3 diffuse;
 uniform float opacity;
 
@@ -32,3 +34,4 @@ void main() {
 
 }
 `;
+}

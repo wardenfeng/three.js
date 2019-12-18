@@ -1,4 +1,6 @@
-export var normal_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var normal_vert = /* glsl */`
 #define NORMAL
 
 #if defined( FLAT_SHADED ) || defined( USE_BUMPMAP ) || defined( TANGENTSPACE_NORMALMAP )
@@ -67,3 +69,4 @@ void main() {
 
 }
 `;
+}

@@ -1,4 +1,6 @@
-export var points_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var points_vert = /* glsl */`
 uniform float size;
 uniform float scale;
 
@@ -33,3 +35,4 @@ void main() {
 
 }
 `;
+}

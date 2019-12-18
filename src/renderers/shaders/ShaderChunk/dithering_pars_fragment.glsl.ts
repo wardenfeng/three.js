@@ -1,4 +1,6 @@
-export var dithering_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var dithering_pars_fragment = /* glsl */`
 #ifdef DITHERING
 
 	// based on https://www.shadertoy.com/view/MslGR8
@@ -18,3 +20,4 @@ export var dithering_pars_fragment = /* glsl */`
 
 #endif
 `;
+}

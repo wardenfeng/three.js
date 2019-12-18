@@ -1,4 +1,6 @@
-export var shadowmask_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var shadowmask_pars_fragment = /* glsl */`
 float getShadowMask() {
 
 	float shadow = 1.0;
@@ -61,3 +63,4 @@ float getShadowMask() {
 
 }
 `;
+}

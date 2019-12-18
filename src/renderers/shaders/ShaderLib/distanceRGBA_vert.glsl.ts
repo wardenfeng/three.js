@@ -1,4 +1,6 @@
-export var distanceRGBA_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var distanceRGBA_vert = /* glsl */`
 #define DISTANCE
 
 varying vec3 vWorldPosition;
@@ -36,3 +38,4 @@ void main() {
 
 }
 `;
+}

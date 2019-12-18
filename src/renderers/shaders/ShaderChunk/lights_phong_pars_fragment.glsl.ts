@@ -1,4 +1,6 @@
-export var lights_phong_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var lights_phong_pars_fragment = /* glsl */`
 varying vec3 vViewPosition;
 
 #ifndef FLAT_SHADED
@@ -53,3 +55,4 @@ void RE_IndirectDiffuse_BlinnPhong( const in vec3 irradiance, const in Geometric
 
 #define Material_LightProbeLOD( material )	(0)
 `;
+}

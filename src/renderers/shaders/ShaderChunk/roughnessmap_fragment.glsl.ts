@@ -1,4 +1,6 @@
-export var roughnessmap_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var roughnessmap_fragment = /* glsl */`
 float roughnessFactor = roughness;
 
 #ifdef USE_ROUGHNESSMAP
@@ -10,3 +12,4 @@ float roughnessFactor = roughness;
 
 #endif
 `;
+}

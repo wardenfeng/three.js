@@ -1,4 +1,6 @@
-export var cube_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var cube_frag = /* glsl */`
 uniform samplerCube tCube;
 uniform float tFlip;
 uniform float opacity;
@@ -17,3 +19,4 @@ void main() {
 
 }
 `;
+}

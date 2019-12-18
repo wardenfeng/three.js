@@ -1,4 +1,6 @@
-export var meshphong_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var meshphong_vert = /* glsl */`
 #define PHONG
 
 varying vec3 vViewPosition;
@@ -57,3 +59,4 @@ void main() {
 
 }
 `;
+}

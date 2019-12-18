@@ -1,4 +1,6 @@
-export var fog_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var fog_pars_fragment = /* glsl */`
 #ifdef USE_FOG
 
 	uniform vec3 fogColor;
@@ -17,3 +19,4 @@ export var fog_pars_fragment = /* glsl */`
 
 #endif
 `;
+}

@@ -1,4 +1,6 @@
-export var envmap_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var envmap_vertex = /* glsl */`
 #ifdef USE_ENVMAP
 
 	#ifdef ENV_WORLDPOS
@@ -35,3 +37,4 @@ export var envmap_vertex = /* glsl */`
 
 #endif
 `;
+}

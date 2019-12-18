@@ -1,4 +1,6 @@
-export var meshphong_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var meshphong_frag = /* glsl */`
 #define PHONG
 
 uniform vec3 diffuse;
@@ -73,3 +75,4 @@ void main() {
 
 }
 `;
+}

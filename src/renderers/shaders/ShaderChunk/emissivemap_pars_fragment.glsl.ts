@@ -1,7 +1,10 @@
-export var emissivemap_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var emissivemap_pars_fragment = /* glsl */`
 #ifdef USE_EMISSIVEMAP
 
 	uniform sampler2D emissiveMap;
 
 #endif
 `;
+}

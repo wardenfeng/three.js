@@ -1,4 +1,6 @@
-export var meshmatcap_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var meshmatcap_vert = /* glsl */`
 #define MATCAP
 
 varying vec3 vViewPosition;
@@ -49,3 +51,4 @@ void main() {
 
 }
 `;
+}

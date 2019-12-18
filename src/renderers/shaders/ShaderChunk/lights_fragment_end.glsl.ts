@@ -1,4 +1,6 @@
-export var lights_fragment_end = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var lights_fragment_end = /* glsl */`
 #if defined( RE_IndirectDiffuse )
 
 	RE_IndirectDiffuse( irradiance, geometry, material, reflectedLight );
@@ -11,3 +13,4 @@ export var lights_fragment_end = /* glsl */`
 
 #endif
 `;
+}

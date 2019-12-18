@@ -1,4 +1,6 @@
-export var envmap_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var envmap_pars_fragment = /* glsl */`
 #ifdef USE_ENVMAP
 
 	uniform float reflectivity;
@@ -19,3 +21,4 @@ export var envmap_pars_fragment = /* glsl */`
 
 #endif
 `;
+}

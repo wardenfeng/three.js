@@ -1,4 +1,6 @@
-export var skinnormal_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var skinnormal_vertex = /* glsl */`
 #ifdef USE_SKINNING
 
 	mat4 skinMatrix = mat4( 0.0 );
@@ -18,3 +20,4 @@ export var skinnormal_vertex = /* glsl */`
 
 #endif
 `;
+}

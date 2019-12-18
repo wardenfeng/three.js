@@ -1,4 +1,6 @@
-export var lights_pars_begin = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var lights_pars_begin = /* glsl */`
 uniform bool receiveShadow;
 uniform vec3 ambientLightColor;
 uniform vec3 lightProbe[ 9 ];
@@ -209,3 +211,4 @@ vec3 getAmbientLightIrradiance( const in vec3 ambientLightColor ) {
 
 #endif
 `;
+}

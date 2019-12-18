@@ -1,4 +1,6 @@
-export var meshmatcap_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var meshmatcap_frag = /* glsl */`
 #define MATCAP
 
 uniform vec3 diffuse;
@@ -64,3 +66,4 @@ void main() {
 
 }
 `;
+}

@@ -1,4 +1,6 @@
-export var defaultnormal_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var defaultnormal_vertex = /* glsl */`
 vec3 transformedNormal = objectNormal;
 
 #ifdef USE_INSTANCING
@@ -27,3 +29,4 @@ transformedNormal = normalMatrix * transformedNormal;
 
 #endif
 `;
+}

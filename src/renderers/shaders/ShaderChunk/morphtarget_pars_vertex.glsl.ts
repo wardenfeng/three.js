@@ -1,4 +1,6 @@
-export var morphtarget_pars_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var morphtarget_pars_vertex = /* glsl */`
 #ifdef USE_MORPHTARGETS
 
 	#ifndef USE_MORPHNORMALS
@@ -13,3 +15,4 @@ export var morphtarget_pars_vertex = /* glsl */`
 
 #endif
 `;
+}

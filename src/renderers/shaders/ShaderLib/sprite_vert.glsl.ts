@@ -1,4 +1,6 @@
-export var sprite_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var sprite_vert = /* glsl */`
 uniform float rotation;
 uniform vec2 center;
 
@@ -42,3 +44,4 @@ void main() {
 
 }
 `;
+}

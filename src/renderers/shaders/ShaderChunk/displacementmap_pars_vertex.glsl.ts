@@ -1,4 +1,6 @@
-export var displacementmap_pars_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var displacementmap_pars_vertex = /* glsl */`
 #ifdef USE_DISPLACEMENTMAP
 
 	uniform sampler2D displacementMap;
@@ -7,3 +9,4 @@ export var displacementmap_pars_vertex = /* glsl */`
 
 #endif
 `;
+}

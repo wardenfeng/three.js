@@ -1,4 +1,6 @@
-export var normalmap_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var normalmap_pars_fragment = /* glsl */`
 #ifdef USE_NORMALMAP
 
 	uniform sampler2D normalMap;
@@ -57,3 +59,4 @@ export var normalmap_pars_fragment = /* glsl */`
 
 #endif
 `;
+}

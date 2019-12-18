@@ -1,4 +1,6 @@
-export var encodings_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var encodings_pars_fragment = /* glsl */`
 // For a discussion of what this is, please read this: http://lousodrome.net/blog/light/2013/05/26/gamma-correct-and-hdr-rendering-in-a-32-bits-buffer/
 
 vec4 LinearToLinear( in vec4 value ) {
@@ -83,3 +85,4 @@ vec4 LogLuvToLinear( in vec4 value ) {
 	return vec4( max( vRGB, 0.0 ), 1.0 );
 }
 `;
+}

@@ -1,4 +1,6 @@
-export var distanceRGBA_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var distanceRGBA_frag = /* glsl */`
 #define DISTANCE
 
 uniform vec3 referencePosition;
@@ -31,3 +33,4 @@ void main () {
 
 }
 `;
+}

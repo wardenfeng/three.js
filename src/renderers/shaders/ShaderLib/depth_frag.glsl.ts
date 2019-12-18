@@ -1,4 +1,6 @@
-export var depth_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var depth_frag = /* glsl */`
 #if DEPTH_PACKING == 3200
 
 	uniform float opacity;
@@ -43,3 +45,4 @@ void main() {
 
 }
 `;
+}

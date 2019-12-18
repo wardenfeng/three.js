@@ -1,4 +1,6 @@
-export var lights_fragment_maps = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var lights_fragment_maps = /* glsl */`
 #if defined( RE_IndirectDiffuse )
 
 	#ifdef USE_LIGHTMAP
@@ -35,3 +37,4 @@ export var lights_fragment_maps = /* glsl */`
 
 #endif
 `;
+}

@@ -1,4 +1,6 @@
-export var background_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var background_frag = /* glsl */`
 uniform sampler2D t2D;
 
 varying vec2 vUv;
@@ -14,3 +16,4 @@ void main() {
 
 }
 `;
+}

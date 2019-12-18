@@ -1,4 +1,6 @@
-export var uv_pars_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var uv_pars_vertex = /* glsl */`
 #ifdef USE_UV
 
 	#ifdef UVS_VERTEX_ONLY
@@ -15,3 +17,4 @@ export var uv_pars_vertex = /* glsl */`
 
 #endif
 `;
+}

@@ -1,4 +1,6 @@
-export var shadowmap_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var shadowmap_pars_fragment = /* glsl */`
 #ifdef USE_SHADOWMAP
 
 	#if NUM_DIR_LIGHT_SHADOWS > 0
@@ -286,3 +288,4 @@ export var shadowmap_pars_fragment = /* glsl */`
 
 #endif
 `;
+}

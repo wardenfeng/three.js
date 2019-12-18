@@ -1,4 +1,7 @@
-export var shadow_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+
+	export var shadow_frag = /* glsl */`
 uniform vec3 color;
 uniform float opacity;
 
@@ -18,3 +21,4 @@ void main() {
 
 }
 `;
+}

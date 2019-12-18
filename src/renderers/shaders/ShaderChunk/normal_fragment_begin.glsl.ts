@@ -1,4 +1,6 @@
-export var normal_fragment_begin = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var normal_fragment_begin = /* glsl */`
 #ifdef FLAT_SHADED
 
 	// Workaround for Adreno/Nexus5 not able able to do dFdx( vViewPosition ) ...
@@ -38,3 +40,4 @@ export var normal_fragment_begin = /* glsl */`
 vec3 geometryNormal = normal;
 
 `;
+}

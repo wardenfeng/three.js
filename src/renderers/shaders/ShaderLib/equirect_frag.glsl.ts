@@ -1,4 +1,6 @@
-export var equirect_frag = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var equirect_frag = /* glsl */`
 uniform sampler2D tEquirect;
 
 varying vec3 vWorldDirection;
@@ -24,3 +26,4 @@ void main() {
 
 }
 `;
+}

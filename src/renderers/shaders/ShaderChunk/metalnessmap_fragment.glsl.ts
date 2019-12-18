@@ -1,4 +1,6 @@
-export var metalnessmap_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var metalnessmap_fragment = /* glsl */`
 float metalnessFactor = metalness;
 
 #ifdef USE_METALNESSMAP
@@ -10,3 +12,4 @@ float metalnessFactor = metalness;
 
 #endif
 `;
+}

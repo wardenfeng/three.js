@@ -1,3 +1,6 @@
-export var encodings_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+    export var encodings_fragment = /* glsl */`
 gl_FragColor = linearToOutputTexel( gl_FragColor );
 `;
+}

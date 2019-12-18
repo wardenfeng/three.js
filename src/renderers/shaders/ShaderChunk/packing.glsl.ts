@@ -1,4 +1,6 @@
-export var packing = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var packing = /* glsl */`
 vec3 packNormalToRGB( const in vec3 normal ) {
 	return normalize( normal ) * 0.5 + 0.5;
 }
@@ -58,3 +60,4 @@ float perspectiveDepthToViewZ( const in float invClipZ, const in float near, con
 	return ( near * far ) / ( ( far - near ) * invClipZ - far );
 }
 `;
+}

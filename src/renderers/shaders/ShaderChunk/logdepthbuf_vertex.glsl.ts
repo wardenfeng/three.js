@@ -1,4 +1,6 @@
-export var logdepthbuf_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var logdepthbuf_vertex = /* glsl */`
 #ifdef USE_LOGDEPTHBUF
 
 	#ifdef USE_LOGDEPTHBUF_EXT
@@ -20,3 +22,4 @@ export var logdepthbuf_vertex = /* glsl */`
 
 #endif
 `;
+}

@@ -1,4 +1,6 @@
-export var equirect_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var equirect_vert = /* glsl */`
 varying vec3 vWorldDirection;
 
 #include <common>
@@ -12,3 +14,4 @@ void main() {
 
 }
 `;
+}

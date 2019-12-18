@@ -1,7 +1,10 @@
-export var lightmap_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var lightmap_fragment = /* glsl */`
 #ifdef USE_LIGHTMAP
 
 	reflectedLight.indirectDiffuse += PI * texture2D( lightMap, vUv2 ).xyz * lightMapIntensity; // factor of PI should not be present; included here to prevent breakage
 
 #endif
 `;
+}

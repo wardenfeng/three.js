@@ -1,4 +1,6 @@
-export var gradientmap_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var gradientmap_pars_fragment = /* glsl */`
 #ifdef TOON
 
 	uniform sampler2D gradientMap;
@@ -24,3 +26,4 @@ export var gradientmap_pars_fragment = /* glsl */`
 
 #endif
 `;
+}

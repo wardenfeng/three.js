@@ -1,4 +1,6 @@
-export var map_particle_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var map_particle_pars_fragment = /* glsl */`
 #if defined( USE_MAP ) || defined( USE_ALPHAMAP )
 
 	uniform mat3 uvTransform;
@@ -17,3 +19,4 @@ export var map_particle_pars_fragment = /* glsl */`
 
 #endif
 `;
+}

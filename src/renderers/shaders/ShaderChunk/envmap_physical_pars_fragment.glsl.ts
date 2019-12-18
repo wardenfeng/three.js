@@ -1,4 +1,6 @@
-export var envmap_physical_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var envmap_physical_pars_fragment = /* glsl */`
 #if defined( USE_ENVMAP )
 
 	#ifdef ENVMAP_MODE_REFRACTION
@@ -139,3 +141,4 @@ export var envmap_physical_pars_fragment = /* glsl */`
 
 #endif
 `;
+}

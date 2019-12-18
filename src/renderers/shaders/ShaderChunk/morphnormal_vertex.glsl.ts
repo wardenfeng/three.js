@@ -1,4 +1,6 @@
-export var morphnormal_vertex =/* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var morphnormal_vertex =/* glsl */`
 #ifdef USE_MORPHNORMALS
 
 	objectNormal += ( morphNormal0 - normal ) * morphTargetInfluences[ 0 ];
@@ -8,3 +10,4 @@ export var morphnormal_vertex =/* glsl */`
 
 #endif
 `;
+}

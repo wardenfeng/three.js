@@ -1,4 +1,6 @@
-export var uv2_pars_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var uv2_pars_vertex = /* glsl */`
 #if defined( USE_LIGHTMAP ) || defined( USE_AOMAP )
 
 	attribute vec2 uv2;
@@ -6,3 +8,4 @@ export var uv2_pars_vertex = /* glsl */`
 
 #endif
 `;
+}

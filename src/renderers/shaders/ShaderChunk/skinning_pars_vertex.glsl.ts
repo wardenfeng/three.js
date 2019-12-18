@@ -1,4 +1,6 @@
-export var skinning_pars_vertex =  /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var skinning_pars_vertex =  /* glsl */`
 #ifdef USE_SKINNING
 
 	uniform mat4 bindMatrix;
@@ -46,3 +48,4 @@ export var skinning_pars_vertex =  /* glsl */`
 
 #endif
 `;
+}

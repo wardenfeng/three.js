@@ -1,4 +1,6 @@
-export var vsm_vert = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var vsm_vert = /* glsl */`
 
 void main() {
 
@@ -7,3 +9,4 @@ void main() {
 }
 
 `;
+}

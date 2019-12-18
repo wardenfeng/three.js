@@ -1,4 +1,6 @@
-export var map_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var map_fragment = /* glsl */`
 #ifdef USE_MAP
 
 	vec4 texelColor = texture2D( map, vUv );
@@ -8,3 +10,4 @@ export var map_fragment = /* glsl */`
 
 #endif
 `;
+}

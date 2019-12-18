@@ -1,4 +1,6 @@
-export var envmap_pars_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var envmap_pars_vertex = /* glsl */`
 #ifdef USE_ENVMAP
 
 	#if defined( USE_BUMPMAP ) || defined( USE_NORMALMAP ) ||defined( PHONG )
@@ -20,3 +22,4 @@ export var envmap_pars_vertex = /* glsl */`
 
 #endif
 `;
+}

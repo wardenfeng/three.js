@@ -1,4 +1,6 @@
-export var envmap_common_pars_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var envmap_common_pars_fragment = /* glsl */`
 #ifdef USE_ENVMAP
 
 	uniform float envMapIntensity;
@@ -13,3 +15,4 @@ export var envmap_common_pars_fragment = /* glsl */`
 	
 #endif
 `;
+}

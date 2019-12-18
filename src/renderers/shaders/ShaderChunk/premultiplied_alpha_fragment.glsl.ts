@@ -1,4 +1,6 @@
-export var premultiplied_alpha_fragment = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var premultiplied_alpha_fragment = /* glsl */`
 #ifdef PREMULTIPLIED_ALPHA
 
 	// Get get normal blending with premultipled, use with CustomBlending, OneFactor, OneMinusSrcAlphaFactor, AddEquation.
@@ -6,3 +8,4 @@ export var premultiplied_alpha_fragment = /* glsl */`
 
 #endif
 `;
+}

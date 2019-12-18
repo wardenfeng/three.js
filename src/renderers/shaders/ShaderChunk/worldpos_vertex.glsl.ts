@@ -1,4 +1,6 @@
-export var worldpos_vertex = /* glsl */`
+namespace THREE.ShaderChunk
+{
+	export var worldpos_vertex = /* glsl */`
 #if defined( USE_ENVMAP ) || defined( DISTANCE ) || defined ( USE_SHADOWMAP )
 
 	vec4 worldPosition = vec4( transformed, 1.0 );
@@ -13,3 +15,4 @@ export var worldpos_vertex = /* glsl */`
 
 #endif
 `;
+}
