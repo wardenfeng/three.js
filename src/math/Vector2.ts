@@ -7,7 +7,7 @@ namespace THREE {
 	 * @author zz85 / http://www.lab4games.net/zz85/blog
 	 */
 
-	export function Vector2(x, y) {
+	export function Vector2(x?, y?) {
 
 		this.x = x || 0;
 		this.y = y || 0;

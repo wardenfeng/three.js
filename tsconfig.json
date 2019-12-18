@@ -20,5 +20,9 @@
     "src/math/Triangle.ts",
     "src/math/Matrix3.ts",
     "src/math/Matrix4.ts",
+    "src/math/Box2.ts",
+    "src/math/Box3.ts",
+    "src/math/Color.ts",
+    "src/math/Cylindrical.ts",
   ]
 }
