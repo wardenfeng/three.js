@@ -35,54 +35,31 @@ namespace THREE
 	var _hslA = { h: 0, s: 0, l: 0 };
 	var _hslB = { h: 0, s: 0, l: 0 };
 
-	export function Color(r?, g?, b?)
+	export class Color
 	{
-
-		if (g === undefined && b === undefined)
+		constructor(r?, g?, b?)
 		{
 
-			// r is THREE.Color, hex or string
-			return this.set(r);
+			if (g === undefined && b === undefined)
+			{
+
+				// r is THREE.Color, hex or string
+				return this.set(r);
+
+			}
+
+			return this.setRGB(r, g, b);
 
 		}
 
-		return this.setRGB(r, g, b);
 
-	}
+		isColor = true
 
-	function hue2rgb(p, q, t)
-	{
+		r = 1
+		g = 1
+		b = 1
 
-		if (t < 0) t += 1;
-		if (t > 1) t -= 1;
-		if (t < 1 / 6) return p + (q - p) * 6 * t;
-		if (t < 1 / 2) return q;
-		if (t < 2 / 3) return p + (q - p) * 6 * (2 / 3 - t);
-		return p;
-
-	}
-
-	function SRGBToLinear(c)
-	{
-
-		return (c < 0.04045) ? c * 0.0773993808 : Math.pow(c * 0.9478672986 + 0.0521327014, 2.4);
-
-	}
-
-	function LinearToSRGB(c)
-	{
-
-		return (c < 0.0031308) ? c * 12.92 : 1.055 * (Math.pow(c, 0.41666)) - 0.055;
-
-	}
-
-	Object.assign(Color.prototype, {
-
-		isColor: true,
-
-		r: 1, g: 1, b: 1,
-
-		set: function (value)
+		set(value)
 		{
 
 			if (value && value.isColor)
@@ -104,9 +81,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		setScalar: function (scalar)
+		setScalar(scalar)
 		{
 
 			this.r = scalar;
@@ -115,9 +92,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		setHex: function (hex)
+		setHex(hex)
 		{
 
 			hex = Math.floor(hex);
@@ -128,9 +105,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		setRGB: function (r, g, b)
+		setRGB(r, g, b)
 		{
 
 			this.r = r;
@@ -139,9 +116,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		setHSL: function (h, s, l)
+		setHSL(h, s, l)
 		{
 
 			// h,s,l ranges are in 0.0 - 1.0
@@ -168,9 +145,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		setStyle: function (style)
+		setStyle(style)
 		{
 
 			function handleAlpha(string)
@@ -297,9 +274,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		setColorName: function (style)
+		setColorName(style)
 		{
 
 			// color keywords
@@ -321,16 +298,16 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		clone: function ()
+		clone()
 		{
 
-			return new this.constructor(this.r, this.g, this.b);
+			return new Color(this.r, this.g, this.b);
 
-		},
+		}
 
-		copy: function (color)
+		copy(color)
 		{
 
 			this.r = color.r;
@@ -339,9 +316,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		copyGammaToLinear: function (color, gammaFactor)
+		copyGammaToLinear(color, gammaFactor)
 		{
 
 			if (gammaFactor === undefined) gammaFactor = 2.0;
@@ -352,9 +329,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		copyLinearToGamma: function (color, gammaFactor)
+		copyLinearToGamma(color, gammaFactor)
 		{
 
 			if (gammaFactor === undefined) gammaFactor = 2.0;
@@ -367,27 +344,27 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		convertGammaToLinear: function (gammaFactor)
+		convertGammaToLinear(gammaFactor)
 		{
 
 			this.copyGammaToLinear(this, gammaFactor);
 
 			return this;
 
-		},
+		}
 
-		convertLinearToGamma: function (gammaFactor)
+		convertLinearToGamma(gammaFactor)
 		{
 
 			this.copyLinearToGamma(this, gammaFactor);
 
 			return this;
 
-		},
+		}
 
-		copySRGBToLinear: function (color)
+		copySRGBToLinear(color)
 		{
 
 			this.r = SRGBToLinear(color.r);
@@ -396,9 +373,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		copyLinearToSRGB: function (color)
+		copyLinearToSRGB(color)
 		{
 
 			this.r = LinearToSRGB(color.r);
@@ -407,41 +384,41 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		convertSRGBToLinear: function ()
+		convertSRGBToLinear()
 		{
 
 			this.copySRGBToLinear(this);
 
 			return this;
 
-		},
+		}
 
-		convertLinearToSRGB: function ()
+		convertLinearToSRGB()
 		{
 
 			this.copyLinearToSRGB(this);
 
 			return this;
 
-		},
+		}
 
-		getHex: function ()
+		getHex()
 		{
 
 			return (this.r * 255) << 16 ^ (this.g * 255) << 8 ^ (this.b * 255) << 0;
 
-		},
+		}
 
-		getHexString: function ()
+		getHexString()
 		{
 
 			return ('000000' + this.getHex().toString(16)).slice(- 6);
 
-		},
+		}
 
-		getHSL: function (target)
+		getHSL(target)
 		{
 
 			// h,s,l ranges are in 0.0 - 1.0
@@ -494,16 +471,16 @@ namespace THREE
 
 			return target;
 
-		},
+		}
 
-		getStyle: function ()
+		getStyle()
 		{
 
 			return 'rgb(' + ((this.r * 255) | 0) + ',' + ((this.g * 255) | 0) + ',' + ((this.b * 255) | 0) + ')';
 
-		},
+		}
 
-		offsetHSL: function (h, s, l)
+		offsetHSL(h, s, l)
 		{
 
 			this.getHSL(_hslA);
@@ -514,9 +491,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		add: function (color)
+		add(color)
 		{
 
 			this.r += color.r;
@@ -525,9 +502,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		addColors: function (color1, color2)
+		addColors(color1, color2)
 		{
 
 			this.r = color1.r + color2.r;
@@ -536,9 +513,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		addScalar: function (s)
+		addScalar(s)
 		{
 
 			this.r += s;
@@ -547,9 +524,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		sub: function (color)
+		sub(color)
 		{
 
 			this.r = Math.max(0, this.r - color.r);
@@ -558,9 +535,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		multiply: function (color)
+		multiply(color)
 		{
 
 			this.r *= color.r;
@@ -569,9 +546,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		multiplyScalar: function (s)
+		multiplyScalar(s)
 		{
 
 			this.r *= s;
@@ -580,9 +557,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		lerp: function (color, alpha)
+		lerp(color, alpha)
 		{
 
 			this.r += (color.r - this.r) * alpha;
@@ -591,9 +568,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		lerpHSL: function (color, alpha)
+		lerpHSL(color, alpha)
 		{
 
 			this.getHSL(_hslA);
@@ -607,16 +584,16 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		equals: function (c)
+		equals(c)
 		{
 
 			return (c.r === this.r) && (c.g === this.g) && (c.b === this.b);
 
-		},
+		}
 
-		fromArray: function (array, offset)
+		fromArray(array, offset)
 		{
 
 			if (offset === undefined) offset = 0;
@@ -627,9 +604,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		toArray: function (array, offset)
+		toArray(array, offset)
 		{
 
 			if (array === undefined) array = [];
@@ -641,17 +618,42 @@ namespace THREE
 
 			return array;
 
-		},
+		}
 
-		toJSON: function ()
+		toJSON()
 		{
 
 			return this.getHex();
 
 		}
 
-	});
+		static NAMES = _colorKeywords;
+	}
 
-	Color.NAMES = _colorKeywords;
 
+	function hue2rgb(p, q, t)
+	{
+
+		if (t < 0) t += 1;
+		if (t > 1) t -= 1;
+		if (t < 1 / 6) return p + (q - p) * 6 * t;
+		if (t < 1 / 2) return q;
+		if (t < 2 / 3) return p + (q - p) * 6 * (2 / 3 - t);
+		return p;
+
+	}
+
+	function SRGBToLinear(c)
+	{
+
+		return (c < 0.04045) ? c * 0.0773993808 : Math.pow(c * 0.9478672986 + 0.0521327014, 2.4);
+
+	}
+
+	function LinearToSRGB(c)
+	{
+
+		return (c < 0.0031308) ? c * 12.92 : 1.055 * (Math.pow(c, 0.41666)) - 0.055;
+
+	}
 }

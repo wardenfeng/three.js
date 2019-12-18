@@ -1040,7 +1040,7 @@ namespace THREE
 		toJSON: function ()
 		{
 
-			var data = {
+			var data: any = {
 				metadata: {
 					version: 4.5,
 					type: 'BufferGeometry',

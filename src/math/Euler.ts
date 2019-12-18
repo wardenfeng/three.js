@@ -12,7 +12,7 @@ namespace THREE
 	var _matrix = new Matrix4();
 	var _quaternion = new Quaternion();
 
-	export function Euler(x, y, z, order)
+	export function Euler(x?, y?, z?, order?)
 	{
 
 		this._x = x || 0;

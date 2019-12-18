@@ -6,7 +6,7 @@ namespace THREE
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	export function BufferAttribute(array, itemSize, normalized)
+	export function BufferAttribute(array, itemSize, normalized?)
 	{
 
 		if (Array.isArray(array))
@@ -399,7 +399,7 @@ namespace THREE
 	Int16BufferAttribute.prototype.constructor = Int16BufferAttribute;
 
 
-	export function Uint16BufferAttribute(array, itemSize, normalized)
+	export function Uint16BufferAttribute(array, itemSize, normalized?)
 	{
 
 		BufferAttribute.call(this, new Uint16Array(array), itemSize, normalized);
@@ -432,7 +432,7 @@ namespace THREE
 	Uint32BufferAttribute.prototype.constructor = Uint32BufferAttribute;
 
 
-	export function Float32BufferAttribute(array, itemSize, normalized)
+	export function Float32BufferAttribute(array, itemSize, normalized?)
 	{
 
 		BufferAttribute.call(this, new Float32Array(array), itemSize, normalized);
