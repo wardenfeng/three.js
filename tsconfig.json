@@ -308,6 +308,14 @@
     "src/geometries/TorusKnotGeometry.ts",
     "src/geometries/TubeGeometry.ts",
     "src/geometries/WireframeGeometry.ts",
+    //
+    "src/extras/Earcut.ts",
+    "src/extras/ImageUtils.ts",
+    "src/extras/ShapeUtils.ts",
+    //
+    "src/extras/core/Curve.ts",
+    "src/extras/core/CurvePath.ts",
+    "src/extras/core/Font.ts",
 
   ]
 }
