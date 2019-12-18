@@ -153,5 +153,9 @@
     "src/materials/MeshBasicMaterial.ts",
     "src/materials/LineDashedMaterial.ts",
     "src/materials/LineBasicMaterial.ts",
+    //
+    "src/scenes/Fog.ts",
+    "src/scenes/FogExp2.ts",
+    "src/scenes/Scene.ts",
   ]
 }
