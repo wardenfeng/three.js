@@ -1,4 +1,5 @@
-namespace THREE {
+namespace THREE
+{
 
 	var _vector = new Vector3();
 	var _segCenter = new Vector3();
@@ -13,7 +14,8 @@ namespace THREE {
 	 * @author bhouston / http://clara.io
 	 */
 
-	export function Ray(origin, direction) {
+	export function Ray(origin?, direction?)
+	{
 
 		this.origin = (origin !== undefined) ? origin : new Vector3();
 		this.direction = (direction !== undefined) ? direction : new Vector3();
@@ -22,7 +24,8 @@ namespace THREE {
 
 	Object.assign(Ray.prototype, {
 
-		set: function (origin, direction) {
+		set: function (origin, direction)
+		{
 
 			this.origin.copy(origin);
 			this.direction.copy(direction);
@@ -31,13 +34,15 @@ namespace THREE {
 
 		},
 
-		clone: function () {
+		clone: function ()
+		{
 
 			return new this.constructor().copy(this);
 
 		},
 
-		copy: function (ray) {
+		copy: function (ray)
+		{
 
 			this.origin.copy(ray.origin);
 			this.direction.copy(ray.direction);
@@ -46,9 +51,11 @@ namespace THREE {
 
 		},
 
-		at: function (t, target) {
+		at: function (t, target)
+		{
 
-			if (target === undefined) {
+			if (target === undefined)
+			{
 
 				console.warn('THREE.Ray: .at() target is now required');
 				target = new Vector3();
@@ -59,7 +66,8 @@ namespace THREE {
 
 		},
 
-		lookAt: function (v) {
+		lookAt: function (v)
+		{
 
 			this.direction.copy(v).sub(this.origin).normalize();
 
@@ -67,7 +75,8 @@ namespace THREE {
 
 		},
 
-		recast: function (t) {
+		recast: function (t)
+		{
 
 			this.origin.copy(this.at(t, _vector));
 
@@ -75,9 +84,11 @@ namespace THREE {
 
 		},
 
-		closestPointToPoint: function (point, target) {
+		closestPointToPoint: function (point, target)
+		{
 
-			if (target === undefined) {
+			if (target === undefined)
+			{
 
 				console.warn('THREE.Ray: .closestPointToPoint() target is now required');
 				target = new Vector3();
@@ -88,7 +99,8 @@ namespace THREE {
 
 			var directionDistance = target.dot(this.direction);
 
-			if (directionDistance < 0) {
+			if (directionDistance < 0)
+			{
 
 				return target.copy(this.origin);
 
@@ -98,19 +110,22 @@ namespace THREE {
 
 		},
 
-		distanceToPoint: function (point) {
+		distanceToPoint: function (point)
+		{
 
 			return Math.sqrt(this.distanceSqToPoint(point));
 
 		},
 
-		distanceSqToPoint: function (point) {
+		distanceSqToPoint: function (point)
+		{
 
 			var directionDistance = _vector.subVectors(point, this.origin).dot(this.direction);
 
 			// point behind the ray
 
-			if (directionDistance < 0) {
+			if (directionDistance < 0)
+			{
 
 				return this.origin.distanceToSquared(point);
 
@@ -122,7 +137,8 @@ namespace THREE {
 
 		},
 
-		distanceSqToSegment: function (v0, v1, optionalPointOnRay, optionalPointOnSegment) {
+		distanceSqToSegment: function (v0, v1, optionalPointOnRay, optionalPointOnSegment)
+		{
 
 			// from http://www.geometrictools.com/GTEngine/Include/Mathematics/GteDistRaySegment.h
 			// It returns the min distance between the ray and the segment
@@ -143,7 +159,8 @@ namespace THREE {
 			var det = Math.abs(1 - a01 * a01);
 			var s0, s1, sqrDist, extDet;
 
-			if (det > 0) {
+			if (det > 0)
+			{
 
 				// The ray and segment are not parallel.
 
@@ -151,11 +168,14 @@ namespace THREE {
 				s1 = a01 * b0 - b1;
 				extDet = segExtent * det;
 
-				if (s0 >= 0) {
+				if (s0 >= 0)
+				{
 
-					if (s1 >= - extDet) {
+					if (s1 >= - extDet)
+					{
 
-						if (s1 <= extDet) {
+						if (s1 <= extDet)
+						{
 
 							// region 0
 							// Minimum at interior points of ray and segment.
@@ -165,7 +185,8 @@ namespace THREE {
 							s1 *= invDet;
 							sqrDist = s0 * (s0 + a01 * s1 + 2 * b0) + s1 * (a01 * s0 + s1 + 2 * b1) + c;
 
-						} else {
+						} else
+						{
 
 							// region 1
 
@@ -175,7 +196,8 @@ namespace THREE {
 
 						}
 
-					} else {
+					} else
+					{
 
 						// region 5
 
@@ -185,9 +207,11 @@ namespace THREE {
 
 					}
 
-				} else {
+				} else
+				{
 
-					if (s1 <= - extDet) {
+					if (s1 <= - extDet)
+					{
 
 						// region 4
 
@@ -195,7 +219,8 @@ namespace THREE {
 						s1 = (s0 > 0) ? - segExtent : Math.min(Math.max(- segExtent, - b1), segExtent);
 						sqrDist = - s0 * s0 + s1 * (s1 + 2 * b1) + c;
 
-					} else if (s1 <= extDet) {
+					} else if (s1 <= extDet)
+					{
 
 						// region 3
 
@@ -203,7 +228,8 @@ namespace THREE {
 						s1 = Math.min(Math.max(- segExtent, - b1), segExtent);
 						sqrDist = s1 * (s1 + 2 * b1) + c;
 
-					} else {
+					} else
+					{
 
 						// region 2
 
@@ -215,7 +241,8 @@ namespace THREE {
 
 				}
 
-			} else {
+			} else
+			{
 
 				// Ray and segment are parallel.
 
@@ -225,13 +252,15 @@ namespace THREE {
 
 			}
 
-			if (optionalPointOnRay) {
+			if (optionalPointOnRay)
+			{
 
 				optionalPointOnRay.copy(this.direction).multiplyScalar(s0).add(this.origin);
 
 			}
 
-			if (optionalPointOnSegment) {
+			if (optionalPointOnSegment)
+			{
 
 				optionalPointOnSegment.copy(_segDir).multiplyScalar(s1).add(_segCenter);
 
@@ -241,7 +270,8 @@ namespace THREE {
 
 		},
 
-		intersectSphere: function (sphere, target) {
+		intersectSphere: function (sphere, target)
+		{
 
 			_vector.subVectors(sphere.center, this.origin);
 			var tca = _vector.dot(this.direction);
@@ -271,20 +301,24 @@ namespace THREE {
 
 		},
 
-		intersectsSphere: function (sphere) {
+		intersectsSphere: function (sphere)
+		{
 
 			return this.distanceSqToPoint(sphere.center) <= (sphere.radius * sphere.radius);
 
 		},
 
-		distanceToPlane: function (plane) {
+		distanceToPlane: function (plane)
+		{
 
 			var denominator = plane.normal.dot(this.direction);
 
-			if (denominator === 0) {
+			if (denominator === 0)
+			{
 
 				// line is coplanar, return origin
-				if (plane.distanceToPoint(this.origin) === 0) {
+				if (plane.distanceToPoint(this.origin) === 0)
+				{
 
 					return 0;
 
@@ -304,11 +338,13 @@ namespace THREE {
 
 		},
 
-		intersectPlane: function (plane, target) {
+		intersectPlane: function (plane, target)
+		{
 
 			var t = this.distanceToPlane(plane);
 
-			if (t === null) {
+			if (t === null)
+			{
 
 				return null;
 
@@ -318,13 +354,15 @@ namespace THREE {
 
 		},
 
-		intersectsPlane: function (plane) {
+		intersectsPlane: function (plane)
+		{
 
 			// check if the ray lies on the plane first
 
 			var distToPoint = plane.distanceToPoint(this.origin);
 
-			if (distToPoint === 0) {
+			if (distToPoint === 0)
+			{
 
 				return true;
 
@@ -332,7 +370,8 @@ namespace THREE {
 
 			var denominator = plane.normal.dot(this.direction);
 
-			if (denominator * distToPoint < 0) {
+			if (denominator * distToPoint < 0)
+			{
 
 				return true;
 
@@ -344,7 +383,8 @@ namespace THREE {
 
 		},
 
-		intersectBox: function (box, target) {
+		intersectBox: function (box, target)
+		{
 
 			var tmin, tmax, tymin, tymax, tzmin, tzmax;
 
@@ -354,24 +394,28 @@ namespace THREE {
 
 			var origin = this.origin;
 
-			if (invdirx >= 0) {
+			if (invdirx >= 0)
+			{
 
 				tmin = (box.min.x - origin.x) * invdirx;
 				tmax = (box.max.x - origin.x) * invdirx;
 
-			} else {
+			} else
+			{
 
 				tmin = (box.max.x - origin.x) * invdirx;
 				tmax = (box.min.x - origin.x) * invdirx;
 
 			}
 
-			if (invdiry >= 0) {
+			if (invdiry >= 0)
+			{
 
 				tymin = (box.min.y - origin.y) * invdiry;
 				tymax = (box.max.y - origin.y) * invdiry;
 
-			} else {
+			} else
+			{
 
 				tymin = (box.max.y - origin.y) * invdiry;
 				tymax = (box.min.y - origin.y) * invdiry;
@@ -387,12 +431,14 @@ namespace THREE {
 
 			if (tymax < tmax || tmax !== tmax) tmax = tymax;
 
-			if (invdirz >= 0) {
+			if (invdirz >= 0)
+			{
 
 				tzmin = (box.min.z - origin.z) * invdirz;
 				tzmax = (box.max.z - origin.z) * invdirz;
 
-			} else {
+			} else
+			{
 
 				tzmin = (box.max.z - origin.z) * invdirz;
 				tzmax = (box.min.z - origin.z) * invdirz;
@@ -413,13 +459,15 @@ namespace THREE {
 
 		},
 
-		intersectsBox: function (box) {
+		intersectsBox: function (box)
+		{
 
 			return this.intersectBox(box, _vector) !== null;
 
 		},
 
-		intersectTriangle: function (a, b, c, backfaceCulling, target) {
+		intersectTriangle: function (a, b, c, backfaceCulling, target)
+		{
 
 			// Compute the offset origin, edges, and normal.
 
@@ -437,17 +485,20 @@ namespace THREE {
 			var DdN = this.direction.dot(_normal);
 			var sign;
 
-			if (DdN > 0) {
+			if (DdN > 0)
+			{
 
 				if (backfaceCulling) return null;
 				sign = 1;
 
-			} else if (DdN < 0) {
+			} else if (DdN < 0)
+			{
 
 				sign = - 1;
 				DdN = - DdN;
 
-			} else {
+			} else
+			{
 
 				return null;
 
@@ -457,7 +508,8 @@ namespace THREE {
 			var DdQxE2 = sign * this.direction.dot(_edge2.crossVectors(_diff, _edge2));
 
 			// b1 < 0, no intersection
-			if (DdQxE2 < 0) {
+			if (DdQxE2 < 0)
+			{
 
 				return null;
 
@@ -466,14 +518,16 @@ namespace THREE {
 			var DdE1xQ = sign * this.direction.dot(_edge1.cross(_diff));
 
 			// b2 < 0, no intersection
-			if (DdE1xQ < 0) {
+			if (DdE1xQ < 0)
+			{
 
 				return null;
 
 			}
 
 			// b1+b2 > 1, no intersection
-			if (DdQxE2 + DdE1xQ > DdN) {
+			if (DdQxE2 + DdE1xQ > DdN)
+			{
 
 				return null;
 
@@ -483,7 +537,8 @@ namespace THREE {
 			var QdN = - sign * _diff.dot(_normal);
 
 			// t < 0, no intersection
-			if (QdN < 0) {
+			if (QdN < 0)
+			{
 
 				return null;
 
@@ -494,7 +549,8 @@ namespace THREE {
 
 		},
 
-		applyMatrix4: function (matrix4) {
+		applyMatrix4: function (matrix4)
+		{
 
 			this.origin.applyMatrix4(matrix4);
 			this.direction.transformDirection(matrix4);
@@ -503,7 +559,8 @@ namespace THREE {
 
 		},
 
-		equals: function (ray) {
+		equals: function (ray)
+		{
 
 			return ray.origin.equals(this.origin) && ray.direction.equals(this.direction);
 

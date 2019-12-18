@@ -15,51 +15,74 @@ namespace THREE
 	var _obj = new Object3D();
 	var _offset = new Vector3();
 
-	export function Geometry()
+	export class Geometry extends EventDispatcher
 	{
+		uuid: string;
+		name: string;
+		type: string;
+		vertices: any[];
+		colors: any[];
+		faces: any[];
+		faceVertexUvs: any[][];
+		morphTargets: any[];
+		morphNormals: any[];
+		skinWeights: any[];
+		skinIndices: any[];
+		lineDistances: any[];
+		boundingBox: any;
+		boundingSphere: any;
+		elementsNeedUpdate: boolean;
+		verticesNeedUpdate: boolean;
+		uvsNeedUpdate: boolean;
+		colorsNeedUpdate: boolean;
+		normalsNeedUpdate: boolean;
+		lineDistancesNeedUpdate: boolean;
+		groupsNeedUpdate: boolean;
+		parameters: any;
 
-		Object.defineProperty(this, 'id', { value: _geometryId += 2 });
+		constructor()
+		{
+			super();
 
-		this.uuid = _Math.generateUUID();
+			Object.defineProperty(this, 'id', { value: _geometryId += 2 });
 
-		this.name = '';
-		this.type = 'Geometry';
+			this.uuid = _Math.generateUUID();
 
-		this.vertices = [];
-		this.colors = [];
-		this.faces = [];
-		this.faceVertexUvs = [[]];
+			this.name = '';
+			this.type = 'Geometry';
 
-		this.morphTargets = [];
-		this.morphNormals = [];
+			this.vertices = [];
+			this.colors = [];
+			this.faces = [];
+			this.faceVertexUvs = [[]];
 
-		this.skinWeights = [];
-		this.skinIndices = [];
+			this.morphTargets = [];
+			this.morphNormals = [];
 
-		this.lineDistances = [];
+			this.skinWeights = [];
+			this.skinIndices = [];
 
-		this.boundingBox = null;
-		this.boundingSphere = null;
+			this.lineDistances = [];
 
-		// update flags
+			this.boundingBox = null;
+			this.boundingSphere = null;
 
-		this.elementsNeedUpdate = false;
-		this.verticesNeedUpdate = false;
-		this.uvsNeedUpdate = false;
-		this.normalsNeedUpdate = false;
-		this.colorsNeedUpdate = false;
-		this.lineDistancesNeedUpdate = false;
-		this.groupsNeedUpdate = false;
+			// update flags
 
-	}
+			this.elementsNeedUpdate = false;
+			this.verticesNeedUpdate = false;
+			this.uvsNeedUpdate = false;
+			this.normalsNeedUpdate = false;
+			this.colorsNeedUpdate = false;
+			this.lineDistancesNeedUpdate = false;
+			this.groupsNeedUpdate = false;
 
-	Geometry.prototype = Object.assign(Object.create(EventDispatcher.prototype), {
+		}
 
-		constructor: Geometry,
 
-		isGeometry: true,
+		isGeometry = true
 
-		applyMatrix: function (matrix)
+		applyMatrix(matrix)
 		{
 
 			var normalMatrix = new Matrix3().getNormalMatrix(matrix);
@@ -106,9 +129,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		rotateX: function (angle)
+		rotateX(angle)
 		{
 
 			// rotate geometry around world x-axis
@@ -119,9 +142,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		rotateY: function (angle)
+		rotateY(angle)
 		{
 
 			// rotate geometry around world y-axis
@@ -132,9 +155,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		rotateZ: function (angle)
+		rotateZ(angle)
 		{
 
 			// rotate geometry around world z-axis
@@ -145,9 +168,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		translate: function (x, y, z)
+		translate(x, y, z)
 		{
 
 			// translate geometry
@@ -158,9 +181,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		scale: function (x, y, z)
+		scale(x, y, z)
 		{
 
 			// scale geometry
@@ -171,9 +194,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		lookAt: function (vector)
+		lookAt(vector)
 		{
 
 			_obj.lookAt(vector);
@@ -184,9 +207,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		fromBufferGeometry: function (geometry)
+		fromBufferGeometry(geometry)
 		{
 
 			var scope = this;
@@ -343,9 +366,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		center: function ()
+		center()
 		{
 
 			this.computeBoundingBox();
@@ -356,9 +379,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		normalize: function ()
+		normalize()
 		{
 
 			this.computeBoundingSphere();
@@ -380,9 +403,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		computeFaceNormals: function ()
+		computeFaceNormals()
 		{
 
 			var cb = new Vector3(), ab = new Vector3();
@@ -406,9 +429,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		computeVertexNormals: function (areaWeighted)
+		computeVertexNormals(areaWeighted?)
 		{
 
 			if (areaWeighted === undefined) areaWeighted = true;
@@ -509,9 +532,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		computeFlatVertexNormals: function ()
+		computeFlatVertexNormals()
 		{
 
 			var f, fl, face;
@@ -550,9 +573,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		computeMorphNormals: function ()
+		computeMorphNormals()
 		{
 
 			var i, il, f, fl, face;
@@ -679,9 +702,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		computeBoundingBox: function ()
+		computeBoundingBox()
 		{
 
 			if (this.boundingBox === null)
@@ -693,9 +716,9 @@ namespace THREE
 
 			this.boundingBox.setFromPoints(this.vertices);
 
-		},
+		}
 
-		computeBoundingSphere: function ()
+		computeBoundingSphere()
 		{
 
 			if (this.boundingSphere === null)
@@ -707,9 +730,9 @@ namespace THREE
 
 			this.boundingSphere.setFromPoints(this.vertices);
 
-		},
+		}
 
-		merge: function (geometry, matrix, materialIndexOffset)
+		merge(geometry, matrix, materialIndexOffset?)
 		{
 
 			if (!(geometry && geometry.isGeometry))
@@ -840,9 +863,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		mergeMesh: function (mesh)
+		mergeMesh(mesh)
 		{
 
 			if (!(mesh && mesh.isMesh))
@@ -857,7 +880,7 @@ namespace THREE
 
 			this.merge(mesh.geometry, mesh.matrix);
 
-		},
+		}
 
 		/*
 		 * Checks for duplicate vertices with hashmap.
@@ -865,7 +888,7 @@ namespace THREE
 		 * and faces' vertices are updated.
 		 */
 
-		mergeVertices: function ()
+		mergeVertices()
 		{
 
 			var verticesMap = {}; // Hashmap for looking up vertices by position coordinates (and making sure they are unique)
@@ -955,9 +978,9 @@ namespace THREE
 			this.vertices = unique;
 			return diff;
 
-		},
+		}
 
-		setFromPoints: function (points)
+		setFromPoints(points)
 		{
 
 			this.vertices = [];
@@ -972,9 +995,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		sortFacesByMaterialIndex: function ()
+		sortFacesByMaterialIndex()
 		{
 
 			var faces = this.faces;
@@ -1023,9 +1046,9 @@ namespace THREE
 			if (newUvs1) this.faceVertexUvs[0] = newUvs1;
 			if (newUvs2) this.faceVertexUvs[1] = newUvs2;
 
-		},
+		}
 
-		toJSON: function ()
+		toJSON()
 		{
 
 			var data: any = {
@@ -1233,40 +1256,40 @@ namespace THREE
 
 			return data;
 
-		},
+		}
 
-		clone: function ()
+		clone()
 		{
 
 			/*
 			 // Handle primitives
-	
+		
 			 var parameters = this.parameters;
-	
+		
 			 if ( parameters !== undefined ) {
-	
+		
 			 var values = [];
-	
+		
 			 for ( var key in parameters ) {
-	
+		
 			 values.push( parameters[ key ] );
-	
+		
 			 }
-	
+		
 			 var geometry = Object.create( this.constructor.prototype );
 			 this.constructor.apply( geometry, values );
 			 return geometry;
-	
+		
 			 }
-	
+		
 			 return new this.constructor().copy( this );
 			 */
 
 			return new Geometry().copy(this);
 
-		},
+		}
 
-		copy: function (source)
+		copy(source)
 		{
 
 			var i, il, j, jl, k, kl;
@@ -1521,16 +1544,18 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		dispose: function ()
+		dispose()
 		{
 
 			this.dispatchEvent({ type: 'dispose' });
 
 		}
 
-	});
+	}
+
+
 
 
 }

@@ -32,8 +32,8 @@ namespace THREE
 		this.defines = {};
 		this.uniforms = {};
 
-		this.vertexShader = default_vertex;
-		this.fragmentShader = default_fragment;
+		this.vertexShader = ShaderChunk.default_vertex;
+		this.fragmentShader = ShaderChunk.default_fragment;
 
 		this.linewidth = 1;
 

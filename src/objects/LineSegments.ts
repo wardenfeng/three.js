@@ -63,7 +63,7 @@ namespace THREE
 			{
 
 				var vertices = geometry.vertices;
-				var lineDistances = geometry.lineDistances;
+				var lineDistances: any[] = geometry.lineDistances;
 
 				for (var i = 0, l = vertices.length; i < l; i += 2)
 				{

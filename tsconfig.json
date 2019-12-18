@@ -287,5 +287,8 @@
     "src/scenes/Fog.ts",
     "src/scenes/FogExp2.ts",
     "src/scenes/Scene.ts",
+    //
+    "src/geometries/BoxGeometry.ts",
+
   ]
 }
