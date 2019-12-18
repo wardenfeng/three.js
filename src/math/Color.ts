@@ -35,7 +35,7 @@ namespace THREE
 	var _hslA = { h: 0, s: 0, l: 0 };
 	var _hslB = { h: 0, s: 0, l: 0 };
 
-	export function Color(r, g, b)
+	export function Color(r?, g?, b?)
 	{
 
 		if (g === undefined && b === undefined)

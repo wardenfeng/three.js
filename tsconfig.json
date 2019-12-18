@@ -44,6 +44,9 @@
     "src/math/interpolants/QuaternionLinearInterpolant.ts",
     //
     "src/core/EventDispatcher.ts",
+    "src/core/BufferAttribute.ts",
+    "src/core/BufferGeometry.ts",
+    "src/core/Clock.ts",
     //
     "src/animation/KeyframeTrack.ts",
     "src/animation/AnimationAction.ts",
