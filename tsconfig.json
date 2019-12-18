@@ -365,5 +365,15 @@
     "src/lights/AmbientLightProbe.ts",
     "src/lights/DirectionalLight.ts",
     "src/lights/DirectionalLightShadow.ts",
+    "src/lights/HemisphereLight.ts",
+    "src/lights/HemisphereLightProbe.ts",
+    "src/lights/Light.ts",
+    "src/lights/LightProbe.ts",
+    "src/lights/LightShadow.ts",
+    "src/lights/PointLight.ts",
+    "src/lights/PointLightShadow.ts",
+    "src/lights/RectAreaLight.ts",
+    "src/lights/SpotLight.ts",
+    "src/lights/SpotLightShadow.ts",
   ]
 }
