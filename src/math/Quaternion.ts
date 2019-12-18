@@ -1,17 +1,64 @@
-namespace THREE {
+namespace THREE
+{
 	/**
 	 * @author mikael emtinger / http://gomo.se/
 	 * @author alteredq / http://alteredqualia.com/
 	 * @author WestLangley / http://github.com/WestLangley
 	 * @author bhouston / http://clara.io
 	 */
-	export class Quaternion {
+	export class Quaternion
+	{
 		_x: any;
 		_y: any;
 		_z: any;
 		_w: any;
 
-		constructor(x?, y?, z?, w?) {
+		get x()
+		{
+			return this._x;
+		}
+
+		set x(value)
+		{
+			this._x = value;
+			this._onChangeCallback();
+		}
+
+		get y()
+		{
+			return this._y;
+		}
+
+		set y(value)
+		{
+			this._y = value;
+			this._onChangeCallback();
+		}
+
+		get z()
+		{
+			return this._z;
+		}
+
+		set z(value)
+		{
+			this._z = value;
+			this._onChangeCallback();
+		}
+
+		get w()
+		{
+			return this._w;
+		}
+
+		set w(value)
+		{
+			this._w = value;
+			this._onChangeCallback();
+		}
+
+		constructor(x?, y?, z?, w?)
+		{
 
 			this._x = x || 0;
 			this._y = y || 0;
@@ -20,13 +67,15 @@ namespace THREE {
 
 		}
 
-		static slerp(qa, qb, qm, t) {
+		static slerp(qa, qb, qm, t)
+		{
 
 			return qm.copy(qa).slerp(qb, t);
 
 		}
 
-		static slerpFlat(dst, dstOffset, src0, srcOffset0, src1, srcOffset1, t) {
+		static slerpFlat(dst, dstOffset, src0, srcOffset0, src1, srcOffset1, t)
+		{
 
 			// fuzz-free, array-based Quaternion SLERP operation
 
@@ -40,7 +89,8 @@ namespace THREE {
 				z1 = src1[srcOffset1 + 2],
 				w1 = src1[srcOffset1 + 3];
 
-			if (w0 !== w1 || x0 !== x1 || y0 !== y1 || z0 !== z1) {
+			if (w0 !== w1 || x0 !== x1 || y0 !== y1 || z0 !== z1)
+			{
 
 				var s = 1 - t,
 
@@ -50,7 +100,8 @@ namespace THREE {
 					sqrSin = 1 - cos * cos;
 
 				// Skip the Slerp for tiny steps to avoid numeric problems:
-				if (sqrSin > Number.EPSILON) {
+				if (sqrSin > Number.EPSILON)
+				{
 
 					var sin = Math.sqrt(sqrSin),
 						len = Math.atan2(sin, cos * dir);
@@ -68,7 +119,8 @@ namespace THREE {
 				w0 = w0 * s + w1 * tDir;
 
 				// Normalize in case we just did a lerp:
-				if (s === 1 - t) {
+				if (s === 1 - t)
+				{
 
 					var f = 1 / Math.sqrt(x0 * x0 + y0 * y0 + z0 * z0 + w0 * w0);
 
@@ -87,86 +139,12 @@ namespace THREE {
 			dst[dstOffset + 3] = w0;
 
 		}
-	}
 
 
-	Object.defineProperties(Quaternion.prototype, {
+		isQuaternion: true
 
-		x: {
-
-			get: function () {
-
-				return this._x;
-
-			},
-
-			set: function (value) {
-
-				this._x = value;
-				this._onChangeCallback();
-
-			}
-
-		},
-
-		y: {
-
-			get: function () {
-
-				return this._y;
-
-			},
-
-			set: function (value) {
-
-				this._y = value;
-				this._onChangeCallback();
-
-			}
-
-		},
-
-		z: {
-
-			get: function () {
-
-				return this._z;
-
-			},
-
-			set: function (value) {
-
-				this._z = value;
-				this._onChangeCallback();
-
-			}
-
-		},
-
-		w: {
-
-			get: function () {
-
-				return this._w;
-
-			},
-
-			set: function (value) {
-
-				this._w = value;
-				this._onChangeCallback();
-
-			}
-
-		}
-
-	});
-
-	Object.assign(Quaternion.prototype, {
-
-		isQuaternion: true,
-
-		set: function (x, y, z, w) {
+		set(x, y, z, w)
+		{
 
 			this._x = x;
 			this._y = y;
@@ -177,15 +155,17 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		clone: function () {
+		clone()
+		{
 
-			return new this.constructor(this._x, this._y, this._z, this._w);
+			return new Quaternion(this._x, this._y, this._z, this._w);
 
-		},
+		}
 
-		copy: function (quaternion) {
+		copy(quaternion)
+		{
 
 			this._x = quaternion.x;
 			this._y = quaternion.y;
@@ -196,11 +176,13 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		setFromEuler: function (euler, update) {
+		setFromEuler(euler, update)
+		{
 
-			if (!(euler && euler.isEuler)) {
+			if (!(euler && euler.isEuler))
+			{
 
 				throw new Error('THREE.Quaternion: .setFromEuler() now expects an Euler rotation rather than a Vector3 and order.');
 
@@ -223,42 +205,48 @@ namespace THREE {
 			var s2 = sin(y / 2);
 			var s3 = sin(z / 2);
 
-			if (order === 'XYZ') {
+			if (order === 'XYZ')
+			{
 
 				this._x = s1 * c2 * c3 + c1 * s2 * s3;
 				this._y = c1 * s2 * c3 - s1 * c2 * s3;
 				this._z = c1 * c2 * s3 + s1 * s2 * c3;
 				this._w = c1 * c2 * c3 - s1 * s2 * s3;
 
-			} else if (order === 'YXZ') {
+			} else if (order === 'YXZ')
+			{
 
 				this._x = s1 * c2 * c3 + c1 * s2 * s3;
 				this._y = c1 * s2 * c3 - s1 * c2 * s3;
 				this._z = c1 * c2 * s3 - s1 * s2 * c3;
 				this._w = c1 * c2 * c3 + s1 * s2 * s3;
 
-			} else if (order === 'ZXY') {
+			} else if (order === 'ZXY')
+			{
 
 				this._x = s1 * c2 * c3 - c1 * s2 * s3;
 				this._y = c1 * s2 * c3 + s1 * c2 * s3;
 				this._z = c1 * c2 * s3 + s1 * s2 * c3;
 				this._w = c1 * c2 * c3 - s1 * s2 * s3;
 
-			} else if (order === 'ZYX') {
+			} else if (order === 'ZYX')
+			{
 
 				this._x = s1 * c2 * c3 - c1 * s2 * s3;
 				this._y = c1 * s2 * c3 + s1 * c2 * s3;
 				this._z = c1 * c2 * s3 - s1 * s2 * c3;
 				this._w = c1 * c2 * c3 + s1 * s2 * s3;
 
-			} else if (order === 'YZX') {
+			} else if (order === 'YZX')
+			{
 
 				this._x = s1 * c2 * c3 + c1 * s2 * s3;
 				this._y = c1 * s2 * c3 + s1 * c2 * s3;
 				this._z = c1 * c2 * s3 - s1 * s2 * c3;
 				this._w = c1 * c2 * c3 - s1 * s2 * s3;
 
-			} else if (order === 'XZY') {
+			} else if (order === 'XZY')
+			{
 
 				this._x = s1 * c2 * c3 - c1 * s2 * s3;
 				this._y = c1 * s2 * c3 - s1 * c2 * s3;
@@ -271,9 +259,10 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		setFromAxisAngle: function (axis, angle) {
+		setFromAxisAngle(axis, angle)
+		{
 
 			// http://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToQuaternion/index.htm
 
@@ -290,9 +279,10 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		setFromRotationMatrix: function (m) {
+		setFromRotationMatrix(m)
+		{
 
 			// http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
 
@@ -307,7 +297,8 @@ namespace THREE {
 				trace = m11 + m22 + m33,
 				s;
 
-			if (trace > 0) {
+			if (trace > 0)
+			{
 
 				s = 0.5 / Math.sqrt(trace + 1.0);
 
@@ -316,7 +307,8 @@ namespace THREE {
 				this._y = (m13 - m31) * s;
 				this._z = (m21 - m12) * s;
 
-			} else if (m11 > m22 && m11 > m33) {
+			} else if (m11 > m22 && m11 > m33)
+			{
 
 				s = 2.0 * Math.sqrt(1.0 + m11 - m22 - m33);
 
@@ -325,7 +317,8 @@ namespace THREE {
 				this._y = (m12 + m21) / s;
 				this._z = (m13 + m31) / s;
 
-			} else if (m22 > m33) {
+			} else if (m22 > m33)
+			{
 
 				s = 2.0 * Math.sqrt(1.0 + m22 - m11 - m33);
 
@@ -334,7 +327,8 @@ namespace THREE {
 				this._y = 0.25 * s;
 				this._z = (m23 + m32) / s;
 
-			} else {
+			} else
+			{
 
 				s = 2.0 * Math.sqrt(1.0 + m33 - m11 - m22);
 
@@ -349,9 +343,10 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		setFromUnitVectors: function (vFrom, vTo) {
+		setFromUnitVectors(vFrom, vTo)
+		{
 
 			// assumes direction vectors vFrom and vTo are normalized
 
@@ -359,18 +354,21 @@ namespace THREE {
 
 			var r = vFrom.dot(vTo) + 1;
 
-			if (r < EPS) {
+			if (r < EPS)
+			{
 
 				r = 0;
 
-				if (Math.abs(vFrom.x) > Math.abs(vFrom.z)) {
+				if (Math.abs(vFrom.x) > Math.abs(vFrom.z))
+				{
 
 					this._x = - vFrom.y;
 					this._y = vFrom.x;
 					this._z = 0;
 					this._w = r;
 
-				} else {
+				} else
+				{
 
 					this._x = 0;
 					this._y = - vFrom.z;
@@ -379,7 +377,8 @@ namespace THREE {
 
 				}
 
-			} else {
+			} else
+			{
 
 				// crossVectors( vFrom, vTo ); // inlined to avoid cyclic dependency on Vector3
 
@@ -392,15 +391,17 @@ namespace THREE {
 
 			return this.normalize();
 
-		},
+		}
 
-		angleTo: function (q) {
+		angleTo(q)
+		{
 
 			return 2 * Math.acos(Math.abs(_Math.clamp(this.dot(q), - 1, 1)));
 
-		},
+		}
 
-		rotateTowards: function (q, step) {
+		rotateTowards(q, step)
+		{
 
 			var angle = this.angleTo(q);
 
@@ -412,17 +413,19 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		inverse: function () {
+		inverse()
+		{
 
 			// quaternion is assumed to have unit length
 
 			return this.conjugate();
 
-		},
+		}
 
-		conjugate: function () {
+		conjugate()
+		{
 
 			this._x *= - 1;
 			this._y *= - 1;
@@ -432,38 +435,44 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		dot: function (v) {
+		dot(v)
+		{
 
 			return this._x * v._x + this._y * v._y + this._z * v._z + this._w * v._w;
 
-		},
+		}
 
-		lengthSq: function () {
+		lengthSq()
+		{
 
 			return this._x * this._x + this._y * this._y + this._z * this._z + this._w * this._w;
 
-		},
+		}
 
-		length: function () {
+		length()
+		{
 
 			return Math.sqrt(this._x * this._x + this._y * this._y + this._z * this._z + this._w * this._w);
 
-		},
+		}
 
-		normalize: function () {
+		normalize()
+		{
 
 			var l = this.length();
 
-			if (l === 0) {
+			if (l === 0)
+			{
 
 				this._x = 0;
 				this._y = 0;
 				this._z = 0;
 				this._w = 1;
 
-			} else {
+			} else
+			{
 
 				l = 1 / l;
 
@@ -478,11 +487,13 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		multiply: function (q, p) {
+		multiply(q, p)
+		{
 
-			if (p !== undefined) {
+			if (p !== undefined)
+			{
 
 				console.warn('THREE.Quaternion: .multiply() now only accepts one argument. Use .multiplyQuaternions( a, b ) instead.');
 				return this.multiplyQuaternions(q, p);
@@ -491,15 +502,17 @@ namespace THREE {
 
 			return this.multiplyQuaternions(this, q);
 
-		},
+		}
 
-		premultiply: function (q) {
+		premultiply(q)
+		{
 
 			return this.multiplyQuaternions(q, this);
 
-		},
+		}
 
-		multiplyQuaternions: function (a, b) {
+		multiplyQuaternions(a, b)
+		{
 
 			// from http://www.euclideanspace.com/maths/algebra/realNormedAlgebra/quaternions/code/index.htm
 
@@ -515,9 +528,10 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		slerp: function (qb, t) {
+		slerp(qb, t)
+		{
 
 			if (t === 0) return this;
 			if (t === 1) return this.copy(qb);
@@ -528,7 +542,8 @@ namespace THREE {
 
 			var cosHalfTheta = w * qb._w + x * qb._x + y * qb._y + z * qb._z;
 
-			if (cosHalfTheta < 0) {
+			if (cosHalfTheta < 0)
+			{
 
 				this._w = - qb._w;
 				this._x = - qb._x;
@@ -537,13 +552,15 @@ namespace THREE {
 
 				cosHalfTheta = - cosHalfTheta;
 
-			} else {
+			} else
+			{
 
 				this.copy(qb);
 
 			}
 
-			if (cosHalfTheta >= 1.0) {
+			if (cosHalfTheta >= 1.0)
+			{
 
 				this._w = w;
 				this._x = x;
@@ -556,7 +573,8 @@ namespace THREE {
 
 			var sqrSinHalfTheta = 1.0 - cosHalfTheta * cosHalfTheta;
 
-			if (sqrSinHalfTheta <= Number.EPSILON) {
+			if (sqrSinHalfTheta <= Number.EPSILON)
+			{
 
 				var s = 1 - t;
 				this._w = s * w + t * this._w;
@@ -585,15 +603,17 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		equals: function (quaternion) {
+		equals(quaternion)
+		{
 
 			return (quaternion._x === this._x) && (quaternion._y === this._y) && (quaternion._z === this._z) && (quaternion._w === this._w);
 
-		},
+		}
 
-		fromArray: function (array, offset) {
+		fromArray(array, offset)
+		{
 
 			if (offset === undefined) offset = 0;
 
@@ -606,9 +626,10 @@ namespace THREE {
 
 			return this;
 
-		},
+		}
 
-		toArray: function (array, offset) {
+		toArray(array, offset)
+		{
 
 			if (array === undefined) array = [];
 			if (offset === undefined) offset = 0;
@@ -620,18 +641,19 @@ namespace THREE {
 
 			return array;
 
-		},
+		}
 
-		_onChange: function (callback) {
+		_onChange(callback)
+		{
 
 			this._onChangeCallback = callback;
 
 			return this;
 
-		},
+		}
 
-		_onChangeCallback: function () { }
+		_onChangeCallback() { }
+	}
 
-	});
 
 }
