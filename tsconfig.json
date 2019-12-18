@@ -316,6 +316,20 @@
     "src/extras/core/Curve.ts",
     "src/extras/core/CurvePath.ts",
     "src/extras/core/Font.ts",
-
+    "src/extras/core/Interpolations.ts",
+    "src/extras/core/Path.ts",
+    "src/extras/core/Shape.ts",
+    "src/extras/core/ShapePath.ts",
+    //
+    "src/extras/curves/LineCurve.ts",
+    "src/extras/curves/ArcCurve.ts",
+    "src/extras/curves/CatmullRomCurve3.ts",
+    "src/extras/curves/CubicBezierCurve.ts",
+    "src/extras/curves/CubicBezierCurve3.ts",
+    "src/extras/curves/EllipseCurve.ts",
+    "src/extras/curves/LineCurve3.ts",
+    "src/extras/curves/QuadraticBezierCurve.ts",
+    "src/extras/curves/QuadraticBezierCurve3.ts",
+    "src/extras/curves/SplineCurve.ts",
   ]
 }
