@@ -6,7 +6,7 @@ namespace THREE
 	 * @author alteredq / http://alteredqualia.com/
 	 */
 
-export	function Face3(a, b, c, normal, color, materialIndex)
+export	function Face3(a, b, c, normal?, color?, materialIndex?)
 	{
 
 		this.a = a;

@@ -224,7 +224,7 @@ namespace THREE
 
 			}
 
-			function addFace(a, b, c, materialIndex)
+			function addFace(a, b, c, materialIndex?)
 			{
 
 				var vertexColors = (colors === undefined) ? [] : [
@@ -1028,7 +1028,7 @@ namespace THREE
 		toJSON: function ()
 		{
 
-			var data = {
+			var data: any = {
 				metadata: {
 					version: 4.5,
 					type: 'Geometry',
@@ -1363,7 +1363,7 @@ namespace THREE
 			for (i = 0, il = morphTargets.length; i < il; i++)
 			{
 
-				var morphTarget = {};
+				var morphTarget: any = {};
 				morphTarget.name = morphTargets[i].name;
 
 				// vertices
@@ -1409,7 +1409,7 @@ namespace THREE
 			for (i = 0, il = morphNormals.length; i < il; i++)
 			{
 
-				var morphNormal = {};
+				var morphNormal: any = {};
 
 				// vertex normals
 
@@ -1422,7 +1422,7 @@ namespace THREE
 					{
 
 						var srcVertexNormal = morphNormals[i].vertexNormals[j];
-						var destVertexNormal = {};
+						var destVertexNormal: any = {};
 
 						destVertexNormal.a = srcVertexNormal.a.clone();
 						destVertexNormal.b = srcVertexNormal.b.clone();

@@ -5,7 +5,7 @@ namespace THREE
 	 * @author alteredq / http://alteredqualia.com/
 	 */
 
-	export function Clock(autoStart)
+	export function Clock(autoStart?)
 	{
 
 		this.autoStart = (autoStart !== undefined) ? autoStart : true;
