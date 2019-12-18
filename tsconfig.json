@@ -28,5 +28,14 @@
     "src/math/Frustum.ts",
     "src/math/Sphere.ts",
     "src/math/Spherical.ts",
+    "src/math/Interpolant.ts",
+    "src/math/Line3.ts",
+    "src/math/Ray.ts",
+    "src/math/SphericalHarmonics3.ts",
+    //
+    "src/math/interpolants/CubicInterpolant.ts",
+    "src/math/interpolants/DiscreteInterpolant.ts",
+    "src/math/interpolants/LinearInterpolant.ts",
+    "src/math/interpolants/QuaternionLinearInterpolant.ts",
   ]
 }

@@ -5,25 +5,28 @@ namespace THREE {
 	 * @author WestLangley / http://github.com/WestLangley
 	 * @author bhouston / http://clara.io
 	 */
+	export class Quaternion {
+		_x: any;
+		_y: any;
+		_z: any;
+		_w: any;
 
-	export function Quaternion(x?, y?, z?, w?) {
+		constructor(x?, y?, z?, w?) {
 
-		this._x = x || 0;
-		this._y = y || 0;
-		this._z = z || 0;
-		this._w = (w !== undefined) ? w : 1;
+			this._x = x || 0;
+			this._y = y || 0;
+			this._z = z || 0;
+			this._w = (w !== undefined) ? w : 1;
 
-	}
+		}
 
-	Object.assign(Quaternion, {
-
-		slerp: function (qa, qb, qm, t) {
+		static slerp(qa, qb, qm, t) {
 
 			return qm.copy(qa).slerp(qb, t);
 
-		},
+		}
 
-		slerpFlat: function (dst, dstOffset, src0, srcOffset0, src1, srcOffset1, t) {
+		static slerpFlat(dst, dstOffset, src0, srcOffset0, src1, srcOffset1, t) {
 
 			// fuzz-free, array-based Quaternion SLERP operation
 
@@ -84,8 +87,8 @@ namespace THREE {
 			dst[dstOffset + 3] = w0;
 
 		}
+	}
 
-	});
 
 	Object.defineProperties(Quaternion.prototype, {
 
