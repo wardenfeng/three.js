@@ -178,7 +178,7 @@ namespace THREE
 
 		}
 
-		setFromEuler(euler, update)
+		setFromEuler(euler, update?)
 		{
 
 			if (!(euler && euler.isEuler))
