@@ -18,5 +18,7 @@
     "src/math/Vector4.ts",
     "src/math/Plane.ts",
     "src/math/Triangle.ts",
+    "src/math/Matrix3.ts",
+    "src/math/Matrix4.ts",
   ]
 }

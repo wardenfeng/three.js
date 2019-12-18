@@ -9,7 +9,7 @@ namespace THREE
 	var _vector2 = new Vector3();
 	var _normalMatrix = new Matrix3();
 
-	export function Plane(normal, constant)
+	export function Plane(normal?, constant?)
 	{
 
 		// normal is assumed to be normalized
