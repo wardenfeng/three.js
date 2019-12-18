@@ -38,8 +38,10 @@ namespace THREE
 
 	export class BoxBufferGeometry extends BufferGeometry
 	{
+		type: string;
+		parameters: { width: any; height: any; depth: any; widthSegments: any; heightSegments: any; depthSegments: any; };
 
-		constructor(width, height, depth, widthSegments, heightSegments, depthSegments)
+		constructor(width, height, depth, widthSegments?, heightSegments?, depthSegments?)
 		{
 
 			super();

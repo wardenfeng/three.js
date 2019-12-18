@@ -263,7 +263,7 @@ namespace THREE
 
 	};
 
-	ShaderLib.physical = {
+	ShaderLib["physical"] = {
 
 		uniforms: mergeUniforms([
 			ShaderLib.standard.uniforms,

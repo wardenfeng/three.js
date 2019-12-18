@@ -76,7 +76,7 @@ namespace THREE
 			{
 
 				var vertices = geometry.vertices;
-				var lineDistances = geometry.lineDistances;
+				var lineDistances: number[] = geometry.lineDistances;
 
 				lineDistances[0] = 0;
 

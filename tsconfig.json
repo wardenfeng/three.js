@@ -182,6 +182,8 @@
     "src/renderers/shaders/ShaderChunk/uv2_pars_vertex.glsl.ts",
     "src/renderers/shaders/ShaderChunk/uv2_vertex.glsl.ts",
     "src/renderers/shaders/ShaderChunk/worldpos_vertex.glsl.ts",
+    "src/renderers/shaders/ShaderChunk/default_vertex.glsl.ts",
+    "src/renderers/shaders/ShaderChunk/default_fragment.glsl.ts",
     //
     "src/renderers/shaders/ShaderLib/background_frag.glsl.ts",
     "src/renderers/shaders/ShaderLib/background_vert.glsl.ts",
@@ -288,7 +290,24 @@
     "src/scenes/FogExp2.ts",
     "src/scenes/Scene.ts",
     //
+    "src/geometries/PlaneGeometry.ts",
     "src/geometries/BoxGeometry.ts",
+    "src/geometries/CircleGeometry.ts",
+    "src/geometries/ConeGeometry.ts",
+    "src/geometries/CylinderGeometry.ts",
+    "src/geometries/ExtrudeGeometry.ts",
+    "src/geometries/IcosahedronGeometry.ts",
+    "src/geometries/LatheGeometry.ts",
+    "src/geometries/OctahedronGeometry.ts",
+    "src/geometries/ParametricGeometry.ts",
+    "src/geometries/PolyhedronGeometry.ts",
+    "src/geometries/ShapeGeometry.ts",
+    "src/geometries/SphereGeometry.ts",
+    "src/geometries/TetrahedronGeometry.ts",
+    "src/geometries/TextGeometry.ts",
+    "src/geometries/TorusKnotGeometry.ts",
+    "src/geometries/TubeGeometry.ts",
+    "src/geometries/WireframeGeometry.ts",
 
   ]
 }

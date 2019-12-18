@@ -15,46 +15,58 @@ namespace THREE
 	var _boxMorphTargets = new Box3();
 	var _vector = new Vector3();
 
-	export function BufferGeometry()
+	export class BufferGeometry extends EventDispatcher
 	{
+		index: any;
+		attributes: any;
+		groups: any;
+		drawRange: any;
+		boundingBox: any;
+		boundingSphere: any;
+		morphAttributes: any;
+		userData: any;
+		uuid: any;
+		type: any;
+		name: any;
+		parameters: any;
 
-		Object.defineProperty(this, 'id', { value: _bufferGeometryId += 2 });
+		constructor()
+		{
+			super();
+			Object.defineProperty(this, 'id', { value: _bufferGeometryId += 2 });
 
-		this.uuid = _Math.generateUUID();
+			this.uuid = _Math.generateUUID();
 
-		this.name = '';
-		this.type = 'BufferGeometry';
+			this.name = '';
+			this.type = 'BufferGeometry';
 
-		this.index = null;
-		this.attributes = {};
+			this.index = null;
+			this.attributes = {};
 
-		this.morphAttributes = {};
+			this.morphAttributes = {};
 
-		this.groups = [];
+			this.groups = [];
 
-		this.boundingBox = null;
-		this.boundingSphere = null;
+			this.boundingBox = null;
+			this.boundingSphere = null;
 
-		this.drawRange = { start: 0, count: Infinity };
+			this.drawRange = { start: 0, count: Infinity };
 
-		this.userData = {};
+			this.userData = {};
 
-	}
+		}
 
-	BufferGeometry.prototype = Object.assign(Object.create(EventDispatcher.prototype), {
 
-		constructor: BufferGeometry,
+		isBufferGeometry = true
 
-		isBufferGeometry: true,
-
-		getIndex: function ()
+		getIndex()
 		{
 
 			return this.index;
 
-		},
+		}
 
-		setIndex: function (index)
+		setIndex(index)
 		{
 
 			if (Array.isArray(index))
@@ -69,34 +81,34 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		getAttribute: function (name)
+		getAttribute(name)
 		{
 
 			return this.attributes[name];
 
-		},
+		}
 
-		setAttribute: function (name, attribute)
+		setAttribute(name, attribute)
 		{
 
 			this.attributes[name] = attribute;
 
 			return this;
 
-		},
+		}
 
-		deleteAttribute: function (name)
+		deleteAttribute(name)
 		{
 
 			delete this.attributes[name];
 
 			return this;
 
-		},
+		}
 
-		addGroup: function (start, count, materialIndex)
+		addGroup(start, count, materialIndex)
 		{
 
 			this.groups.push({
@@ -107,24 +119,24 @@ namespace THREE
 
 			});
 
-		},
+		}
 
-		clearGroups: function ()
+		clearGroups()
 		{
 
 			this.groups = [];
 
-		},
+		}
 
-		setDrawRange: function (start, count)
+		setDrawRange(start, count)
 		{
 
 			this.drawRange.start = start;
 			this.drawRange.count = count;
 
-		},
+		}
 
-		applyMatrix: function (matrix)
+		applyMatrix(matrix)
 		{
 
 			var position = this.attributes.position;
@@ -178,9 +190,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		rotateX: function (angle)
+		rotateX(angle)
 		{
 
 			// rotate geometry around world x-axis
@@ -191,9 +203,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		rotateY: function (angle)
+		rotateY(angle)
 		{
 
 			// rotate geometry around world y-axis
@@ -204,9 +216,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		rotateZ: function (angle)
+		rotateZ(angle)
 		{
 
 			// rotate geometry around world z-axis
@@ -217,9 +229,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		translate: function (x, y, z)
+		translate(x, y, z)
 		{
 
 			// translate geometry
@@ -230,9 +242,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		scale: function (x, y, z)
+		scale(x, y, z)
 		{
 
 			// scale geometry
@@ -243,9 +255,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		lookAt: function (vector)
+		lookAt(vector)
 		{
 
 			_obj.lookAt(vector);
@@ -256,9 +268,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		center: function ()
+		center()
 		{
 
 			this.computeBoundingBox();
@@ -269,9 +281,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		setFromObject: function (object)
+		setFromObject(object)
 		{
 
 			// console.log( 'THREE.BufferGeometry.setFromObject(). Converting', object, this );
@@ -324,9 +336,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		setFromPoints: function (points)
+		setFromPoints(points)
 		{
 
 			var position = [];
@@ -343,9 +355,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		updateFromObject: function (object)
+		updateFromObject(object)
 		{
 
 			var geometry = object.geometry;
@@ -485,18 +497,18 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		fromGeometry: function (geometry)
+		fromGeometry(geometry)
 		{
 
 			geometry.__directGeometry = new DirectGeometry().fromGeometry(geometry);
 
 			return this.fromDirectGeometry(geometry.__directGeometry);
 
-		},
+		}
 
-		fromDirectGeometry: function (geometry)
+		fromDirectGeometry(geometry)
 		{
 
 			var positions = new Float32Array(geometry.vertices.length * 3);
@@ -598,9 +610,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		computeBoundingBox: function ()
+		computeBoundingBox()
 		{
 
 			if (this.boundingBox === null)
@@ -650,9 +662,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		computeBoundingSphere: function ()
+		computeBoundingSphere()
 		{
 
 			if (this.boundingSphere === null)
@@ -742,16 +754,16 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		computeFaceNormals: function ()
+		computeFaceNormals()
 		{
 
 			// backwards compatibility
 
-		},
+		}
 
-		computeVertexNormals: function ()
+		computeVertexNormals()
 		{
 
 			var index = this.index;
@@ -863,9 +875,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		merge: function (geometry, offset)
+		merge(geometry, offset)
 		{
 
 			if (!(geometry && geometry.isBufferGeometry))
@@ -915,9 +927,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		normalizeNormals: function ()
+		normalizeNormals()
 		{
 
 			var normals = this.attributes.normal;
@@ -935,9 +947,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		toNonIndexed: function ()
+		toNonIndexed()
 		{
 
 			function convertBufferAttribute(attribute, indices)
@@ -1035,9 +1047,9 @@ namespace THREE
 
 			return geometry2;
 
-		},
+		}
 
-		toJSON: function ()
+		toJSON()
 		{
 
 			var data: any = {
@@ -1159,9 +1171,9 @@ namespace THREE
 
 			return data;
 
-		},
+		}
 
-		clone: function ()
+		clone()
 		{
 
 			/*
@@ -1190,9 +1202,9 @@ namespace THREE
 
 			return new BufferGeometry().copy(this);
 
-		},
+		}
 
-		copy: function (source)
+		copy(source)
 		{
 
 			var name, i, l;
@@ -1299,16 +1311,18 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		dispose: function ()
+		dispose()
 		{
 
 			this.dispatchEvent({ type: 'dispose' });
 
 		}
 
-	});
+	}
+
+
 
 
 }

@@ -421,7 +421,7 @@ namespace THREE
 	Int32BufferAttribute.prototype.constructor = Int32BufferAttribute;
 
 
-	export function Uint32BufferAttribute(array, itemSize, normalized)
+	export function Uint32BufferAttribute(array, itemSize, normalized?)
 	{
 
 		BufferAttribute.call(this, new Uint32Array(array), itemSize, normalized);

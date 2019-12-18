@@ -97,7 +97,7 @@ namespace THREE
 
 				var vertices = geometry.vertices;
 
-				for (var i = 0, l = vertices.length; i < l; i++)
+				for (var i = 0, l: number = vertices.length; i < l; i++)
 				{
 
 					testPoint(vertices[i], i, localThresholdSq, matrixWorld, raycaster, intersects, this);

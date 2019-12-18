@@ -468,7 +468,7 @@ namespace THREE
 
 		}
 
-		var intersection = checkIntersection(object, material, raycaster, ray, _vA, _vB, _vC, _intersectionPoint);
+		var intersection: any = checkIntersection(object, material, raycaster, ray, _vA, _vB, _vC, _intersectionPoint);
 
 		if (intersection)
 		{

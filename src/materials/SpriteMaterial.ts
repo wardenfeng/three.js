@@ -13,7 +13,7 @@ namespace THREE
 	 * }
 	 */
 
-	export function SpriteMaterial(parameters)
+	export function SpriteMaterial(parameters?)
 	{
 
 		Material.call(this);
