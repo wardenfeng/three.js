@@ -331,5 +331,24 @@
     "src/extras/curves/QuadraticBezierCurve.ts",
     "src/extras/curves/QuadraticBezierCurve3.ts",
     "src/extras/curves/SplineCurve.ts",
+    //
+    "src/extras/objects/ImmediateRenderObject.ts",
+    //
+    "src/helpers/ArrowHelper.ts",
+    "src/helpers/AxesHelper.ts",
+    "src/helpers/Box3Helper.ts",
+    "src/helpers/BoxHelper.ts",
+    "src/helpers/CameraHelper.ts",
+    "src/helpers/DirectionalLightHelper.ts",
+    "src/helpers/FaceNormalsHelper.ts",
+    "src/helpers/GridHelper.ts",
+    "src/helpers/LightProbeHelper.ts",
+    "src/helpers/PointLightHelper.ts",
+    "src/helpers/PolarGridHelper.ts",
+    "src/helpers/PositionalAudioHelper.ts",
+    "src/helpers/RectAreaLightHelper.ts",
+    "src/helpers/SkeletonHelper.ts",
+    "src/helpers/SpotLightHelper.ts",
+    "src/helpers/VertexNormalsHelper.ts",
   ]
 }
