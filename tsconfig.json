@@ -8,7 +8,7 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "outFile": "./out/three.js",
+    "outFile": "./build/three.js",
   },
   "files": [
     "src/constants.ts",
