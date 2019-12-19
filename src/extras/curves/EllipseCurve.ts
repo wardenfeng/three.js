@@ -5,8 +5,16 @@ namespace THREE
 	export class EllipseCurve extends Curve
 	{
 		isEllipseCurve = true;
+		aX: any;
+		aY: any;
+		xRadius: any;
+		yRadius: any;
+		aStartAngle: any;
+		aEndAngle: any;
+		aClockwise: any;
+		aRotation: any;
 
-		constructor(aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation)
+		constructor(aX, aY, xRadius, yRadius, aStartAngle, aEndAngle, aClockwise, aRotation?)
 		{
 
 			super();
@@ -28,7 +36,7 @@ namespace THREE
 
 		}
 
-		getPoint(t, optionalTarget)
+		getPoint(t, optionalTarget?)
 		{
 
 			var point = optionalTarget || new Vector2();

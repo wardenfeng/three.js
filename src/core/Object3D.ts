@@ -26,105 +26,135 @@ namespace THREE
 	 * @author WestLangley / http://github.com/WestLangley
 	 * @author elephantatwork / www.elephantatwork.ch
 	 */
-
-	export function Object3D()
+	export class Object3D extends EventDispatcher
 	{
-
-		Object.defineProperty(this, 'id', { value: _object3DId++ });
-
-		this.uuid = _Math.generateUUID();
-
-		this.name = '';
-		this.type = 'Object3D';
-
-		this.parent = null;
-		this.children = [];
-
-		this.up = Object3D.DefaultUp.clone();
-
-		var position = new Vector3();
-		var rotation = new Euler();
-		var quaternion = new Quaternion();
-		var scale = new Vector3(1, 1, 1);
-
-		function onRotationChange()
+		matrixAutoUpdate: any;
+		matrix: any;
+		position: any;
+		quaternion: any;
+		scale: any;
+		matrixWorld: any;
+		parent: any;
+		isCamera: any;
+		isLight: any;
+		up: any;
+		children: any;
+		visible: boolean;
+		matrixWorldNeedsUpdate: boolean;
+		uuid: any;
+		type: any;
+		name: string;
+		castShadow: boolean;
+		receiveShadow: boolean;
+		frustumCulled: boolean;
+		renderOrder: number;
+		layers: any;
+		isMesh: boolean;
+		drawMode: number;
+		isInstancedMesh: any;
+		count: any;
+		instanceMatrix: any;
+		isLine: boolean;
+		isPoints: boolean;
+		material: any;
+		userData: any;
+		geometry: any;
+		constructor()
 		{
+			super();
 
-			quaternion.setFromEuler(rotation, false);
+			Object.defineProperty(this, 'id', { value: _object3DId++ });
 
-		}
+			this.uuid = _Math.generateUUID();
 
-		function onQuaternionChange()
-		{
+			this.name = '';
+			this.type = 'Object3D';
 
-			rotation.setFromQuaternion(quaternion, undefined, false);
+			this.parent = null;
+			this.children = [];
 
-		}
+			this.up = Object3D.DefaultUp.clone();
 
-		rotation._onChange(onRotationChange);
-		quaternion._onChange(onQuaternionChange);
+			var position = new Vector3();
+			var rotation = new Euler();
+			var quaternion = new Quaternion();
+			var scale = new Vector3(1, 1, 1);
 
-		Object.defineProperties(this, {
-			position: {
-				configurable: true,
-				enumerable: true,
-				value: position
-			},
-			rotation: {
-				configurable: true,
-				enumerable: true,
-				value: rotation
-			},
-			quaternion: {
-				configurable: true,
-				enumerable: true,
-				value: quaternion
-			},
-			scale: {
-				configurable: true,
-				enumerable: true,
-				value: scale
-			},
-			modelViewMatrix: {
-				value: new Matrix4()
-			},
-			normalMatrix: {
-				value: new Matrix3()
+			function onRotationChange()
+			{
+
+				quaternion.setFromEuler(rotation, false);
+
 			}
-		});
 
-		this.matrix = new Matrix4();
-		this.matrixWorld = new Matrix4();
+			function onQuaternionChange()
+			{
 
-		this.matrixAutoUpdate = Object3D.DefaultMatrixAutoUpdate;
-		this.matrixWorldNeedsUpdate = false;
+				rotation.setFromQuaternion(quaternion, undefined, false);
 
-		this.layers = new Layers();
-		this.visible = true;
+			}
 
-		this.castShadow = false;
-		this.receiveShadow = false;
+			rotation._onChange(onRotationChange);
+			quaternion._onChange(onQuaternionChange);
 
-		this.frustumCulled = true;
-		this.renderOrder = 0;
+			Object.defineProperties(this, {
+				position: {
+					configurable: true,
+					enumerable: true,
+					value: position
+				},
+				rotation: {
+					configurable: true,
+					enumerable: true,
+					value: rotation
+				},
+				quaternion: {
+					configurable: true,
+					enumerable: true,
+					value: quaternion
+				},
+				scale: {
+					configurable: true,
+					enumerable: true,
+					value: scale
+				},
+				modelViewMatrix: {
+					value: new Matrix4()
+				},
+				normalMatrix: {
+					value: new Matrix3()
+				}
+			});
 
-		this.userData = {};
+			this.matrix = new Matrix4();
+			this.matrixWorld = new Matrix4();
 
-	}
+			this.matrixAutoUpdate = Object3D.DefaultMatrixAutoUpdate;
+			this.matrixWorldNeedsUpdate = false;
 
-	Object3D.DefaultUp = new Vector3(0, 1, 0);
-	Object3D.DefaultMatrixAutoUpdate = true;
+			this.layers = new Layers();
+			this.visible = true;
 
-	Object3D.prototype = Object.assign(Object.create(EventDispatcher.prototype), {
+			this.castShadow = false;
+			this.receiveShadow = false;
 
-		constructor: Object3D,
+			this.frustumCulled = true;
+			this.renderOrder = 0;
 
-		isObject3D: true,
+			this.userData = {};
 
-		onBeforeRender: function () { },
-		onAfterRender: function () { },
+		}
 
-		applyMatrix: function (matrix)
+		static DefaultUp = new Vector3(0, 1, 0);
+		static DefaultMatrixAutoUpdate = true;
+
+
+		isObject3D = true
+
+		onBeforeRender() { }
+		onAfterRender() { }
+
+		applyMatrix(matrix)
 		{
 
 			if (this.matrixAutoUpdate) this.updateMatrix();
@@ -133,52 +163,52 @@ namespace THREE
 
 			this.matrix.decompose(this.position, this.quaternion, this.scale);
 
-		},
+		}
 
-		applyQuaternion: function (q)
+		applyQuaternion(q)
 		{
 
 			this.quaternion.premultiply(q);
 
 			return this;
 
-		},
+		}
 
-		setRotationFromAxisAngle: function (axis, angle)
+		setRotationFromAxisAngle(axis, angle)
 		{
 
 			// assumes axis is normalized
 
 			this.quaternion.setFromAxisAngle(axis, angle);
 
-		},
+		}
 
-		setRotationFromEuler: function (euler)
+		setRotationFromEuler(euler)
 		{
 
 			this.quaternion.setFromEuler(euler, true);
 
-		},
+		}
 
-		setRotationFromMatrix: function (m)
+		setRotationFromMatrix(m)
 		{
 
 			// assumes the upper 3x3 of m is a pure rotation matrix (i.e, unscaled)
 
 			this.quaternion.setFromRotationMatrix(m);
 
-		},
+		}
 
-		setRotationFromQuaternion: function (q)
+		setRotationFromQuaternion(q)
 		{
 
 			// assumes q is normalized
 
 			this.quaternion.copy(q);
 
-		},
+		}
 
-		rotateOnAxis: function (axis, angle)
+		rotateOnAxis(axis, angle)
 		{
 
 			// rotate object on axis in object space
@@ -190,9 +220,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		rotateOnWorldAxis: function (axis, angle)
+		rotateOnWorldAxis(axis, angle)
 		{
 
 			// rotate object on axis in world space
@@ -205,30 +235,30 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		rotateX: function (angle)
+		rotateX(angle)
 		{
 
 			return this.rotateOnAxis(_xAxis, angle);
 
-		},
+		}
 
-		rotateY: function (angle)
+		rotateY(angle)
 		{
 
 			return this.rotateOnAxis(_yAxis, angle);
 
-		},
+		}
 
-		rotateZ: function (angle)
+		rotateZ(angle)
 		{
 
 			return this.rotateOnAxis(_zAxis, angle);
 
-		},
+		}
 
-		translateOnAxis: function (axis, distance)
+		translateOnAxis(axis, distance)
 		{
 
 			// translate object by distance along axis in object space
@@ -240,44 +270,44 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		translateX: function (distance)
+		translateX(distance)
 		{
 
 			return this.translateOnAxis(_xAxis, distance);
 
-		},
+		}
 
-		translateY: function (distance)
+		translateY(distance)
 		{
 
 			return this.translateOnAxis(_yAxis, distance);
 
-		},
+		}
 
-		translateZ: function (distance)
+		translateZ(distance)
 		{
 
 			return this.translateOnAxis(_zAxis, distance);
 
-		},
+		}
 
-		localToWorld: function (vector)
+		localToWorld(vector)
 		{
 
 			return vector.applyMatrix4(this.matrixWorld);
 
-		},
+		}
 
-		worldToLocal: function (vector)
+		worldToLocal(vector)
 		{
 
 			return vector.applyMatrix4(_m1.getInverse(this.matrixWorld));
 
-		},
+		}
 
-		lookAt: function (x, y, z)
+		lookAt(x, y?, z?)
 		{
 
 			// This method does not support objects having non-uniformly-scaled parent(s)
@@ -323,9 +353,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		add: function (object)
+		add(object)
 		{
 
 			if (arguments.length > 1)
@@ -374,9 +404,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		remove: function (object)
+		remove(object)
 		{
 
 			if (arguments.length > 1)
@@ -407,9 +437,9 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		attach: function (object)
+		attach(object)
 		{
 
 			// adds object as a child of this, while maintaining the object's world transform
@@ -435,23 +465,23 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		getObjectById: function (id)
+		getObjectById(id)
 		{
 
 			return this.getObjectByProperty('id', id);
 
-		},
+		}
 
-		getObjectByName: function (name)
+		getObjectByName(name)
 		{
 
 			return this.getObjectByProperty('name', name);
 
-		},
+		}
 
-		getObjectByProperty: function (name, value)
+		getObjectByProperty(name, value)
 		{
 
 			if (this[name] === value) return this;
@@ -473,9 +503,9 @@ namespace THREE
 
 			return undefined;
 
-		},
+		}
 
-		getWorldPosition: function (target)
+		getWorldPosition(target)
 		{
 
 			if (target === undefined)
@@ -490,9 +520,9 @@ namespace THREE
 
 			return target.setFromMatrixPosition(this.matrixWorld);
 
-		},
+		}
 
-		getWorldQuaternion: function (target)
+		getWorldQuaternion(target)
 		{
 
 			if (target === undefined)
@@ -509,9 +539,9 @@ namespace THREE
 
 			return target;
 
-		},
+		}
 
-		getWorldScale: function (target)
+		getWorldScale(target)
 		{
 
 			if (target === undefined)
@@ -528,9 +558,9 @@ namespace THREE
 
 			return target;
 
-		},
+		}
 
-		getWorldDirection: function (target)
+		getWorldDirection(target)
 		{
 
 			if (target === undefined)
@@ -547,11 +577,11 @@ namespace THREE
 
 			return target.set(e[8], e[9], e[10]).normalize();
 
-		},
+		}
 
-		raycast: function () { },
+		raycast() { }
 
-		traverse: function (callback)
+		traverse(callback)
 		{
 
 			callback(this);
@@ -565,9 +595,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		traverseVisible: function (callback)
+		traverseVisible(callback)
 		{
 
 			if (this.visible === false) return;
@@ -583,9 +613,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		traverseAncestors: function (callback)
+		traverseAncestors(callback)
 		{
 
 			var parent = this.parent;
@@ -599,18 +629,18 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		updateMatrix: function ()
+		updateMatrix()
 		{
 
 			this.matrix.compose(this.position, this.quaternion, this.scale);
 
 			this.matrixWorldNeedsUpdate = true;
 
-		},
+		}
 
-		updateMatrixWorld: function (force)
+		updateMatrixWorld(force)
 		{
 
 			if (this.matrixAutoUpdate) this.updateMatrix();
@@ -647,9 +677,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		updateWorldMatrix: function (updateParents, updateChildren)
+		updateWorldMatrix(updateParents, updateChildren)
 		{
 
 			var parent = this.parent;
@@ -691,9 +721,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		toJSON: function (meta)
+		toJSON(meta)
 		{
 
 			// meta is a string when called from JSON.stringify
@@ -890,16 +920,17 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		clone: function (recursive)
+
+		clone(recursive)
 		{
 
-			return new this.constructor().copy(this, recursive);
+			return new Object3D().copy(this, recursive);
 
-		},
+		}
 
-		copy: function (source, recursive)
+		copy(source, recursive?)
 		{
 
 			if (recursive === undefined) recursive = true;
@@ -946,7 +977,9 @@ namespace THREE
 
 		}
 
-	});
+	}
+
+
 
 
 }

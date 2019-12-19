@@ -5,27 +5,23 @@ namespace THREE
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	export function DirectionalLightShadow()
+	export class DirectionalLightShadow extends LightShadow
 	{
-
-		LightShadow.call(this, new OrthographicCamera(- 5, 5, 5, - 5, 0.5, 500));
-
-	}
-
-	DirectionalLightShadow.prototype = Object.assign(Object.create(LightShadow.prototype), {
-
-		constructor: DirectionalLightShadow,
-
-		isDirectionalLightShadow: true,
-
-		updateMatrices: function (light)
+		constructor()
 		{
 
-			LightShadow.prototype.updateMatrices.call(this, light);
+			super(new OrthographicCamera(- 5, 5, 5, - 5, 0.5, 500));
 
 		}
+		isDirectionalLightShadow = true;
 
-	});
+		updateMatrices(light)
+		{
+
+			super.updateMatrices(light);
+
+		}
+	}
 
 
 }

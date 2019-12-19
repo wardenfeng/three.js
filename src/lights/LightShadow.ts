@@ -5,56 +5,67 @@ namespace THREE
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	export function LightShadow(camera)
+	export class LightShadow
 	{
+		_viewportCount: any;
+		_frustum: any;
+		camera: any;
+		matrix: any;
+		bias: number;
+		radius: number;
+		mapSize: any;
+		map: any;
+		mapPass: any;
+		_frameExtents: any;
+		_viewports: any[];
+		constructor(camera?)
+		{
 
-		this.camera = camera;
+			this.camera = camera;
 
-		this.bias = 0;
-		this.radius = 1;
+			this.bias = 0;
+			this.radius = 1;
 
-		this.mapSize = new Vector2(512, 512);
+			this.mapSize = new Vector2(512, 512);
 
-		this.map = null;
-		this.mapPass = null;
-		this.matrix = new Matrix4();
+			this.map = null;
+			this.mapPass = null;
+			this.matrix = new Matrix4();
 
-		this._frustum = new Frustum();
-		this._frameExtents = new Vector2(1, 1);
+			this._frustum = new Frustum();
+			this._frameExtents = new Vector2(1, 1);
 
-		this._viewportCount = 1;
+			this._viewportCount = 1;
 
-		this._viewports = [
+			this._viewports = [
 
-			new Vector4(0, 0, 1, 1)
+				new Vector4(0, 0, 1, 1)
 
-		];
+			];
 
-	}
+		}
 
-	Object.assign(LightShadow.prototype, {
+		_projScreenMatrix = new Matrix4()
 
-		_projScreenMatrix: new Matrix4(),
+		_lightPositionWorld = new Vector3()
 
-		_lightPositionWorld: new Vector3(),
+		_lookTarget = new Vector3()
 
-		_lookTarget: new Vector3(),
-
-		getViewportCount: function ()
+		getViewportCount()
 		{
 
 			return this._viewportCount;
 
-		},
+		}
 
-		getFrustum: function ()
+		getFrustum()
 		{
 
 			return this._frustum;
 
-		},
+		}
 
-		updateMatrices: function (light)
+		updateMatrices(light)
 		{
 
 			var shadowCamera = this.camera,
@@ -83,23 +94,23 @@ namespace THREE
 			shadowMatrix.multiply(shadowCamera.projectionMatrix);
 			shadowMatrix.multiply(shadowCamera.matrixWorldInverse);
 
-		},
+		}
 
-		getViewport: function (viewportIndex)
+		getViewport(viewportIndex)
 		{
 
 			return this._viewports[viewportIndex];
 
-		},
+		}
 
-		getFrameExtents: function ()
+		getFrameExtents()
 		{
 
 			return this._frameExtents;
 
-		},
+		}
 
-		copy: function (source)
+		copy(source)
 		{
 
 			this.camera = source.camera.clone();
@@ -111,16 +122,16 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		clone: function ()
+		clone()
 		{
 
-			return new this.constructor().copy(this);
+			return new LightShadow().copy(this);
 
-		},
+		}
 
-		toJSON: function ()
+		toJSON()
 		{
 
 			var object: any = {};
@@ -135,8 +146,9 @@ namespace THREE
 			return object;
 
 		}
+	}
 
-	});
+
 
 
 }

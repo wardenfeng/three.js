@@ -6,45 +6,44 @@ namespace THREE
 	 *
 	 * A LightProbe is a source of indirect-diffuse light
 	 */
-
-	export function LightProbe(sh, intensity)
+	export class LightProbe extends Light
 	{
-
-		Light.call(this, undefined, intensity);
-
-		this.sh = (sh !== undefined) ? sh : new SphericalHarmonics3();
-
-	}
-
-	LightProbe.prototype = Object.assign(Object.create(Light.prototype), {
-
-		constructor: LightProbe,
-
-		isLightProbe: true,
-
-		copy: function (source)
+		sh: any;
+		constructor(sh, intensity)
 		{
 
-			Light.prototype.copy.call(this, source);
+			super(undefined, intensity);
+
+			this.sh = (sh !== undefined) ? sh : new SphericalHarmonics3();
+
+		}
+
+		isLightProbe = true;
+
+		copy(source)
+		{
+
+			super.copy(source);
 
 			this.sh.copy(source.sh);
 			this.intensity = source.intensity;
 
 			return this;
 
-		},
+		}
 
-		toJSON: function (meta)
+		toJSON(meta)
 		{
 
-			var data = Light.prototype.toJSON.call(this, meta);
+			var data = super.toJSON(meta);
 
 			// data.sh = this.sh.toArray(); // todo
 
 			return data;
 
 		}
+	}
 
-	});
+
 
 }

@@ -104,6 +104,8 @@ namespace THREE
 		morphTargets: boolean;
 		morphNormals: boolean;
 		skinning: boolean;
+		defines: any;
+		uniforms: any;
 		constructor()
 		{
 			super();
@@ -447,7 +449,7 @@ namespace THREE
 		clone()
 		{
 
-			return new Material().copy(this);
+			return new (<any>this.constructor)().copy(this);
 
 		}
 
