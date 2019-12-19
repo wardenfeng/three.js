@@ -401,5 +401,9 @@
     "src/loaders/MaterialLoader.ts",
     "src/loaders/ObjectLoader.ts",
     "src/loaders/TextureLoader.ts",
+    "src/loaders/CubeTextureLoader.ts",
+    //
+    "src/Three.ts",
+    "src/Three.Legacy.ts",
   ]
 }

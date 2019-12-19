@@ -4,8 +4,7 @@ namespace THREE
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-
-	export function CubeTextureLoader(manager)
+	export function CubeTextureLoader(manager?)
 	{
 
 		Loader.call(this, manager);

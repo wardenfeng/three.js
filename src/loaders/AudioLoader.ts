@@ -5,7 +5,7 @@ namespace THREE
 	 * @author Reece Aaron Lecrivain / http://reecenotes.com/
 	 */
 
-	export function AudioLoader(manager)
+	export function AudioLoader(manager?)
 	{
 
 		Loader.call(this, manager);

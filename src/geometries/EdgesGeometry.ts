@@ -7,7 +7,7 @@ namespace THREE
 	 */
 
 
-	export function EdgesGeometry(geometry, thresholdAngle)
+	export function EdgesGeometry(geometry, thresholdAngle?)
 	{
 
 		BufferGeometry.call(this);

@@ -355,7 +355,7 @@ namespace THREE
 
 	//
 
-	export function Int8BufferAttribute(array, itemSize, normalized)
+	export function Int8BufferAttribute(array, itemSize, normalized?)
 	{
 
 		BufferAttribute.call(this, new Int8Array(array), itemSize, normalized);
@@ -366,7 +366,7 @@ namespace THREE
 	Int8BufferAttribute.prototype.constructor = Int8BufferAttribute;
 
 
-	export function Uint8BufferAttribute(array, itemSize, normalized)
+	export function Uint8BufferAttribute(array, itemSize, normalized?)
 	{
 
 		BufferAttribute.call(this, new Uint8Array(array), itemSize, normalized);
@@ -377,7 +377,7 @@ namespace THREE
 	Uint8BufferAttribute.prototype.constructor = Uint8BufferAttribute;
 
 
-	export function Uint8ClampedBufferAttribute(array, itemSize, normalized)
+	export function Uint8ClampedBufferAttribute(array, itemSize, normalized?)
 	{
 
 		BufferAttribute.call(this, new Uint8ClampedArray(array), itemSize, normalized);
@@ -388,7 +388,7 @@ namespace THREE
 	Uint8ClampedBufferAttribute.prototype.constructor = Uint8ClampedBufferAttribute;
 
 
-	export function Int16BufferAttribute(array, itemSize, normalized)
+	export function Int16BufferAttribute(array, itemSize, normalized?)
 	{
 
 		BufferAttribute.call(this, new Int16Array(array), itemSize, normalized);
@@ -410,7 +410,7 @@ namespace THREE
 	Uint16BufferAttribute.prototype.constructor = Uint16BufferAttribute;
 
 
-	export function Int32BufferAttribute(array, itemSize, normalized)
+	export function Int32BufferAttribute(array, itemSize, normalized?)
 	{
 
 		BufferAttribute.call(this, new Int32Array(array), itemSize, normalized);
@@ -443,7 +443,7 @@ namespace THREE
 	Float32BufferAttribute.prototype.constructor = Float32BufferAttribute;
 
 
-	export function Float64BufferAttribute(array, itemSize, normalized)
+	export function Float64BufferAttribute(array, itemSize, normalized?)
 	{
 
 		BufferAttribute.call(this, new Float64Array(array), itemSize, normalized);
