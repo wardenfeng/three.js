@@ -16,42 +16,45 @@ namespace THREE
 	 * }
 	 */
 
-	export function LineBasicMaterial(parameters)
+	export class LineBasicMaterial extends Material
 	{
+		isLineBasicMaterial = true;
+		linecap: string;
+		linejoin: string;
 
-		Material.call(this);
+		constructor(parameters?)
+		{
+			super();
 
-		this.type = 'LineBasicMaterial';
+			this.type = 'LineBasicMaterial';
 
-		this.color = new Color(0xffffff);
+			this.color = new Color(0xffffff);
 
-		this.linewidth = 1;
-		this.linecap = 'round';
-		this.linejoin = 'round';
+			this.linewidth = 1;
+			this.linecap = 'round';
+			this.linejoin = 'round';
 
-		this.setValues(parameters);
+			this.setValues(parameters);
 
+		}
+
+
+		copy(source)
+		{
+
+			Material.prototype.copy.call(this, source);
+
+			this.color.copy(source.color);
+
+			this.linewidth = source.linewidth;
+			this.linecap = source.linecap;
+			this.linejoin = source.linejoin;
+
+			return this;
+
+		}
 	}
 
-	LineBasicMaterial.prototype = Object.create(Material.prototype);
-	LineBasicMaterial.prototype.constructor = LineBasicMaterial;
-
-	LineBasicMaterial.prototype.isLineBasicMaterial = true;
-
-	LineBasicMaterial.prototype.copy = function (source)
-	{
-
-		Material.prototype.copy.call(this, source);
-
-		this.color.copy(source.color);
-
-		this.linewidth = source.linewidth;
-		this.linecap = source.linecap;
-		this.linejoin = source.linejoin;
-
-		return this;
-
-	};
 
 
 }
