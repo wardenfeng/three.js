@@ -23,6 +23,10 @@
 				text-decoration: line-through;
 			}
 		</style>
+		<script src="../build/three.js"></script>
+		<script src="./js/libs/stats.min.js"></script>
+		<script src="./js/libs/dat.gui.min.js"></script>
+		<script src="./js/loaders/GLTFLoader.js"></script>
 	</head>
 	<body>
 		<div id="container"></div>
@@ -32,13 +36,16 @@
 			Note: crossfades are possible with blend weights being set to (1,0,0), (0,1,0) or (0,0,1)
 		</div>
 
-		<script type="module">
+		<script>
 
-			import * as THREE from '../build/three.module.js';
-			import Stats from './jsm/libs/stats.module.js';
-			import { GUI } from './jsm/libs/dat.gui.module.js';
+			// import * as THREE from '../build/three.module.js';
+			// import Stats from './jsm/libs/stats.module.js';
+			// import { GUI } from './jsm/libs/dat.gui.module.js';
 
-			import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
+			// import { GLTFLoader } from './jsm/loaders/GLTFLoader.js';
+
+			var GUI = dat.GUI;
+			var GLTFLoader = THREE.GLTFLoader;
 
 			var scene, renderer, camera, stats;
 			var model, skeleton, mixer, clock;
