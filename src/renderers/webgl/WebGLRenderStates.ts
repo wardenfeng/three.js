@@ -4,62 +4,65 @@ namespace THREE
 	/**
 	 * @author Mugen87 / https://github.com/Mugen87
 	 */
-
-
-	export function WebGLRenderState()
+	export class WebGLRenderState
 	{
-
-		var lights = new WebGLLights();
-
-		var lightsArray = [];
-		var shadowsArray = [];
-
-		function init()
+		constructor()
 		{
 
-			lightsArray.length = 0;
-			shadowsArray.length = 0;
+			var lights = new WebGLLights();
+
+			var lightsArray = [];
+			var shadowsArray = [];
+
+			function init()
+			{
+
+				lightsArray.length = 0;
+				shadowsArray.length = 0;
+
+			}
+
+			function pushLight(light)
+			{
+
+				lightsArray.push(light);
+
+			}
+
+			function pushShadow(shadowLight)
+			{
+
+				shadowsArray.push(shadowLight);
+
+			}
+
+			function setupLights(camera)
+			{
+
+				lights.setup(lightsArray, shadowsArray, camera);
+
+			}
+
+			var state = {
+				lightsArray: lightsArray,
+				shadowsArray: shadowsArray,
+
+				lights: lights
+			};
+
+			return {
+				init: init,
+				state: state,
+				setupLights: setupLights,
+
+				pushLight: pushLight,
+				pushShadow: pushShadow
+			};
 
 		}
-
-		function pushLight(light)
-		{
-
-			lightsArray.push(light);
-
-		}
-
-		function pushShadow(shadowLight)
-		{
-
-			shadowsArray.push(shadowLight);
-
-		}
-
-		function setupLights(camera)
-		{
-
-			lights.setup(lightsArray, shadowsArray, camera);
-
-		}
-
-		var state = {
-			lightsArray: lightsArray,
-			shadowsArray: shadowsArray,
-
-			lights: lights
-		};
-
-		return {
-			init: init,
-			state: state,
-			setupLights: setupLights,
-
-			pushLight: pushLight,
-			pushShadow: pushShadow
-		};
 
 	}
+
 
 	export class WebGLRenderStates
 	{

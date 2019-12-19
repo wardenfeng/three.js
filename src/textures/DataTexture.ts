@@ -3,30 +3,28 @@ namespace THREE
 	/**
 	 * @author alteredq / http://alteredqualia.com/
 	 */
-
-
-	export function DataTexture(data, width, height, format, type, mapping?, wrapS?, wrapT?, magFilter?, minFilter?, anisotropy?, encoding?)
+	export class DataTexture extends Texture
 	{
 
-		Texture.call(this, null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
+		isDataTexture = true;
 
-		this.image = { data: data || null, width: width || 1, height: height || 1 };
+		constructor(data, width, height, format, type, mapping?, wrapS?, wrapT?, magFilter?, minFilter?, anisotropy?, encoding?)
+		{
 
-		this.magFilter = magFilter !== undefined ? magFilter : NearestFilter;
-		this.minFilter = minFilter !== undefined ? minFilter : NearestFilter;
+			super(null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);
 
-		this.generateMipmaps = false;
-		this.flipY = false;
-		this.unpackAlignment = 1;
+			this.image = { data: data || null, width: width || 1, height: height || 1 };
 
-		this.needsUpdate = true;
+			this.magFilter = magFilter !== undefined ? magFilter : NearestFilter;
+			this.minFilter = minFilter !== undefined ? minFilter : NearestFilter;
+
+			this.generateMipmaps = false;
+			this.flipY = false;
+			this.unpackAlignment = 1;
+
+			this.needsUpdate = true;
+
+		}
 
 	}
-
-	DataTexture.prototype = Object.create(Texture.prototype);
-	DataTexture.prototype.constructor = DataTexture;
-
-	DataTexture.prototype.isDataTexture = true;
-
-
 }

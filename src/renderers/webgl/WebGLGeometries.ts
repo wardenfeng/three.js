@@ -141,10 +141,10 @@ namespace THREE
 				if (geometryIndex !== null)
 				{
 
-					var array = geometryIndex.array;
+					var array: number[] = geometryIndex.array;
 					version = geometryIndex.version;
 
-					for (var i = 0, l = array.length; i < l; i += 3)
+					for (var i = 0, l: number = array.length; i < l; i += 3)
 					{
 
 						var a = array[i + 0];
@@ -158,10 +158,10 @@ namespace THREE
 				} else
 				{
 
-					var array = geometryPosition.array;
+					var array: number[] = geometryPosition.array;
 					version = geometryPosition.version;
 
-					for (var i = 0, l = (array.length / 3) - 1; i < l; i += 3)
+					for (var i = 0, l: number = (array.length / 3) - 1; i < l; i += 3)
 					{
 
 						var a = i + 0;

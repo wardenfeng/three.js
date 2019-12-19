@@ -6,7 +6,7 @@ namespace THREE
 	 */
 
 
-	export function CompressedTexture(mipmaps, width, height, format, type, mapping, wrapS, wrapT, magFilter, minFilter, anisotropy, encoding)
+	export function CompressedTexture(mipmaps?, width?, height?, format?, type?, mapping?, wrapS?, wrapT?, magFilter?, minFilter?, anisotropy?, encoding?)
 	{
 
 		Texture.call(this, null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);

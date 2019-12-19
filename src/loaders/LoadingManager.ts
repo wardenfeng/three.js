@@ -4,7 +4,7 @@ namespace THREE
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	export function LoadingManager(onLoad, onProgress, onError)
+	export function LoadingManager(onLoad?, onProgress?, onError?)
 	{
 
 		var scope = this;
