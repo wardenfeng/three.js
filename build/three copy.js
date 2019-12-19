@@ -32204,3 +32204,21 @@ var THREE;
     THREE.LensFlare = LensFlare;
 })(THREE || (THREE = {}));
 //# sourceMappingURL=three.js.map
+
+(function universalModuleDefinition(root, factory)
+{
+    if (typeof exports === 'object' && typeof module === 'object')
+        module.exports = factory();
+    else if (typeof define === 'function' && define.amd)
+        define([], factory);
+    else if (typeof exports === 'object')
+        exports["THREE"] = factory();
+    else
+        root["THREE"] = factory();
+    
+    var globalObject = (typeof global !== 'undefined') ? global : ((typeof window !== 'undefined') ? window : this);
+    globalObject["THREE"] = factory();
+})(this, function ()
+{
+    return THREE;
+});
