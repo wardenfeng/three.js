@@ -8,85 +8,178 @@ namespace THREE
 
 	var materialId = 0;
 
-	export function Material()
+	export class Material extends EventDispatcher
 	{
+		uuid: string;
+		name: string;
+		type: string;
+		fog: boolean;
+		blending: number;
+		side: number;
+		flatShading: boolean;
+		vertexTangents: boolean;
+		vertexColors: number;
+		opacity: number;
+		transparent: boolean;
+		blendSrc: number;
+		blendDst: number;
+		blendEquation: number;
+		blendSrcAlpha: any;
+		blendDstAlpha: any;
+		blendEquationAlpha: any;
+		depthFunc: number;
+		depthTest: boolean;
+		depthWrite: boolean;
+		stencilWriteMask: number;
+		stencilFunc: number;
+		stencilRef: number;
+		stencilFuncMask: number;
+		stencilFail: number;
+		stencilZPass: number;
+		stencilZFail: number;
+		stencilWrite: boolean;
+		clippingPlanes: any;
+		clipIntersection: boolean;
+		clipShadows: boolean;
+		shadowSide: any;
+		colorWrite: boolean;
+		precision: any;
+		polygonOffset: boolean;
+		polygonOffsetFactor: number;
+		polygonOffsetUnits: number;
+		dithering: boolean;
+		alphaTest: number;
+		premultipliedAlpha: boolean;
+		visible: boolean;
+		toneMapped: boolean;
+		userData: {};
+		needsUpdate: boolean;
+		color: any;
+		roughness: any;
+		metalness: any;
+		sheen: any;
+		emissive: any;
+		emissiveIntensity: any;
+		specular: any;
+		shininess: any;
+		clearcoat: any;
+		clearcoatRoughness: any;
+		clearcoatNormalMap: any;
+		clearcoatNormalScale: any;
+		map: any;
+		matcap: any;
+		alphaMap: any;
+		lightMap: any;
+		aoMap: any;
+		aoMapIntensity: any;
+		bumpMap: any;
+		bumpScale: any;
+		normalMap: any;
+		normalMapType: any;
+		normalScale: any;
+		displacementMap: any;
+		displacementBias: any;
+		displacementScale: any;
+		roughnessMap: any;
+		metalnessMap: any;
+		emissiveMap: any;
+		specularMap: any;
+		envMap: any;
+		reflectivity: any;
+		refractionRatio: any;
+		combine: any;
+		envMapIntensity: any;
+		gradientMap: any;
+		size: any;
+		sizeAttenuation: any;
+		rotation: number;
+		linewidth: number;
+		dashSize: any;
+		gapSize: any;
+		scale: any;
+		wireframe: boolean;
+		wireframeLinewidth: number;
+		wireframeLinecap: string;
+		wireframeLinejoin: string;
+		morphTargets: boolean;
+		morphNormals: boolean;
+		skinning: boolean;
+		constructor()
+		{
+			super();
+			Object.defineProperty(this, 'id', { value: materialId++ });
 
-		Object.defineProperty(this, 'id', { value: materialId++ });
+			this.uuid = _Math.generateUUID();
 
-		this.uuid = _Math.generateUUID();
+			this.name = '';
+			this.type = 'Material';
 
-		this.name = '';
-		this.type = 'Material';
+			this.fog = true;
 
-		this.fog = true;
+			this.blending = NormalBlending;
+			this.side = FrontSide;
+			this.flatShading = false;
+			this.vertexTangents = false;
+			this.vertexColors = NoColors; // THREE.NoColors, THREE.VertexColors, THREE.FaceColors
 
-		this.blending = NormalBlending;
-		this.side = FrontSide;
-		this.flatShading = false;
-		this.vertexTangents = false;
-		this.vertexColors = NoColors; // THREE.NoColors, THREE.VertexColors, THREE.FaceColors
+			this.opacity = 1;
+			this.transparent = false;
 
-		this.opacity = 1;
-		this.transparent = false;
+			this.blendSrc = SrcAlphaFactor;
+			this.blendDst = OneMinusSrcAlphaFactor;
+			this.blendEquation = AddEquation;
+			this.blendSrcAlpha = null;
+			this.blendDstAlpha = null;
+			this.blendEquationAlpha = null;
 
-		this.blendSrc = SrcAlphaFactor;
-		this.blendDst = OneMinusSrcAlphaFactor;
-		this.blendEquation = AddEquation;
-		this.blendSrcAlpha = null;
-		this.blendDstAlpha = null;
-		this.blendEquationAlpha = null;
+			this.depthFunc = LessEqualDepth;
+			this.depthTest = true;
+			this.depthWrite = true;
 
-		this.depthFunc = LessEqualDepth;
-		this.depthTest = true;
-		this.depthWrite = true;
+			this.stencilWriteMask = 0xff;
+			this.stencilFunc = AlwaysStencilFunc;
+			this.stencilRef = 0;
+			this.stencilFuncMask = 0xff;
+			this.stencilFail = KeepStencilOp;
+			this.stencilZFail = KeepStencilOp;
+			this.stencilZPass = KeepStencilOp;
+			this.stencilWrite = false;
 
-		this.stencilWriteMask = 0xff;
-		this.stencilFunc = AlwaysStencilFunc;
-		this.stencilRef = 0;
-		this.stencilFuncMask = 0xff;
-		this.stencilFail = KeepStencilOp;
-		this.stencilZFail = KeepStencilOp;
-		this.stencilZPass = KeepStencilOp;
-		this.stencilWrite = false;
+			this.clippingPlanes = null;
+			this.clipIntersection = false;
+			this.clipShadows = false;
 
-		this.clippingPlanes = null;
-		this.clipIntersection = false;
-		this.clipShadows = false;
+			this.shadowSide = null;
 
-		this.shadowSide = null;
+			this.colorWrite = true;
 
-		this.colorWrite = true;
+			this.precision = null; // override the renderer's default precision for this material
 
-		this.precision = null; // override the renderer's default precision for this material
+			this.polygonOffset = false;
+			this.polygonOffsetFactor = 0;
+			this.polygonOffsetUnits = 0;
 
-		this.polygonOffset = false;
-		this.polygonOffsetFactor = 0;
-		this.polygonOffsetUnits = 0;
+			this.dithering = false;
 
-		this.dithering = false;
+			this.alphaTest = 0;
+			this.premultipliedAlpha = false;
 
-		this.alphaTest = 0;
-		this.premultipliedAlpha = false;
+			this.visible = true;
 
-		this.visible = true;
+			this.toneMapped = true;
 
-		this.toneMapped = true;
+			this.userData = {};
 
-		this.userData = {};
+			this.needsUpdate = true;
 
-		this.needsUpdate = true;
+		}
 
-	}
 
-	Material.prototype = Object.assign(Object.create(EventDispatcher.prototype), {
+		isMaterial = true
 
-		constructor: Material,
+		onBeforeCompile() { }
 
-		isMaterial: true,
-
-		onBeforeCompile: function () { },
-
-		setValues: function (values)
+		setValues(values)
 		{
 
 			if (values === undefined) return;
@@ -143,9 +236,9 @@ namespace THREE
 
 			}
 
-		},
+		}
 
-		toJSON: function (meta)
+		toJSON(meta)
 		{
 
 			var isRoot = (meta === undefined || typeof meta === 'string');
@@ -349,16 +442,16 @@ namespace THREE
 
 			return data;
 
-		},
+		}
 
-		clone: function ()
+		clone()
 		{
 
-			return new this.constructor().copy(this);
+			return new Material().copy(this);
 
-		},
+		}
 
-		copy: function (source)
+		copy(source)
 		{
 
 			this.name = source.name;
@@ -435,16 +528,18 @@ namespace THREE
 
 			return this;
 
-		},
+		}
 
-		dispose: function ()
+		dispose()
 		{
 
 			this.dispatchEvent({ type: 'dispose' });
 
 		}
 
-	});
+	}
+
+
 
 
 }

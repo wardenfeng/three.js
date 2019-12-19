@@ -233,11 +233,11 @@
     "src/renderers/shaders/ShaderChunk.ts",
     "src/renderers/shaders/ShaderLib.ts",
     //
-    "src/renderers/WebGLRenderTargetCube.ts",
+    "src/renderers/WebGLRenderTarget.ts",
     "src/renderers/WebGLMultisampleRenderTarget.ts",
     "src/renderers/WebGLMultiviewRenderTarget.ts",
+    "src/renderers/WebGLRenderTargetCube.ts",
     "src/renderers/WebGLRenderer.ts",
-    "src/renderers/WebGLRenderTarget.ts",
     //
     "src/renderers/webgl/WebGLAnimation.ts",
     "src/renderers/webgl/WebGLAttributes.ts",
@@ -271,7 +271,6 @@
     //
     "src/objects/Group.ts",
     "src/objects/Bone.ts",
-    "src/objects/InstancedMesh.ts",
     "src/objects/Line.ts",
     "src/objects/LineLoop.ts",
     "src/objects/LineSegments.ts",
@@ -280,6 +279,7 @@
     "src/objects/Points.ts",
     "src/objects/Skeleton.ts",
     "src/objects/Sprite.ts",
+    "src/objects/InstancedMesh.ts",
     "src/objects/SkinnedMesh.ts",
     //
     "src/materials/Material.ts",
@@ -288,10 +288,10 @@
     "src/materials/SpriteMaterial.ts",
     "src/materials/RawShaderMaterial.ts",
     "src/materials/PointsMaterial.ts",
+    "src/materials/MeshPhongMaterial.ts",
     "src/materials/MeshToonMaterial.ts",
     "src/materials/MeshStandardMaterial.ts",
     "src/materials/MeshPhysicalMaterial.ts",
-    "src/materials/MeshPhongMaterial.ts",
     "src/materials/MeshNormalMaterial.ts",
     "src/materials/MeshMatcapMaterial.ts",
     "src/materials/MeshDistanceMaterial.ts",

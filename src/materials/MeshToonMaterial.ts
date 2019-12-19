@@ -8,37 +8,36 @@ namespace THREE
 	 *  gradientMap: new THREE.Texture( <Image> )
 	 * }
 	 */
-
-	export function MeshToonMaterial(parameters)
+	export class MeshToonMaterial extends MeshPhongMaterial
 	{
+		gradientMap: any;
+		defines: { 'TOON': string; };
 
-		MeshPhongMaterial.call(this);
+		constructor(parameters)
+		{
 
-		this.defines = { 'TOON': '' };
+			super();
 
-		this.type = 'MeshToonMaterial';
+			this.defines = { 'TOON': '' };
 
-		this.gradientMap = null;
+			this.type = 'MeshToonMaterial';
 
-		this.setValues(parameters);
+			this.gradientMap = null;
 
+			this.setValues(parameters);
+
+		}
+
+		isMeshToonMaterial = true;
+
+		copy(source)
+		{
+			super.copy(source);
+
+			this.gradientMap = source.gradientMap;
+
+			return this;
+
+		}
 	}
-
-	MeshToonMaterial.prototype = Object.create(MeshPhongMaterial.prototype);
-	MeshToonMaterial.prototype.constructor = MeshToonMaterial;
-
-	MeshToonMaterial.prototype.isMeshToonMaterial = true;
-
-	MeshToonMaterial.prototype.copy = function (source)
-	{
-
-		MeshPhongMaterial.prototype.copy.call(this, source);
-
-		this.gradientMap = source.gradientMap;
-
-		return this;
-
-	};
-
-
 }
