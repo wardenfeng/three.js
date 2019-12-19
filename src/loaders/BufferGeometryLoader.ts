@@ -5,7 +5,7 @@ namespace THREE
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	export function BufferGeometryLoader(manager)
+	export function BufferGeometryLoader(manager?)
 	{
 
 		Loader.call(this, manager);

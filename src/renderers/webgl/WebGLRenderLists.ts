@@ -69,109 +69,113 @@ namespace THREE
 
 	}
 
-
-	function WebGLRenderList()
+	class WebGLRenderList
 	{
-
-		var renderItems = [];
-		var renderItemsIndex = 0;
-
-		var opaque = [];
-		var transparent = [];
-
-		var defaultProgram = { id: - 1 };
-
-		function init()
+		constructor()
 		{
 
-			renderItemsIndex = 0;
+			var renderItems = [];
+			var renderItemsIndex = 0;
 
-			opaque.length = 0;
-			transparent.length = 0;
+			var opaque = [];
+			var transparent = [];
 
-		}
+			var defaultProgram = { id: - 1 };
 
-		function getNextRenderItem(object, geometry, material, groupOrder, z, group)
-		{
-
-			var renderItem = renderItems[renderItemsIndex];
-
-			if (renderItem === undefined)
+			function init()
 			{
 
-				renderItem = {
-					id: object.id,
-					object: object,
-					geometry: geometry,
-					material: material,
-					program: material.program || defaultProgram,
-					groupOrder: groupOrder,
-					renderOrder: object.renderOrder,
-					z: z,
-					group: group
-				};
+				renderItemsIndex = 0;
 
-				renderItems[renderItemsIndex] = renderItem;
-
-			} else
-			{
-
-				renderItem.id = object.id;
-				renderItem.object = object;
-				renderItem.geometry = geometry;
-				renderItem.material = material;
-				renderItem.program = material.program || defaultProgram;
-				renderItem.groupOrder = groupOrder;
-				renderItem.renderOrder = object.renderOrder;
-				renderItem.z = z;
-				renderItem.group = group;
+				opaque.length = 0;
+				transparent.length = 0;
 
 			}
 
-			renderItemsIndex++;
+			function getNextRenderItem(object, geometry, material, groupOrder, z, group)
+			{
 
-			return renderItem;
+				var renderItem = renderItems[renderItemsIndex];
+
+				if (renderItem === undefined)
+				{
+
+					renderItem = {
+						id: object.id,
+						object: object,
+						geometry: geometry,
+						material: material,
+						program: material.program || defaultProgram,
+						groupOrder: groupOrder,
+						renderOrder: object.renderOrder,
+						z: z,
+						group: group
+					};
+
+					renderItems[renderItemsIndex] = renderItem;
+
+				} else
+				{
+
+					renderItem.id = object.id;
+					renderItem.object = object;
+					renderItem.geometry = geometry;
+					renderItem.material = material;
+					renderItem.program = material.program || defaultProgram;
+					renderItem.groupOrder = groupOrder;
+					renderItem.renderOrder = object.renderOrder;
+					renderItem.z = z;
+					renderItem.group = group;
+
+				}
+
+				renderItemsIndex++;
+
+				return renderItem;
+
+			}
+
+			function push(object, geometry, material, groupOrder, z, group)
+			{
+
+				var renderItem = getNextRenderItem(object, geometry, material, groupOrder, z, group);
+
+				(material.transparent === true ? transparent : opaque).push(renderItem);
+
+			}
+
+			function unshift(object, geometry, material, groupOrder, z, group)
+			{
+
+				var renderItem = getNextRenderItem(object, geometry, material, groupOrder, z, group);
+
+				(material.transparent === true ? transparent : opaque).unshift(renderItem);
+
+			}
+
+			function sort()
+			{
+
+				if (opaque.length > 1) opaque.sort(painterSortStable);
+				if (transparent.length > 1) transparent.sort(reversePainterSortStable);
+
+			}
+
+			return {
+				opaque: opaque,
+				transparent: transparent,
+
+				init: init,
+				push: push,
+				unshift: unshift,
+
+				sort: sort
+			};
 
 		}
-
-		function push(object, geometry, material, groupOrder, z, group)
-		{
-
-			var renderItem = getNextRenderItem(object, geometry, material, groupOrder, z, group);
-
-			(material.transparent === true ? transparent : opaque).push(renderItem);
-
-		}
-
-		function unshift(object, geometry, material, groupOrder, z, group)
-		{
-
-			var renderItem = getNextRenderItem(object, geometry, material, groupOrder, z, group);
-
-			(material.transparent === true ? transparent : opaque).unshift(renderItem);
-
-		}
-
-		function sort()
-		{
-
-			if (opaque.length > 1) opaque.sort(painterSortStable);
-			if (transparent.length > 1) transparent.sort(reversePainterSortStable);
-
-		}
-
-		return {
-			opaque: opaque,
-			transparent: transparent,
-
-			init: init,
-			push: push,
-			unshift: unshift,
-
-			sort: sort
-		};
 
 	}
+
 
 	export class WebGLRenderLists
 	{

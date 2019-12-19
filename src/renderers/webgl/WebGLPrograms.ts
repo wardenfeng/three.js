@@ -6,6 +6,11 @@ namespace THREE
 	 */
 	export class WebGLPrograms
 	{
+		programs: any[];
+		releaseProgram: (program: any) => void;
+		acquireProgram: (material: any, shader: any, parameters: any, cacheKey: any) => any;
+		getProgramCacheKey: (material: any, parameters: any) => string;
+		getParameters: any;
 
 		constructor(renderer, extensions, capabilities)
 		{

@@ -32,7 +32,7 @@ namespace THREE
 
 	// PlaneBufferGeometry
 
-	export function PlaneBufferGeometry(width, height, widthSegments, heightSegments)
+	export function PlaneBufferGeometry(width, height, widthSegments?, heightSegments?)
 	{
 
 		BufferGeometry.call(this);

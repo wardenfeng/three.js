@@ -5,7 +5,7 @@ namespace THREE
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	export function MaterialLoader(manager)
+	export function MaterialLoader(manager?)
 	{
 
 		Loader.call(this, manager);
@@ -53,7 +53,7 @@ namespace THREE
 
 			}
 
-			var material = new Materials[json.type]();
+			var material = new THREE[json.type]();
 
 			if (json.uuid !== undefined) material.uuid = json.uuid;
 			if (json.name !== undefined) material.name = json.name;

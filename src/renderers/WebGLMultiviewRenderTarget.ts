@@ -7,7 +7,7 @@ namespace THREE
 	 */
 
 
-	export function WebGLMultiviewRenderTarget(width, height, numViews, options)
+	export function WebGLMultiviewRenderTarget(width, height, numViews, options?)
 	{
 
 		WebGLRenderTarget.call(this, width, height, options);

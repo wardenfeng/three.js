@@ -1,5 +1,6 @@
 namespace THREE
 {
+	export declare var LegacyJSONLoader;
 
 	/**
 	 * @author mrdoob / http://mrdoob.com/

@@ -89,6 +89,16 @@
     "src/cameras/ArrayCamera.ts",
     "src/cameras/StereoCamera.ts",
     //
+    "src/textures/Texture.ts",
+    "src/textures/CanvasTexture.ts",
+    "src/textures/CompressedTexture.ts",
+    "src/textures/CubeTexture.ts",
+    "src/textures/DataTexture.ts",
+    "src/textures/DataTexture2DArray.ts",
+    "src/textures/DataTexture3D.ts",
+    "src/textures/DepthTexture.ts",
+    "src/textures/VideoTexture.ts",
+    //
     "src/renderers/shaders/ShaderChunk/alphamap_fragment.glsl.ts",
     "src/renderers/shaders/ShaderChunk/alphamap_pars_fragment.glsl.ts",
     "src/renderers/shaders/ShaderChunk/alphatest_fragment.glsl.ts",
@@ -270,6 +280,7 @@
     "src/objects/Points.ts",
     "src/objects/Skeleton.ts",
     "src/objects/Sprite.ts",
+    "src/objects/SkinnedMesh.ts",
     //
     "src/materials/Material.ts",
     "src/materials/ShaderMaterial.ts",
@@ -359,16 +370,6 @@
     "src/helpers/SkeletonHelper.ts",
     "src/helpers/SpotLightHelper.ts",
     "src/helpers/VertexNormalsHelper.ts",
-    //
-    "src/textures/Texture.ts",
-    "src/textures/CanvasTexture.ts",
-    "src/textures/CompressedTexture.ts",
-    "src/textures/CubeTexture.ts",
-    "src/textures/DataTexture.ts",
-    "src/textures/DataTexture2DArray.ts",
-    "src/textures/DataTexture3D.ts",
-    "src/textures/DepthTexture.ts",
-    "src/textures/VideoTexture.ts",
     //
     "src/lights/AmbientLight.ts",
     "src/lights/AmbientLightProbe.ts",

@@ -5,7 +5,7 @@ namespace THREE
 	 * @author benaadams / https://twitter.com/ben_a_adams
 	 */
 
-	export function InstancedBufferAttribute(array, itemSize, normalized, meshPerAttribute)
+	export function InstancedBufferAttribute(array, itemSize, normalized, meshPerAttribute?)
 	{
 
 		if (typeof (normalized) === 'number')

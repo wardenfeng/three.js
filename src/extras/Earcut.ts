@@ -8,7 +8,7 @@ namespace THREE
 
 	export var Earcut = {
 
-		triangulate: function (data, holeIndices, dim)
+		triangulate: function (data, holeIndices, dim?)
 		{
 
 			dim = dim || 2;

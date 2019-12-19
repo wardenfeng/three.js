@@ -8,7 +8,7 @@ namespace THREE
 
 		isDataTexture = true;
 
-		constructor(data, width, height, format, type, mapping?, wrapS?, wrapT?, magFilter?, minFilter?, anisotropy?, encoding?)
+		constructor(data?, width?, height?, format?, type?, mapping?, wrapS?, wrapT?, magFilter?, minFilter?, anisotropy?, encoding?)
 		{
 
 			super(null, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding);

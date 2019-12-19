@@ -36,7 +36,7 @@ namespace THREE
 
 	// CylinderBufferGeometry
 
-	export function CylinderBufferGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength)
+	export function CylinderBufferGeometry(radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded?, thetaStart?, thetaLength?)
 	{
 
 		BufferGeometry.call(this);
